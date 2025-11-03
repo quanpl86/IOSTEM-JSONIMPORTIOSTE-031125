@@ -1,0 +1,195 @@
+# src/map_generator/service.py
+
+from .models.map_data import MapData
+from .models.path_info import PathInfo
+from .topologies.simple_path import SimplePathTopology
+from .topologies.straight_line import StraightLineTopology
+from .topologies.staircase import StaircaseTopology
+from .topologies.square import SquareTopology
+from .topologies.plowing_field import PlowingFieldTopology
+from .topologies.grid import GridTopology
+from .topologies.symmetrical_islands import SymmetricalIslandsTopology
+from .topologies.spiral import SpiralTopology
+from .topologies.interspersed_path import InterspersedPathTopology
+from .topologies.grid_with_holes import GridWithHolesTopology
+from .topologies.complex_maze import ComplexMazeTopology
+from .topologies.hub_with_stepped_islands import HubWithSteppedIslandsTopology # [MỚI]
+from .topologies.stepped_island_clusters import SteppedIslandClustersTopology # [MỚI]
+from .topologies.plus_shape_islands import PlusShapeIslandsTopology # [MỚI] Import topology mới
+from .topologies.l_shape import LShapeTopology # Import LShapeTopology
+from .topologies.u_shape import UShapeTopology
+from .topologies.s_shape import SShapeTopology
+from .topologies.zigzag import ZigzagTopology
+from .topologies.h_shape import HShapeTopology
+from .topologies.ef_shape import EFShapeTopology
+from .topologies.plus_shape import PlusShapeTopology
+from .topologies.arrow_shape import ArrowShapeTopology
+from .topologies.t_shape import TShapeTopology
+from .topologies.v_shape import VShapeTopology 
+from .topologies.star_shape import StarShapeTopology
+from .topologies.z_shape import ZShapeTopology
+from .topologies.staircase_3d import Staircase3DTopology
+from .topologies.spiral_3d import Spiral3DTopology
+from .topologies.circle import CircleTopology
+from .topologies.swift_playground_maze import SwiftPlaygroundMazeTopology # [MỚI] Import topology Swift Playground
+from .placements.spiral_placer import SpiralPlacer
+from .placements.v_shape_placer import VShapePlacer
+from .placements.star_shape_placer import StarShapePlacer
+from .placements.z_shape_placer import ZShapePlacer
+from .placements.staircase_3d_placer import Staircase3DPlacer
+from .placements.spiral_3d_placer import Spiral3DPlacer
+from .placements.circle_placer import CirclePlacer
+from .topologies.triangle import TriangleTopology
+from .placements.triangle_placer import TrianglePlacer
+from .placements.sequencing_placer import SequencingPlacer
+from .placements.obstacle_placer import ObstaclePlacer # THÊM MỚI
+from .placements.for_loop_placer import ForLoopPlacer
+from .placements.function_placer import FunctionPlacer
+from .placements.variable_placer import VariablePlacer
+from .placements.while_if_placer import WhileIfPlacer
+from .placements.t_shape_placer import TShapePlacer
+from .placements.grid_with_holes_placer import GridWithHolesPlacer
+from .placements.h_shape_placer import HShapePlacer
+from .placements.ef_shape_placer import EFShapePlacer
+from .placements.plus_shape_placer import PlusShapePlacer
+from .placements.arrow_shape_placer import ArrowShapePlacer
+from .placements.algorithm_placer import AlgorithmPlacer
+from .placements.island_tour_placer import IslandTourPlacer # [MỚI] Import placer mới
+from .placements.zigzag_placer import ZigzagPlacer # [MỚI] Import ZigzagPlacer
+from .placements.swift_playground_placer import SwiftPlaygroundPlacer # [MỚI] Import placer Swift Playground
+
+class MapGeneratorService:
+    def __init__(self):
+        print("⚙️  Khởi tạo MapGeneratorService...")
+        self.topologies = {
+            'simple_path': SimplePathTopology(),
+            'straight_line': StraightLineTopology(),
+            'staircase': StaircaseTopology(),
+            'square_shape': SquareTopology(),
+            'plowing_field': PlowingFieldTopology(),
+            'grid': GridTopology(),
+            'symmetrical_islands': SymmetricalIslandsTopology(),
+            'spiral_path': SpiralTopology(),
+            'interspersed_path': InterspersedPathTopology(),
+            'grid_with_holes': GridWithHolesTopology(),
+            'complex_maze_2d': ComplexMazeTopology(),
+            'hub_with_stepped_islands': HubWithSteppedIslandsTopology(), # [MỚI] Đăng ký topology mới
+            'stepped_island_clusters': SteppedIslandClustersTopology(), # [MỚI]
+            'plus_shape_islands': PlusShapeIslandsTopology(), # [MỚI] Đăng ký topology mới
+            'l_shape': LShapeTopology(), # Register LShapeTopology
+            'u_shape': UShapeTopology(),
+            's_shape': SShapeTopology(),
+            'zigzag': ZigzagTopology(),
+            'h_shape': HShapeTopology(),
+            'ef_shape': EFShapeTopology(),
+            'plus_shape': PlusShapeTopology(),
+            'arrow_shape': ArrowShapeTopology(),
+            't_shape': TShapeTopology(),
+            'v_shape': VShapeTopology(),
+            'star_shape': StarShapeTopology(),
+            'z_shape': ZShapeTopology(),
+            'staircase_3d': Staircase3DTopology(),
+            'spiral_3d': Spiral3DTopology(),
+            'circle': CircleTopology(),
+            'triangle': TriangleTopology(),
+            'variable_length_sides': StraightLineTopology(),
+            'item_counting_path': StraightLineTopology(),
+            'unknown_length_hallway': StraightLineTopology(),
+            'unknown_height_tower': StaircaseTopology(),
+            'swift_playground_maze': SwiftPlaygroundMazeTopology(), # [SỬA LỖI] Đồng bộ tên đăng ký
+            'variable_size_rectangles': PlowingFieldTopology(),
+        }
+        self.placements = {
+            'sequencing': SequencingPlacer(),
+            't_shape': TShapePlacer(),
+            'h_shape': HShapePlacer(),
+            'ef_shape': EFShapePlacer(),
+            'plus_shape': PlusShapePlacer(),
+            'arrow_shape': ArrowShapePlacer(),
+            'grid_with_holes': GridWithHolesPlacer(),
+            'v_shape': VShapePlacer(), 
+            'star_shape': StarShapePlacer(),
+            'z_shape': ZShapePlacer(),
+            'staircase_3d': Staircase3DPlacer(),
+            'spiral_3d_placer': Spiral3DPlacer(), # [SỬA LỖI] Đồng bộ tên đăng ký
+            'circle': CirclePlacer(),
+            'spiral_path': SpiralPlacer(),
+            'triangle': TrianglePlacer(),
+            'obstacle': ObstaclePlacer(), # THÊM MỚI
+            'function_definition': FunctionPlacer(),
+            'function_decomposition': FunctionPlacer(),
+            'function_with_params': FunctionPlacer(),
+            'functions_simple': FunctionPlacer(), # [FIX] Đăng ký placer cho hàm đơn giản
+            'functions_with_return': FunctionPlacer(), # [FIX] Đăng ký placer cho hàm có trả về
+            'functions_recursive': FunctionPlacer(), # [FIX] Đăng ký placer cho hàm đệ quy
+            'functions_with_params': FunctionPlacer(), # [FIX] Đảm bảo placer này được đăng ký (có thể đã có)
+            'function_with_multi_params': FunctionPlacer(),
+            'advanced_functions': FunctionPlacer(), # [SỬA LỖI] Đăng ký placer còn thiếu
+            'for_loop_simple': ForLoopPlacer(),
+            'for_loop_complex': ForLoopPlacer(),
+            'nested_for_loop': ForLoopPlacer(),
+            # Các placer cho Topic 4 (Biến & Toán học)
+            'variable_loop': VariablePlacer(),
+            'variable_counter': VariablePlacer(),
+            'variable_update': VariablePlacer(),
+            'variable_control_loop': VariablePlacer(),
+            'coordinate_math': VariablePlacer(),
+            'math_basic': VariablePlacer(),
+            'math_complex': VariablePlacer(),
+            'math_expression_loop': VariablePlacer(),
+            'config_driven_execution': VariablePlacer(),
+            'math_puzzle': VariablePlacer(),
+            'if_else_logic': WhileIfPlacer(),
+            'if_elseif_logic': WhileIfPlacer(),
+            'logical_operators': WhileIfPlacer(),
+            'while_loop': WhileIfPlacer(),
+            'algorithm_design': AlgorithmPlacer(),
+            'advanced_algorithm': AlgorithmPlacer(),
+            'island_tour': IslandTourPlacer(), # [MỚI] Đăng ký placer mới
+            'zigzag': ZigzagPlacer(), # [MỚI] Đăng ký ZigzagPlacer
+            'swift_playground_placer': SwiftPlaygroundPlacer(), # [SỬA LỖI] Đồng bộ tên đăng ký
+        }
+        print("👍 Đã đăng ký thành công tất cả các chiến lược.")
+
+    def generate_map(self, map_type: str, logic_type: str, params: dict) -> MapData: # [SỬA LỖI] Xóa các tham số không cần thiết
+        
+        # --- DEBUG POINT B ---
+        print(f"    DEBUG (B): Service nhận được params: {params}")
+        
+        print(f"\n--- Bắt đầu sinh map: [Topology: '{map_type}', Placer: '{logic_type}'] ---")
+        
+        topology_strategy = self.topologies.get(map_type)
+        if not topology_strategy:
+            raise ValueError(f"Không tìm thấy chiến lược topology nào có tên '{map_type}' đã được đăng ký.")
+            
+        # (CẢI TIẾN) Tăng kích thước lưới để có không gian cho các map lớn hơn
+        grid_size = (14, 14, 14)
+
+        # [SỬA LỖI] Một số Topology (ví dụ: GridTopology) có thể truyền toàn bộ params vào PathInfo,
+        # gây ra lỗi "unexpected keyword argument" nếu params chứa các key không mong muốn (như 'map_type').
+        # Tạo một bản sao của params và loại bỏ các key không liên quan đến topology để đảm bảo an toàn.
+        topology_params = params.copy()
+        topology_params.pop('map_type', None) # Xóa 'map_type' nếu có
+        path_info: PathInfo = topology_strategy.generate_path_info(grid_size=grid_size, params=topology_params)
+        
+        placement_strategy = self.placements.get(logic_type)
+        if not placement_strategy:
+            raise ValueError(f"Không tìm thấy chiến lược placement nào có tên '{logic_type}' đã được đăng ký.")
+            
+        final_layout: dict = placement_strategy.place_items(path_info, params=params)
+        
+        map_data = MapData(
+            grid_size=grid_size,
+            start_pos=final_layout.get('start_pos'),
+            target_pos=final_layout.get('target_pos'),
+            items=final_layout.get('items', []),
+            obstacles=final_layout.get('obstacles', []),
+            path_coords=path_info.path_coords, # (SỬA LỖI) Truyền path_coords vào MapData
+            params=params, # [THÊM MỚI] Truyền params vào MapData để xử lý theme
+            placement_coords=path_info.placement_coords, # [SỬA LỖI] Truyền placement_coords
+            map_type=map_type,
+            logic_type=logic_type
+        )
+        
+        print(f"--- Hoàn thành sinh map: '{map_type}' ---")
+        return map_data

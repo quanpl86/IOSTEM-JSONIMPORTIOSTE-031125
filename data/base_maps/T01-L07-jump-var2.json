@@ -1,0 +1,144 @@
+{
+  "gameConfig": {
+    "type": "maze",
+    "renderer": "3d",
+    "blocks": [
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 1,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 2,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 3,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 4,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 5,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 6,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 7,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 8,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 9,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.snow",
+        "position": {
+          "x": 10,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ice.ice01",
+        "position": {
+          "x": 7,
+          "y": 1,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ice.ice01",
+        "position": {
+          "x": 2,
+          "y": 1,
+          "z": 4
+        }
+      }
+    ],
+    "players": [
+      {
+        "id": "player1",
+        "start": {
+          "x": 1,
+          "y": 1,
+          "z": 4,
+          "direction": 1
+        }
+      }
+    ],
+    "collectibles": [],
+    "interactibles": [],
+    "finish": {
+      "x": 10,
+      "y": 1,
+      "z": 4
+    },
+    "obstacles": [
+      {
+        "id": "o1",
+        "type": "obstacle",
+        "modelKey": "ice.ice01",
+        "position": {
+          "x": 7,
+          "y": 1,
+          "z": 4
+        }
+      },
+      {
+        "id": "o2",
+        "type": "obstacle",
+        "modelKey": "ice.ice01",
+        "position": {
+          "x": 2,
+          "y": 1,
+          "z": 4
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "topic_code": "TOPIC_101",
+  "topic_name": "Kiểm tra các dạng Đảo",
+  "suggested_maps": [
+
+    {
+      "id": "test_hub_islands_01_tour",
+      "level": 7,
+      "titleKey": "Challenge.test_hub_islands_01.Title",
+      "descriptionKey": "Challenge.test_hub_islands_01.Description",
+      "translations": {
+        "vi": {
+          "Challenge.test_hub_islands_01.Title": "Đảo Trung Tâm và Vệ Tinh",
+          "Challenge.test_hub_islands_01.Description": "Kiểm tra map 'hub_with_stepped_islands'. Bắt đầu từ trung tâm, hãy khám phá cả 4 hòn đảo vệ tinh ở các độ cao khác nhau để thu thập pha lê."
+        }
+      },
+      "generation_config": {
+        "map_type": "hub_with_stepped_islands",
+        "logic_type": "island_tour",
+        "num_variants": 1,
+        "params": {
+          "hub_size": 3,
+          "island_size": 3,
+          "gap_size": 2,
+          "items_to_place": [
+            "crystal",
+            "crystal"
+          ]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 2
+        }
+      }
+    }
+  ]
+}

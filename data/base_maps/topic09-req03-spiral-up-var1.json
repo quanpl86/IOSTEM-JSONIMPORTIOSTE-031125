@@ -1,0 +1,471 @@
+{
+  "gameConfig": {
+    "type": "maze",
+    "renderer": "3d",
+    "blocks": [
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 5,
+          "y": 6,
+          "z": 10
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 5,
+          "y": 7,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 5,
+          "y": 7,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 5,
+          "y": 7,
+          "z": 8
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 5,
+          "y": 7,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 5,
+          "y": 7,
+          "z": 10
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 6,
+          "y": 2,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 6,
+          "y": 3,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 6,
+          "y": 3,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 6,
+          "y": 3,
+          "z": 8
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 6,
+          "y": 3,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 6,
+          "y": 4,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 6,
+          "y": 6,
+          "z": 10
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 7,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 7,
+          "y": 2,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 7,
+          "y": 4,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 7,
+          "y": 6,
+          "z": 10
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 8,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 8,
+          "y": 2,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 8,
+          "y": 4,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 8,
+          "y": 6,
+          "z": 10
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 9,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 9,
+          "y": 1,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 9,
+          "y": 1,
+          "z": 8
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 9,
+          "y": 1,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 9,
+          "y": 2,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 9,
+          "y": 4,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 9,
+          "y": 6,
+          "z": 10
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 10,
+          "y": 4,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 10,
+          "y": 5,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 10,
+          "y": 5,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 10,
+          "y": 5,
+          "z": 8
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 10,
+          "y": 5,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 10,
+          "y": 5,
+          "z": 10
+        }
+      },
+      {
+        "modelKey": "stone.stone01",
+        "position": {
+          "x": 10,
+          "y": 6,
+          "z": 10
+        }
+      },
+      {
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 9,
+          "y": 1,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 9,
+          "y": 2,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 6,
+          "y": 3,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 6,
+          "y": 4,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 10,
+          "y": 5,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 10,
+          "y": 6,
+          "z": 10
+        }
+      },
+      {
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 5,
+          "y": 7,
+          "z": 10
+        }
+      }
+    ],
+    "players": [
+      {
+        "id": "player1",
+        "start": {
+          "x": 7,
+          "y": 1,
+          "z": 7,
+          "direction": 1
+        }
+      }
+    ],
+    "collectibles": [
+      {
+        "id": "c1",
+        "type": "crystal",
+        "position": {
+          "x": 7,
+          "y": 3,
+          "z": 9
+        }
+      },
+      {
+        "id": "c2",
+        "type": "crystal",
+        "position": {
+          "x": 7,
+          "y": 5,
+          "z": 6
+        }
+      },
+      {
+        "id": "c3",
+        "type": "crystal",
+        "position": {
+          "x": 10,
+          "y": 6,
+          "z": 8
+        }
+      },
+      {
+        "id": "c4",
+        "type": "crystal",
+        "position": {
+          "x": 7,
+          "y": 7,
+          "z": 10
+        }
+      }
+    ],
+    "interactibles": [],
+    "finish": {
+      "x": 5,
+      "y": 8,
+      "z": 6
+    },
+    "obstacles": [
+      {
+        "id": "o1",
+        "type": "obstacle",
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 9,
+          "y": 1,
+          "z": 7
+        }
+      },
+      {
+        "id": "o2",
+        "type": "obstacle",
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 9,
+          "y": 2,
+          "z": 9
+        }
+      },
+      {
+        "id": "o3",
+        "type": "obstacle",
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 6,
+          "y": 3,
+          "z": 9
+        }
+      },
+      {
+        "id": "o4",
+        "type": "obstacle",
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 6,
+          "y": 4,
+          "z": 6
+        }
+      },
+      {
+        "id": "o5",
+        "type": "obstacle",
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 10,
+          "y": 5,
+          "z": 6
+        }
+      },
+      {
+        "id": "o6",
+        "type": "obstacle",
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 10,
+          "y": 6,
+          "z": 10
+        }
+      },
+      {
+        "id": "o7",
+        "type": "obstacle",
+        "modelKey": "wall.brick03",
+        "position": {
+          "x": 5,
+          "y": 7,
+          "z": 10
+        }
+      }
+    ]
+  }
+}
