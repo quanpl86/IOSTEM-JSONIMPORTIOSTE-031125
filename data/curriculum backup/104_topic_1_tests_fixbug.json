@@ -1,0 +1,138 @@
+{
+  "topic_code": "TOPIC_104_TEST_FIXBUG_T1",
+  "topic_name": "Kiểm tra Fixbug - Topic 1",
+  "suggested_maps": [
+    {
+      "id": "Test.Fixbug.T1.Sequence.01",
+      "level": 1,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Seq.01.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Seq.01.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Seq.01.Title": "Sửa lỗi: Sai thứ tự",
+          "Challenge.Test.Fixbug.T1.Seq.01.Description": "Nhân vật đang di chuyển về phía trước trước khi thu thập viên pha lê ngay trước mặt. Hãy sắp xếp lại các khối lệnh để thu thập pha lê trước khi di chuyển."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Seq.01.Title": "Fix the Bug: Sequence Error",
+          "Challenge.Test.Fixbug.T1.Seq.01.Description": "The character is moving forward before collecting the crystal right in front. Rearrange the blocks to collect the crystal before moving."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "path_length": 4,
+          "items_to_place": ["crystal"],
+          "challenge_type": "DEBUG_FIX_SEQUENCE",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "sequence_error",
+          "asset_theme": {
+            "ground": "ground.earth",
+            "obstacle": "wall.brick01"
+          }
+        }       
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.Fixbug.T1.Logic.02",
+      "level": 2,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Logic.02.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Logic.02.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Logic.02.Title": "Sửa lỗi: Nhảy qua tường",
+          "Challenge.Test.Fixbug.T1.Logic.02.Description": "Có một bức tường trên đường đi! Chương trình đang cố gắng đi thẳng qua nó. Hãy tìm khối lệnh sai và thay thế nó bằng lệnh 'nhảy'."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Logic.02.Title": "Fix the Bug: Jump the Wall",
+          "Challenge.Test.Fixbug.T1.Logic.02.Description": "There's a wall on the path! The program is trying to move forward through it. Find the incorrect block and replace it with a 'jump' command."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "side_a_length": 3,
+          "side_b_length": 3,
+          "obstacle_count": 1,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_block",
+          "bug_config": {
+            "options": { "from": "jump", "to": "moveForward" }
+          },
+          "asset_theme": {
+            "ground": "stone.stone02",
+            "obstacle": "wall.brick02"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Test.Fixbug.T1.Complex.03",
+      "level": 3,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Complex.03.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Complex.03.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Complex.03.Title": "Sửa lỗi: Thiếu lệnh",
+          "Challenge.Test.Fixbug.T1.Complex.03.Description": "Chương trình này gần đúng rồi, nhưng nhân vật không bật công tắc. Hãy tìm vị trí và thêm khối lệnh 'bật công tắc' còn thiếu."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Complex.03.Title": "Fix the Bug: Missing Action",
+          "Challenge.Test.Fixbug.T1.Complex.03.Description": "This program is almost correct, but the character isn't toggling the switch. Find the right spot and add the missing 'toggle switch' block."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "side_length": 3,
+          "bottom_length": 2,
+          "items_to_place": ["switch"],
+          "challenge_type": "DEBUG_FIX_SEQUENCE",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "options": { "block_type_to_remove": "toggleSwitch" }
+          },
+          "asset_theme": {
+            "ground": "stone.stone05",
+            "obstacle": "wall.brick04"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "switch": "all"
+        }
+      }
+    }
+  ]
+}

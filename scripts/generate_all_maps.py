@@ -348,17 +348,24 @@ def main():
                     asset_theme = params_for_generation.get('asset_theme', {})
                     default_obstacle_model = asset_theme.get('obstacle', 'wall.brick01')
                     stair_model = asset_theme.get('stair', 'ground.checker')
+
+                    # [SỬA] Danh sách các modelKey của tường chắn không được thay đổi bởi theme.
+                    UNJUMPABLE_WALL_MODELS = {'wall.stone01', 'lava.lava01', 'water.water01'}
                     
                     # [CHUẨN HÓA] Gán danh sách obstacles từ Topology vào gameConfig.
                     # Topology giờ đây chịu trách nhiệm hoàn toàn cho việc định nghĩa vật cản (bao gồm cả bậc thang).
                     if generated_map.obstacles:
-                        game_config['gameConfig']['obstacles'] = [
-                            # [REFACTORED] Gán modelKey cho obstacle để solver có thể sử dụng.
-                            # Danh sách 'blocks' đã được tạo chính xác bởi map_data.py.
-                            {"id": f"o{i+1}", "type": "obstacle", "modelKey": obs.get('modelKey', default_obstacle_model),
-                            "position": {"x": obs['pos'][0], "y": obs['pos'][1], "z": obs['pos'][2]}}
-                            for i, obs in enumerate(generated_map.obstacles)
-                        ]
+                        final_obstacles = []
+                        for i, obs in enumerate(generated_map.obstacles):
+                            existing_model = obs.get('modelKey')
+                            # Nếu modelKey đã có và là loại tường không thể nhảy, giữ nguyên.
+                            if existing_model in UNJUMPABLE_WALL_MODELS:
+                                model_to_use = existing_model
+                            else: # Nếu không, sử dụng model từ theme hoặc model mặc định.
+                                model_to_use = existing_model or default_obstacle_model
+                            
+                            final_obstacles.append({"id": f"o{i+1}", "type": "obstacle", "modelKey": model_to_use, "position": {"x": obs['pos'][0], "y": obs['pos'][1], "z": obs['pos'][2]}})
+                        game_config['gameConfig']['obstacles'] = final_obstacles
 
                     # --- [MỚI] Lưu file gameConfig vào base_maps để test ---
                     test_map_filename = f"{map_request.get('id', 'unknown')}-var{variant_index + 1}.json"

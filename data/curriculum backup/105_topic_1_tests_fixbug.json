@@ -1,0 +1,388 @@
+{
+  "topic_code": "TOPIC_105_TEST_FIXBUG_T1_MISSING",
+  "topic_name": "Kiểm tra Fixbug - Thiếu Lệnh",
+  "suggested_maps": [
+    {
+      "id": "Test.Fixbug.T1.Missing.04",
+      "level": 4,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Missing.04.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Missing.04.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Missing.04.Title": "Sửa lỗi: Thiếu lệnh Nhảy",
+          "Challenge.Test.Fixbug.T1.Missing.04.Description": "Nhân vật đang bị kẹt ở bức tường. Chương trình này thiếu một lệnh quan trọng. Hãy tìm vị trí đúng và thêm khối 'nhảy' để vượt qua chướng ngại vật."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Missing.04.Title": "Fix the Bug: Missing Jump",
+          "Challenge.Test.Fixbug.T1.Missing.04.Description": "The character is stuck at the wall. This program is missing a crucial command. Find the right spot and add a 'jump' block to get over the obstacle."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "path_length": 5,
+          "obstacle_count": 1,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "options": { "block_type_to_remove": "jump" }
+          },
+          "asset_theme": {
+            "ground": "ground.mud",
+            "obstacle": "wall.brick03"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "movement_jump"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Test.Fixbug.T1.Missing.05",
+      "level": 5,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Missing.05.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Missing.05.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Missing.05.Title": "Sửa lỗi: Thiếu lệnh Rẽ",
+          "Challenge.Test.Fixbug.T1.Missing.05.Description": "Ôi không, nhân vật đi thẳng vào ngõ cụt! Có vẻ như chương trình đã quên rẽ ở góc. Hãy thêm khối lệnh rẽ còn thiếu để nhân vật đi đúng đường."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Missing.05.Title": "Fix the Bug: Missing Turn",
+          "Challenge.Test.Fixbug.T1.Missing.05.Description": "Oh no, the character walked straight into a dead end! It looks like the program forgot to make a turn at the corner. Add the missing turn block to get the character on the right path."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 3,
+          "leg2_length": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "options": { "block_type_to_remove": "turn" }
+          },
+          "asset_theme": {
+            "ground": "stone.stone01"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Test.Fixbug.T1.Missing.06",
+      "level": 6,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Missing.06.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Missing.06.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Missing.06.Title": "Sửa lỗi: Thiếu lệnh Thu thập",
+          "Challenge.Test.Fixbug.T1.Missing.06.Description": "Nhân vật đã đi qua viên ngọc quý mà không nhặt nó! Hãy đảm bảo bạn thêm lệnh 'thu thập' vào đúng vị trí để hoàn thành mục tiêu."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Missing.06.Title": "Fix the Bug: Missing Collect",
+          "Challenge.Test.Fixbug.T1.Missing.06.Description": "The character walked right past the crystal without picking it up! Make sure you add the 'collect' command at the right spot to complete the goal."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "path_length": 4,
+          "items_to_place": ["crystal"],
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "options": { "block_type_to_remove": "collect" }
+          },
+          "asset_theme": {
+            "ground": "ground.snow"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+            "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.Fixbug.T1.Missing.07",
+      "level": 7,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Missing.07.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Missing.07.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Missing.07.Title": "Sửa lỗi: Quên Bật Công tắc",
+          "Challenge.Test.Fixbug.T1.Missing.07.Description": "Mục tiêu là phải bật công tắc, nhưng chương trình này lại bỏ qua nó. Tìm vị trí công tắc và thêm khối lệnh còn thiếu."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Missing.07.Title": "Fix the Bug: Forgot the Switch",
+          "Challenge.Test.Fixbug.T1.Missing.07.Description": "The goal is to toggle the switch, but this program ignores it. Find the switch's location and add the missing block."
+        }
+      },
+      "generation_config": {
+        "map_type": "t_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "stem_length": 3,
+          "bar_length": 3,
+          "items_to_place": ["switch"],
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "options": { "block_type_to_remove": "toggleSwitch" }
+          },
+          "asset_theme": {
+            "ground": "stone.stone06"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "switch": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.Fixbug.T1.Sequence.08",
+      "level": 8,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Seq.08.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Seq.08.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Seq.08.Title": "Sửa lỗi: Sai thứ tự phức tạp",
+          "Challenge.Test.Fixbug.T1.Seq.08.Description": "Thứ tự của các khối lệnh này bị xáo trộn hoàn toàn! Nhân vật đang rẽ trước khi di chuyển đến góc. Hãy sắp xếp lại chúng theo đúng logic."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Seq.08.Title": "Fix the Bug: Complex Sequence Error",
+          "Challenge.Test.Fixbug.T1.Seq.08.Description": "The order of these blocks is all mixed up! The character is turning before moving to the corner. Rearrange them into the correct logical sequence."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 2,
+          "leg2_length": 3,
+          "challenge_type": "DEBUG_FIX_SEQUENCE",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "sequence_error",
+          "asset_theme": {
+            "ground": "ground.checker"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Test.Fixbug.T1.Logic.09",
+      "level": 9,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Logic.09.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Logic.09.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Logic.09.Title": "Sửa lỗi: Rẽ Sai Hướng",
+          "Challenge.Test.Fixbug.T1.Logic.09.Description": "Nhân vật cần rẽ phải để đến đích, nhưng chương trình lại dùng lệnh rẽ trái. Hãy tìm khối lệnh sai và thay thế nó."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Logic.09.Title": "Fix the Bug: Wrong Direction",
+          "Challenge.Test.Fixbug.T1.Logic.09.Description": "The character needs to turn right to reach the goal, but the code is telling it to turn left. Find the incorrect block and replace it."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 3,
+          "leg2_length": 2,
+          "turn_direction": "right",
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_block",
+          "bug_config": {
+            "options": { "from": "turnRight", "to": "turnLeft" }
+          },
+          "asset_theme": {
+            "ground": "stone.stone04"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+        {
+      "id": "Test.Fixbug.T1.Logic.091",
+      "level": 9,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Logic.091.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Logic.091.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Logic.091.Title": "Sửa lỗi: Rẽ Sai Hướng",
+          "Challenge.Test.Fixbug.T1.Logic.091.Description": "Nhân vật cần rẽ phải để đến đích, nhưng chương trình lại dùng lệnh rẽ phải. Hãy tìm khối lệnh sai và thay thế nó."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Logic.091.Title": "Fix the Bug: Wrong Direction",
+          "Challenge.Test.Fixbug.T1.Logic.091.Description": "The character needs to turn right to reach the goal, but the code is telling it to turn right. Find the incorrect block and replace it."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 3,
+          "leg2_length": 2,
+          "turn_direction": "left",
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_block",
+          "bug_config": {
+            "options": { "from": "turnLeft", "to": "turnRight" }
+          },
+          "asset_theme": {
+            "ground": "stone.stone04"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Test.Fixbug.T1.Missing.10",
+      "level": 10,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Missing.10.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Missing.10.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Missing.10.Title": "Sửa lỗi: Thiếu một bước",
+          "Challenge.Test.Fixbug.T1.Missing.10.Description": "Chương trình này gần như hoàn hảo, nhưng nhân vật dừng lại ngay trước vạch đích. Nó còn thiếu một bước đi cuối cùng. Hãy thêm nó vào."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Missing.10.Title": "Fix the Bug: One Step Short",
+          "Challenge.Test.Fixbug.T1.Missing.10.Description": "This program is almost perfect, but the character stops just short of the goal. It's missing one final step. Add it in."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "path_length": 5,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "options": { "block_type_to_remove": "moveForward" }
+          },
+          "asset_theme": {
+            "ground": "ice.ice01"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Test.Fixbug.T1.Extra.11",
+      "level": 11,
+      "grade": 7,
+      "titleKey": "Challenge.Test.Fixbug.T1.Extra.11.Title",
+      "descriptionKey": "Challenge.Test.Fixbug.T1.Extra.11.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.Fixbug.T1.Extra.11.Title": "Sửa lỗi: Hành động thừa",
+          "Challenge.Test.Fixbug.T1.Extra.11.Description": "Chương trình này có thể đưa nhân vật đến đích, nhưng nó lại có một hành động rẽ không cần thiết. Hãy tìm và loại bỏ khối lệnh thừa để chương trình hiệu quả hơn."
+        },
+        "en": {
+          "Challenge.Test.Fixbug.T1.Extra.11.Title": "Fix the Bug: Extra Action",
+          "Challenge.Test.Fixbug.T1.Extra.11.Description": "This program gets the character to the goal, but it includes an unnecessary turn. Find and remove the extra block to make the code more efficient."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "side_length": 2,
+          "bottom_length": 2,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "extra_block",
+          "bug_config": {
+            "options": { "block_type_to_add": "turnRight" }
+          },
+          "asset_theme": {
+            "ground": "stone.stone07"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    }
+  ]
+}

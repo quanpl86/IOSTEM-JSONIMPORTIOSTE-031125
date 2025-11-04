@@ -59,29 +59,59 @@ class MissingBlockBug(BaseBugStrategy):
     Xóa một khối lệnh ngẫu nhiên.
     """
     def apply(self, program_dict: Dict[str, Any], config: Dict) -> Dict[str, Any]:
+        # [MỚI] Helper để tìm tất cả các body và khối lệnh có thể xóa
+        def find_removable_blocks_and_bodies(program_part: List[Dict]):
+            removable = []
+            if len(program_part) > 1:
+                for i, block in enumerate(program_part):
+                    removable.append({'body': program_part, 'index': i, 'block': block})
+            for block in program_part:
+                if "body" in block and isinstance(block["body"], list):
+                    removable.extend(find_removable_blocks_and_bodies(block["body"]))
+            return removable
+
         all_bodies = [program_dict.get("main", [])]
         for proc_body in program_dict.get("procedures", {}).values():
             all_bodies.append(proc_body)
 
-        # Tìm tất cả các "body" (danh sách các khối) có thể xóa được
-        possible_bodies_to_modify = [body for body in all_bodies if len(body) > 1]
+        all_removable_blocks = find_removable_blocks_and_bodies(program_dict.get("main", []))
+        for proc_body in program_dict.get("procedures", {}).values():
+            all_removable_blocks.extend(find_removable_blocks_and_bodies(proc_body))
 
-        if possible_bodies_to_modify:
-            target_body = random.choice(possible_bodies_to_modify)
-            # Ưu tiên xóa các khối đơn giản (không phải vòng lặp/hàm)
-            simple_blocks_indices = [
-                i for i, block in enumerate(target_body)
-                if "body" not in block and block.get("type") != "CALL"
+        if not all_removable_blocks:
+            print("   - ⚠️ Không tìm thấy nơi nào phù hợp để xóa khối lệnh (cần ít nhất 2 khối).")
+            return program_dict
+
+        # [REWRITTEN] Ưu tiên tìm và xóa khối được chỉ định trong config trên TOÀN BỘ chương trình
+        block_type_to_remove = config.get("options", {}).get("block_type_to_remove")
+        if block_type_to_remove:
+            specific_blocks = [
+                item for item in all_removable_blocks
+                if (
+                    # [MỚI] Nếu yêu cầu xóa "turn", tìm bất kỳ khối "maze_turn" nào.
+                    (block_type_to_remove == 'turn' and item['block'].get("type") == "maze_turn")
+                    or
+                    # [CŨ] Nếu yêu cầu xóa "turnLeft"/"turnRight" cụ thể.
+                    (('turn' in block_type_to_remove and block_type_to_remove != 'turn') and
+                     item['block'].get("type") == "maze_turn" and
+                     item['block'].get("direction") == block_type_to_remove)
+                    or
+                    # [CŨ] Logic cho các khối khác.
+                    item['block'].get("type") == f"maze_{block_type_to_remove}"
+                )
             ]
-            if simple_blocks_indices:
-                remove_idx = random.choice(simple_blocks_indices)
+            if specific_blocks:
+                target_item = random.choice(specific_blocks)
+                removed_block = target_item['body'].pop(target_item['index'])
+                print(f"      -> Bug 'missing_block': Đã xóa khối được chỉ định '{removed_block.get('type')}' từ body của nó.")
+                return program_dict
             else:
-                remove_idx = random.randint(0, len(target_body) - 1)
-            
-            removed_block = target_body.pop(remove_idx)
-            print(f"      -> Bug 'missing_block': Đã xóa khối '{removed_block.get('type')}'")
-        else:
-            print("   - ⚠️ Không tìm thấy nơi nào phù hợp để xóa khối lệnh.")
+                print(f"   - ⚠️ Không tìm thấy khối loại '{block_type_to_remove}' để xóa. Sẽ xóa một khối ngẫu nhiên.")
+
+        # Nếu không có chỉ định hoặc không tìm thấy, quay về logic cũ: xóa một khối ngẫu nhiên
+        target_item_to_remove = random.choice(all_removable_blocks)
+        removed_block = target_item_to_remove['body'].pop(target_item_to_remove['index'])
+        print(f"      -> Bug 'missing_block': Đã xóa khối ngẫu nhiên '{removed_block.get('type')}'")
         return program_dict
 
 class IncorrectLoopCountBug(BaseBugStrategy):
@@ -130,26 +160,37 @@ class IncorrectParameterBug(BaseBugStrategy):
         to_block_type = bug_options.get("to")
  
         if from_block_type and to_block_type:
-            # Trường hợp 2: Thay thế khối
-            possible_blocks = _find_blocks_recursively(
-                program_dict.get("main", []),
-                lambda block: block.get("type") == f"maze_{from_block_type}"
-            )
-            # [FIX] Mở rộng tìm kiếm vào trong các hàm (procedures)
+            # [REWRITTEN] Logic tìm và thay thế khối, có xử lý trường hợp đặc biệt cho 'turn'
+            
+            # Điều kiện tìm kiếm:
+            # - Nếu là khối 'turn', tìm type='maze_turn' VÀ direction khớp.
+            # - Nếu là khối khác, tìm type='maze_{from_block_type}'.
+            is_turn_bug = 'turn' in from_block_type
+            
+            def find_condition(block):
+                if is_turn_bug:
+                    return block.get("type") == "maze_turn" and block.get("direction") == from_block_type
+                else:
+                    return block.get("type") == f"maze_{from_block_type}"
+
+            possible_blocks = _find_blocks_recursively(program_dict.get("main", []), find_condition)
             for proc_body in program_dict.get("procedures", {}).values():
-                possible_blocks.extend(_find_blocks_recursively(
-                    proc_body,
-                    lambda block: block.get("type") == f"maze_{from_block_type}"
-                ))
+                possible_blocks.extend(_find_blocks_recursively(proc_body, find_condition))
 
             if possible_blocks:
                 target_block = random.choice(possible_blocks)
                 original_type = target_block.get("type")
-                target_block["type"] = f"maze_{to_block_type}"
-                # Xóa các thuộc tính không còn liên quan (ví dụ: direction)
-                if "direction" in target_block:
-                    del target_block["direction"]
-                print(f"      -> Bug 'incorrect_block': Thay thế khối '{original_type}' bằng '{target_block['type']}'.")
+                
+                if is_turn_bug:
+                    # Chỉ thay đổi direction, không thay đổi type
+                    original_dir = target_block["direction"]
+                    target_block["direction"] = to_block_type
+                    print(f"      -> Bug 'incorrect_block': Thay đổi hướng rẽ từ '{original_dir}' thành '{to_block_type}'.")
+                else:
+                    # Thay đổi toàn bộ type của khối
+                    target_block["type"] = f"maze_{to_block_type}"
+                    if "direction" in target_block: del target_block["direction"]
+                    print(f"      -> Bug 'incorrect_block': Thay thế khối '{original_type}' bằng '{target_block['type']}'.")
             else:
                 print(f"   - ⚠️ Không tìm thấy khối loại 'maze_{from_block_type}' để tạo lỗi incorrect_block.")
         else:
@@ -275,11 +316,26 @@ class WrongLogicInAlgorithmBug(BaseBugStrategy):
 class RedundantBlocksBug(BaseBugStrategy):
     """
     1.4. Lỗi Tối Ưu Hóa: Thừa Khối Lệnh (Redundant Blocks)
+    [REWRITTEN] Chèn một khối lệnh thừa vào một vị trí ngẫu nhiên trong chương trình.
     """
-    def apply(self, actions: List[str], config: Dict) -> List[str]:
-        if not actions: return actions
-        insert_idx = random.randint(0, len(actions))
-        actions.insert(insert_idx, 'turnRight')
-        actions.insert(insert_idx, 'turnLeft')
-        print(f"      -> Bug 'optimization': Chèn cặp lệnh rẽ thừa ở vị trí {insert_idx}.")
-        return actions
+    def apply(self, program_dict: Dict[str, Any], config: Dict) -> Dict[str, Any]:
+        # Lấy loại khối lệnh cần thêm từ config, mặc định là 'turnRight'
+        block_type_to_add = config.get("options", {}).get("block_type_to_add", "turnRight")
+
+        # Tạo khối lệnh thừa
+        if "turn" in block_type_to_add:
+            extra_block = {"type": "maze_turn", "direction": block_type_to_add}
+        else:
+            extra_block = {"type": f"maze_{block_type_to_add}"}
+
+        # Tìm một nơi để chèn khối lệnh (ưu tiên chương trình chính)
+        main_body = program_dict.get("main")
+        if main_body is not None and isinstance(main_body, list):
+            # Chèn vào một vị trí ngẫu nhiên trong main_body
+            insert_idx = random.randint(0, len(main_body))
+            main_body.insert(insert_idx, extra_block)
+            print(f"      -> Bug 'extra_block': Đã chèn khối '{block_type_to_add}' thừa vào vị trí {insert_idx} trong 'main'.")
+        else:
+            print("   - ⚠️ Không tìm thấy 'main' body (dạng list) để chèn khối lệnh thừa.")
+
+        return program_dict

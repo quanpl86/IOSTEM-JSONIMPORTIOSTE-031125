@@ -163,8 +163,11 @@ class MapData:
         if self.map_type == 'complex_maze_2d':
             print("    LOG: (Game Engine) Phát hiện map maze, dùng BFS để tìm các ô ground cần thiết...")
             
-            # Tạo một set chứa tọa độ của tất cả các bức tường để tra cứu nhanh.
-            wall_coords = {tuple(obs['pos']) for obs in self.obstacles if obs.get('type') == 'wall'}
+            # [SỬA LỖI] Tạo một set chứa tọa độ 2D (x, z) của tất cả các bức tường để tra cứu nhanh.
+            # Tường trong maze được tạo ở y=1, nhưng BFS chạy ở y=0, nên ta cần bỏ qua tọa độ y khi so sánh.
+            wall_coords_2d = {(obs['pos'][0], 0, obs['pos'][2]) 
+                              for obs in self.obstacles if obs.get('type') == 'wall'}
+            wall_coords_3d = {tuple(obs['pos']) for obs in self.obstacles if obs.get('type') == 'wall'}
             
             # Sử dụng thuật toán BFS để tìm tất cả các ô ground có thể đi được.
             # Hàng đợi (queue) cho BFS, bắt đầu từ vị trí của người chơi.
@@ -186,12 +189,12 @@ class MapData:
                     if (0 <= next_pos[0] < self.grid_size[0] and
                         0 <= next_pos[2] < self.grid_size[2] and
                         next_pos not in visited_grounds and
-                        next_pos not in wall_coords):
+                        next_pos not in wall_coords_2d): # So sánh với tọa độ 2D của tường
                         visited_grounds.add(next_pos)
                         queue.append(next_pos)
             
             # Ground cuối cùng bao gồm các ô đi được và các ô nền móng của tường.
-            final_ground_coords = visited_grounds.union(wall_coords)
+            final_ground_coords = visited_grounds.union(wall_coords_2d)
         else:
             # Đối với các map khác, ground_coords đã được xác định ở trên.
             final_ground_coords = ground_coords
@@ -207,14 +210,18 @@ class MapData:
         # Xử lý các khối từ placement_coords có modelKey riêng
         for item in self.placement_coords:
             if isinstance(item, dict) and 'pos' in item and 'modelKey' in item:
-                game_blocks.append({"modelKey": item['modelKey'], "position": coord_to_obj(item['pos'], y_offset=0)})
+                game_blocks.append({"modelKey": item['modelKey'], "position": coord_to_obj(item['pos'])})
                 processed_coords.add(item['pos'])
         
-        # [FIX] Tạo danh sách game_blocks, ưu tiên modelKey của obstacle nếu có
+        # [SỬA LỖI] Logic tạo khối được tách làm 2 bước rõ ràng để tránh mất tường.
+        # Bước 2.1: Tạo tất cả các khối NỀN ĐẤT (ground)
         for pos in sorted(list(final_ground_coords)):
             if pos not in processed_coords:
-                model_key_to_use = obstacle_map.get(pos, ground_model)
-                game_blocks.append({"modelKey": model_key_to_use, "position": coord_to_obj(pos, y_offset=0)})
+                game_blocks.append({"modelKey": ground_model, "position": coord_to_obj(pos)})
+
+        # Bước 2.2: Tạo tất cả các khối CHƯỚNG NGẠI VẬT (obstacles)
+        for obs in self.obstacles:
+            game_blocks.append({"modelKey": obs.get('modelKey', obstacle_model), "position": coord_to_obj(obs['pos'])})
 
         # --- Bước 2: Đặt các đối tượng lên trên mặt đất ---
         collectibles = []

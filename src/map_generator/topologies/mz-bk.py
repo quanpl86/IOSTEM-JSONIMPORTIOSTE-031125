@@ -81,7 +81,7 @@ class ComplexMazeTopology(BaseTopology):
                 if grid[x][z] == 1:
                     # [SỬA] Định nghĩa rõ ràng "Tường" của mê cung sử dụng modelKey 'wall.stone01'.
                     # Điều này phân biệt nó với các "Vật cản" có thể nhảy qua.
-                    obstacles.append({"type": "wall", "modelKey": "wall.stone01", "pos": (x, 1, z)})
+                    obstacles.append({"type": "wall", "modelKey": "wall.stone01", "pos": (x, 0, z)})
 
         # Xác định vị trí bắt đầu và kết thúc của màn chơi.
         # Chúng ta thường chọn hai góc đối diện để tạo ra thử thách dài nhất.
