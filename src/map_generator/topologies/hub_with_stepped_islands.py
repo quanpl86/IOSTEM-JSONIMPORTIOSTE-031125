@@ -21,31 +21,31 @@ class HubWithSteppedIslandsTopology(BaseTopology):
                 platform_coords.append((cx + x_offset, cy, cz + z_offset))
         return platform_coords
 
-    def _create_staircase(self, start_point: Coord, direction: Coord, num_steps: int) -> tuple[list[Coord], list[Coord]]:
+    def _create_staircase(self, start_point: Coord, direction: Coord, num_steps: int) -> tuple[list[Coord], list[Coord], list[Coord]]:
         """
-        [REWRITTEN] Tạo cầu thang rỗng (chỉ có bề mặt).
+        [CHUẨN HÓA] Tạo cầu thang rỗng (chỉ có bề mặt).
         `num_steps` dương thì đi lên, âm thì đi xuống.
         `direction` là hướng di chuyển trên mặt phẳng (X, Z).
         Returns:
-            - surface_coords: Tọa độ các khối bề mặt của bậc thang (để làm vật cản).
-            - path_coords: Tọa độ đường đi thực tế của người chơi trên bậc thang.
+            - path_coords: Đường đi của người chơi.
+            - surface_coords: Các khối bề mặt của bậc thang.
+            - obstacle_coords: Các khối được coi là vật cản (chính là surface_coords).
         """
-        surface_coords = []
-        path_coords = []
+        path = []
+        surfaces = []
         current_pos = start_point
         vertical_step = UP_Y if num_steps > 0 else DOWN_Y
 
         for _ in range(abs(num_steps)):
             # Bước 1: Đi ngang theo hướng đã cho
             current_pos = add_vectors(current_pos, direction)
-            path_coords.append(current_pos) # Người chơi sẽ đi qua đây
-
+            path.append(current_pos)
             # Bước 2: Đi lên hoặc xuống
             current_pos = add_vectors(current_pos, vertical_step)
-            surface_coords.append(current_pos) # Đặt khối bề mặt tại vị trí mới
-            path_coords.append(current_pos) # Người chơi cũng sẽ đi qua đây
+            surfaces.append(current_pos)
+            path.append(current_pos)
 
-        return surface_coords, path_coords
+        return path, surfaces, surfaces
 
     def generate_path_info(self, grid_size: tuple, params: dict) -> PathInfo:
         print("    LOG: Generating 'hub_with_stepped_islands' topology...")
@@ -96,17 +96,12 @@ class HubWithSteppedIslandsTopology(BaseTopology):
             # Tạo cầu thang
             # Số bậc thang ngang = khoảng cách, số bậc thang dọc = độ cao
             # Để đơn giản, ta cho số bậc thang = chênh lệch độ cao
-            stair_surface_coords, stair_path_coords = self._create_staircase(stair_start_point, direction, height_diff)
+            stair_path, stair_surfaces, stair_obstacles = self._create_staircase(stair_start_point, direction, height_diff)
             
-            # [CẢI TIẾN] Logic mới để xử lý bậc thang.
-            # 1. Các khối bề mặt của bậc thang được coi là vật cản.
-            obstacles.extend([{"modelKey": "ground.checker", "pos": pos} for pos in stair_surface_coords])
-            # 2. Các khối nền móng chỉ cần đặt bên dưới các khối bề mặt.
-            # Điều này tạo ra bậc thang rỗng.
-            placement_coords.extend(stair_surface_coords)
+            obstacles.extend([{"modelKey": "ground.checker", "pos": pos} for pos in stair_obstacles])
 
             # Điểm cuối của cầu thang cũng là điểm vào của đảo vệ tinh
-            island_entry_point = stair_path_coords[-1] if stair_path_coords else stair_start_point
+            island_entry_point = stair_path[-1] if stair_path else stair_start_point
 
             # Tạo hòn đảo vệ tinh
             # Dịch chuyển tâm đảo ra xa một chút so với điểm vào
@@ -119,14 +114,14 @@ class HubWithSteppedIslandsTopology(BaseTopology):
             
             # Cập nhật đường đi và các khối cần đặt
             # Đường đi của solver sẽ bao gồm cả việc đi qua cầu thang
-            path_coords.extend(stair_path_coords)
+            path_coords.extend(stair_path)
             path_coords.append(island_center) # Đi vào giữa đảo
             # Quay trở lại Hub để đi đến đảo tiếp theo
-            path_coords.extend(reversed(stair_path_coords))
+            path_coords.extend(reversed(stair_path))
             path_coords.append(stair_start_point)
             path_coords.append(hub_center) # Quay về trung tâm hub
             
-            # Chỉ đặt vật phẩm trên các đảo, không đặt trên cầu thang
+            # Các vị trí có thể đặt vật phẩm bao gồm các đảo và hub
             # placement_coords đã chứa hub_coords
             placement_coords.extend(island_coords)
         

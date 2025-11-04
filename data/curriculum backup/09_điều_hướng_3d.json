@@ -26,7 +26,15 @@
           "maze_depth": 14,
           "items_to_place": [
             "crystal",
-            "key"
+            "crystal",
+            "crystal",
+            "crystal",
+            "crystal",
+            "crystal",
+            "crystal",
+            "crystal",
+            "crystal",
+            "crystal"
           ],
           "asset_theme": {
             "ground": "ground.snow",
@@ -40,8 +48,7 @@
       "solution_config": {
         "type": "reach_target",
         "itemGoals": {
-          "crystal": 1,
-          "key": 1
+          "crystal": 10
         }
       }
     },

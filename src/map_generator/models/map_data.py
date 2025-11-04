@@ -121,10 +121,15 @@ class MapData:
             """Chuyển tuple (x,y,z) thành object {"x":x, "y":y, "z":z} và áp dụng offset y."""
             return {"x": coord[0], "y": coord[1] + y_offset, "z": coord[2]}
 
-        # --- [CẢI TIẾN] Đọc theme từ params ---
+        # --- Đọc theme từ params ---
         asset_theme = self.params.get('asset_theme', {})
-        ground_model = asset_theme.get('ground', 'ground.normal') # Mặc định là 'ground.normal'
+        ground_model = asset_theme.get('ground', 'ground.normal')
         stair_model = asset_theme.get('stair', 'ground.checker') # Mặc định cho bậc thang
+        # [FIX] Lấy modelKey cho obstacle từ asset_theme
+        obstacle_model = asset_theme.get('obstacle', 'wall.brick01')
+
+        # [FIX] Tạo một set chứa tọa độ và modelKey của các chướng ngại vật để tra cứu nhanh
+        obstacle_map = {tuple(obs['pos']): obs.get('modelKey', obstacle_model) for obs in self.obstacles}
         
         # --- Bước 1: Tạo mặt đất (ground) ---
         # [SỬA LỖI] Logic tạo nền đất được viết lại hoàn toàn.
@@ -197,13 +202,19 @@ class MapData:
         
         # [CẢI TIẾN] Xử lý các khối có modelKey tùy chỉnh từ placement_coords
         game_blocks = []
-        processed_coords = set()
+        processed_coords = set() # Các tọa độ đã được xử lý (để tránh ghi đè)
+
+        # Xử lý các khối từ placement_coords có modelKey riêng
         for item in self.placement_coords:
             if isinstance(item, dict) and 'pos' in item and 'modelKey' in item:
                 game_blocks.append({"modelKey": item['modelKey'], "position": coord_to_obj(item['pos'], y_offset=0)})
                 processed_coords.add(item['pos'])
         
-        game_blocks.extend([{"modelKey": ground_model, "position": coord_to_obj(pos, y_offset=0)} for pos in sorted(list(final_ground_coords)) if pos not in processed_coords])
+        # [FIX] Tạo danh sách game_blocks, ưu tiên modelKey của obstacle nếu có
+        for pos in sorted(list(final_ground_coords)):
+            if pos not in processed_coords:
+                model_key_to_use = obstacle_map.get(pos, ground_model)
+                game_blocks.append({"modelKey": model_key_to_use, "position": coord_to_obj(pos, y_offset=0)})
 
         # --- Bước 2: Đặt các đối tượng lên trên mặt đất ---
         collectibles = []

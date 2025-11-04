@@ -3,7 +3,7 @@
 import random
 from .base_topology import BaseTopology
 from src.map_generator.models.path_info import PathInfo, Coord
-from src.utils.geometry import add_vectors, FORWARD_X, UP_Y
+from src.utils.geometry import add_vectors, FORWARD_X, UP_Y, FORWARD_Z
 
 class SteppedIslandClustersTopology(BaseTopology):
     """
@@ -20,21 +20,26 @@ class SteppedIslandClustersTopology(BaseTopology):
                 coords.append((x + i, y, z + j))
         return coords
 
-    def _create_staircase(self, start_point: Coord, steps: int) -> list[Coord]:
+    def _create_staircase(self, start_point: Coord, direction: Coord, num_steps: int) -> tuple[list[Coord], list[Coord], list[Coord]]:
         """
-        Tạo cầu thang đi được (zigzag) theo hướng +X.
-        Mỗi bậc gồm 1 bước ngang và 1 bước lên.
+        [CHUẨN HÓA] Tạo cầu thang rỗng, đi lên theo hướng cho trước.
+        Returns:
+            - path_coords: Đường đi của người chơi.
+            - surface_coords: Các khối bề mặt của bậc thang.
+            - obstacle_coords: Các khối được coi là vật cản (chính là surface_coords).
         """
         path = []
+        surfaces = []
         current_pos = start_point
-        for _ in range(steps):
+        for _ in range(num_steps):
             # Bước 1: Đi ngang
-            current_pos = add_vectors(current_pos, FORWARD_X)
+            current_pos = add_vectors(current_pos, direction)
             path.append(current_pos)
             # Bước 2: Đi lên
             current_pos = add_vectors(current_pos, UP_Y)
             path.append(current_pos)
-        return path
+            surfaces.append(current_pos) # Chỉ bề mặt trên cùng là khối vật lý
+        return path, surfaces, surfaces
 
     def _create_bridge(self, start_point: Coord, end_point: Coord) -> list[Coord]:
         """Tạo một cây cầu phẳng từ start đến end theo trục X."""
@@ -58,75 +63,64 @@ class SteppedIslandClustersTopology(BaseTopology):
         height_step = params.get('height_step', 2)
 
         start_x = 2
-        start_z = grid_size[2] // 2
+        start_z = grid_size[2] // 2 - (islands_per_cluster * 2) # Căn giữa cụm đảo
         y = 0
 
         path_coords: list[Coord] = []
         placement_coords: list[Coord] = []
         obstacles = []
 
-        # Điểm bắt đầu của cụm đầu tiên
-        last_exit_point = (start_x -1, y, start_z)
+        # Tạo đảo đầu tiên làm điểm bắt đầu
+        first_island = self._create_island((start_x, y, start_z), size=2)
+        placement_coords.extend(first_island)
+        start_pos = (start_x, y, start_z)
+        path_coords.append(start_pos)
+        last_exit_point = (start_x + 1, y, start_z + 1) # Góc dưới bên phải của đảo đầu tiên
+        path_coords.append(last_exit_point)
 
         for i in range(num_clusters):
-            # Tạo cụm đảo đầu tiên
+            # Tính toán độ cao cho cụm đảo hiện tại
             island_base_y = y + i * height_step
-            # Điểm vào của cụm là điểm ra của cầu thang trước đó
-            cluster_entry_point = last_exit_point
             
             # Nối các đảo trong cụm
             for j in range(islands_per_cluster):
-                island_x = cluster_entry_point[0] + 1
-                island_z = start_z if j == 0 else start_z + (j * 4) # Đặt các đảo cách nhau
+                # Điểm vào của đảo tiếp theo
+                next_island_entry = (last_exit_point[0] + 3, island_base_y, last_exit_point[2])
                 
-                # Điểm vào của đảo này
-                current_island_entry = (island_x, island_base_y, cluster_entry_point[2])
-                
-                # Tạo cầu nối từ điểm trước đó đến đảo này
-                bridge = self._create_bridge(last_exit_point, current_island_entry)
+                # Tạo cầu nối
+                bridge = self._create_bridge(last_exit_point, next_island_entry)
                 path_coords.extend(bridge)
                 placement_coords.extend(bridge)
                 
                 # Tạo đảo
-                island = self._create_island((current_island_entry[0], island_base_y, start_z), size=2)
-                path_coords.extend(island) # Đường đi trên đảo có thể đơn giản là đi hết các khối
+                island = self._create_island(next_island_entry, size=2)
+                path_coords.append(next_island_entry)
                 placement_coords.extend(island)
                 
                 # Cập nhật điểm ra cho đảo/cầu tiếp theo
-                last_exit_point = (island[-1][0], island_base_y, island[-1][2])
+                last_exit_point = (next_island_entry[0] + 1, island_base_y, next_island_entry[2] + 1)
+                path_coords.append(last_exit_point)
 
             # Nếu chưa phải cụm cuối, tạo cầu thang đi lên
             if i < num_clusters - 1:
-                stair_coords = self._create_staircase(last_exit_point, height_step)
-                path_coords.extend(stair_coords) # Thêm vào đường đi của solver
-                # [CHUẨN HÓA] Định nghĩa bậc thang là một loại chướng ngại vật (obstacle) có thể đứng lên được.
-                # Sử dụng modelKey 'ground.checker' để nó trông giống một khối có thể đi được.
-                obstacles.extend([{"type": "obstacle", "modelKey": "ground.checker", "pos": pos} for pos in stair_coords])
-                last_exit_point = stair_coords[-1]
+                # [CHUẨN HÓA] Tạo cầu thang và xử lý kết quả
+                stair_path, stair_surfaces, stair_obstacles = self._create_staircase(last_exit_point, FORWARD_X, height_step)
+                
+                path_coords.extend(stair_path)
+                # Bề mặt bậc thang cũng là nơi có thể đặt nền móng, nhưng không đặt vật phẩm
+                placement_coords.extend(stair_surfaces)
+                # Các khối bề mặt được coi là vật cản
+                obstacles.extend([{"modelKey": "ground.checker", "pos": pos} for pos in stair_obstacles])
+                
+                # Cập nhật điểm ra là điểm cuối của cầu thang
+                last_exit_point = stair_path[-1] if stair_path else last_exit_point
 
-        # Tạo nền móng cho tất cả các khối đã đặt
-        coords_with_foundation = set()
-        for x, y_coord, z in placement_coords:
-            for y_level in range(y_coord + 1):
-                coords_with_foundation.add((x, y_level, z))
-        
-        # Dọn dẹp
-        final_path = list(dict.fromkeys(path_coords)) # Xóa trùng lặp, giữ thứ tự
-        final_placement = list(coords_with_foundation)
-
-        start_pos = final_path[0]
-        target_pos = final_path[-1]
-        
-        # Đảm bảo người chơi có chỗ đứng ban đầu
-        if start_pos not in final_placement:
-            final_placement.append(start_pos)
-            final_placement.append((start_pos[0], start_pos[1]-1, start_pos[2]))
-
+        target_pos = last_exit_point
 
         return PathInfo(
             start_pos=start_pos,
             target_pos=target_pos,
-            path_coords=final_path,
-            placement_coords=final_placement,
+            path_coords=list(dict.fromkeys(path_coords)),
+            placement_coords=list(set(placement_coords)),
             obstacles=obstacles
         )

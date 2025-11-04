@@ -348,21 +348,17 @@ def main():
                     asset_theme = params_for_generation.get('asset_theme', {})
                     default_obstacle_model = asset_theme.get('obstacle', 'wall.brick01')
                     stair_model = asset_theme.get('stair', 'ground.checker')
-
-                    # [REFACTORED] Bổ sung danh sách obstacles vào gameConfig.
-                    # Bước này đảm bảo solver có thể nhận diện được chúng.
+                    
+                    # [CHUẨN HÓA] Gán danh sách obstacles từ Topology vào gameConfig.
+                    # Topology giờ đây chịu trách nhiệm hoàn toàn cho việc định nghĩa vật cản (bao gồm cả bậc thang).
                     if generated_map.obstacles:
-                        # [REFACTORED] Thống nhất type là "obstacle" và truyền modelKey nếu có.
-                        # [CẢI TIẾN] Sử dụng modelKey từ theme làm mặc định.
-                        game_config['gameConfig']['obstacles'] = [{"id": f"o{i+1}", "type": "obstacle", "modelKey": obs.get('modelKey', default_obstacle_model), "position": {"x": obs['pos'][0], "y": obs['pos'][1]+1, "z": obs['pos'][2]}} for i, obs in enumerate(generated_map.obstacles)]
-
-                    # Bổ sung các khối vật lý của vật cản vào `blocks`
-                    # để solver có thể nhận diện chúng là các khối vật lý có thể đứng lên được.
-                    if generated_map.obstacles:
-                         for obs in generated_map.obstacles:
-                            y_offset = 0 if map_type in ['stepped_island_clusters', 'hub_with_stepped_islands'] else 1
-                            model_key = obs.get('modelKey', default_obstacle_model) # Sử dụng modelKey từ theme
-                            game_config['gameConfig']['blocks'].append({ "modelKey": model_key, "position": {"x": obs['pos'][0], "y": obs['pos'][1] + y_offset, "z": obs['pos'][2]} })
+                        game_config['gameConfig']['obstacles'] = [
+                            # [REFACTORED] Gán modelKey cho obstacle để solver có thể sử dụng.
+                            # Danh sách 'blocks' đã được tạo chính xác bởi map_data.py.
+                            {"id": f"o{i+1}", "type": "obstacle", "modelKey": obs.get('modelKey', default_obstacle_model),
+                            "position": {"x": obs['pos'][0], "y": obs['pos'][1], "z": obs['pos'][2]}}
+                            for i, obs in enumerate(generated_map.obstacles)
+                        ]
 
                     # --- [MỚI] Lưu file gameConfig vào base_maps để test ---
                     test_map_filename = f"{map_request.get('id', 'unknown')}-var{variant_index + 1}.json"
@@ -399,6 +395,31 @@ def main():
                     solution_config = map_request.get('solution_config', {})
                     solution_config['logic_type'] = logic_type
                     
+                    # [SỬA LỖI QUAN TRỌNG] Tính toán itemGoals TRƯỚC KHI gọi solver.
+                    # Điều này đảm bảo solver nhận được giá trị số, không phải chuỗi "all".
+                    # Phải tạo một bản sao sâu (deepcopy) để không làm thay đổi cấu trúc gốc
+                    requested_item_goals = copy.deepcopy(map_request.get('solution_config', {}).get('itemGoals', {}))
+                    final_item_goals = {}
+                    # [NÂNG CẤP] Logic mới để tự động tính toán itemGoals="all"
+                    # Duyệt qua các mục tiêu được yêu cầu trong curriculum
+                    for item_type, required_count in requested_item_goals.items():
+                        # Nếu yêu cầu là "all", chúng ta cần đếm số lượng thực tế
+                        if isinstance(required_count, str) and required_count.lower() == "all":
+                            actual_count = 0
+                            # Đếm trong 'interactibles' (ví dụ: switch)
+                            if 'interactibles' in game_config['gameConfig']:
+                                actual_count += sum(1 for item in game_config['gameConfig']['interactibles'] if item.get('type') == item_type)
+                            # Đếm trong 'collectibles' (ví dụ: crystal)
+                            if 'collectibles' in game_config['gameConfig']:
+                                actual_count += sum(1 for item in game_config['gameConfig']['collectibles'] if item.get('type') == item_type)
+                            
+                            final_item_goals[item_type] = actual_count
+                            print(f"    LOG: Đã tính toán itemGoals cho '{item_type}': 'all' -> {actual_count} (thực tế).")
+                        else:
+                            # Nếu không phải "all", giữ nguyên giá trị yêu cầu
+                            final_item_goals[item_type] = required_count
+                    solution_config['itemGoals'] = final_item_goals
+
                     # [SỬA LỖI] Các logic_type này không thể giải bằng A* truyền thống.
                     # Chúng ta sẽ bỏ qua bước giải và tạo lời giải "giả lập" trực tiếp.
                     logic_types_to_skip_solving = [
@@ -436,32 +457,6 @@ def main():
                             "raw_actions": [], # Không có hành động thô
                             "structuredSolution": program_dict
                         }
-
-                    # [CẢI TIẾN] Tự động tính toán itemGoals thay vì dùng giá trị "all"
-                    # [SỬA LỖI] Phải tạo một bản sao sâu (deepcopy) để không làm thay đổi cấu trúc gốc
-                    requested_item_goals = copy.deepcopy(map_request.get('solution_config', {}).get('itemGoals', {}))
-                    final_item_goals = {}
-                    for item_type, required_count in requested_item_goals.items():
-                        # Đếm số lượng item/interactible thực tế có trên map được sinh ra
-                        if item_type == 'switch' and 'interactibles' in game_config['gameConfig']:
-                            actual_count = len(game_config['gameConfig'].get('interactibles', []))
-                        else:
-                            actual_count = sum(1 for item in game_config['gameConfig'].get('collectibles', []) if item.get('type') == item_type)
-
-                        # So sánh số lượng yêu cầu và số lượng thực tế
-                        if isinstance(required_count, str) and required_count.lower() == "all":
-                            final_item_goals[item_type] = actual_count
-                            print(f"    LOG: Đã tính toán itemGoals cho '{item_type}': 'all' -> {actual_count} (thực tế).")
-                        elif isinstance(required_count, int) and required_count > actual_count:
-                            print(f"   - ⚠️ Cảnh báo: Yêu cầu {required_count} '{item_type}' nhưng chỉ có {actual_count} được tạo. Cập nhật itemGoals thành {actual_count}.")
-                            final_item_goals[item_type] = actual_count
-                        else:
-                            # Giữ nguyên giá trị nếu hợp lệ
-                            final_item_goals[item_type] = required_count
-                    
-                    # [SỬA LỖI QUAN TRỌNG] Cập nhật lại solution_config sẽ được truyền cho solver
-                    # với giá trị itemGoals đã được tính toán.
-                    solution_config['itemGoals'] = final_item_goals
 
                     # --- [MỚI] Bước 6.5: Tính toán Optimal Lines of Code cho JavaScript ---
                     optimal_lloc = 0

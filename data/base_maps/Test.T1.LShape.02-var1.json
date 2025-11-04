@@ -1,0 +1,117 @@
+{
+  "gameConfig": {
+    "type": "maze",
+    "renderer": "3d",
+    "blocks": [
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": -1,
+          "y": 0,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": 1,
+          "y": 0,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": 2,
+          "y": 0,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": 3,
+          "y": 0,
+          "z": 9
+        }
+      },
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": 4,
+          "y": 0,
+          "z": 5
+        }
+      },
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": 4,
+          "y": 0,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": 4,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": 4,
+          "y": 0,
+          "z": 8
+        }
+      },
+      {
+        "modelKey": "stone.stone03",
+        "position": {
+          "x": 4,
+          "y": 0,
+          "z": 9
+        }
+      }
+    ],
+    "players": [
+      {
+        "id": "player1",
+        "start": {
+          "x": 4,
+          "y": 1,
+          "z": 5,
+          "direction": 1
+        }
+      }
+    ],
+    "collectibles": [],
+    "interactibles": [
+      {
+        "id": "s1",
+        "type": "switch",
+        "position": {
+          "x": 0,
+          "y": 1,
+          "z": 9
+        },
+        "initialState": "off"
+      }
+    ],
+    "finish": {
+      "x": -1,
+      "y": 1,
+      "z": 9
+    }
+  }
+}

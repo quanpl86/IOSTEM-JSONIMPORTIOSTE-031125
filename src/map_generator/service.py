@@ -56,6 +56,7 @@ from .placements.arrow_shape_placer import ArrowShapePlacer
 from .placements.algorithm_placer import AlgorithmPlacer
 from .placements.island_tour_placer import IslandTourPlacer # [MỚI] Import placer mới
 from .placements.zigzag_placer import ZigzagPlacer # [MỚI] Import ZigzagPlacer
+from .placements.command_obstacle_placer import CommandObstaclePlacer # [MỚI] Import placer cho Topic 1
 from .placements.swift_playground_placer import SwiftPlaygroundPlacer # [MỚI] Import placer Swift Playground
 
 class MapGeneratorService:
@@ -112,6 +113,7 @@ class MapGeneratorService:
             'z_shape': ZShapePlacer(),
             'staircase_3d': Staircase3DPlacer(),
             'spiral_3d_placer': Spiral3DPlacer(), # [SỬA LỖI] Đồng bộ tên đăng ký
+            'spiral_placer': SpiralPlacer(), # [FIX] Đăng ký placer còn thiếu
             'circle': CirclePlacer(),
             'spiral_path': SpiralPlacer(),
             'triangle': TrianglePlacer(),
@@ -147,6 +149,7 @@ class MapGeneratorService:
             'advanced_algorithm': AlgorithmPlacer(),
             'island_tour': IslandTourPlacer(), # [MỚI] Đăng ký placer mới
             'zigzag': ZigzagPlacer(), # [MỚI] Đăng ký ZigzagPlacer
+            'command_obstacle': CommandObstaclePlacer(), # [MỚI] Đăng ký placer cho Topic 1
             'swift_playground_placer': SwiftPlaygroundPlacer(), # [SỬA LỖI] Đồng bộ tên đăng ký
         }
         print("👍 Đã đăng ký thành công tất cả các chiến lược.")

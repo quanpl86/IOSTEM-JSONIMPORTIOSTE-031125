@@ -1,0 +1,188 @@
+{
+  "topic_code": "TOPIC_102",
+  "topic_name": "Kiểm tra các Map Cầu thang",
+  "suggested_maps": [
+    {
+      "id": "test_staircase_01_basic",
+      "level": 1,
+      "titleKey": "Challenge.test_staircase_01.Title",
+      "descriptionKey": "Challenge.test_staircase_01.Description",
+      "translations": {
+        "vi": {
+          "Challenge.test_staircase_01.Title": "Test: Cầu thang 2D",
+          "Challenge.test_staircase_01.Description": "Kiểm tra map 'staircase' với các bậc thang đi lên theo một hướng."
+        }
+      },
+      "generation_config": {
+        "map_type": "staircase",
+        "logic_type": "spiral_placer",
+        "num_variants": 1,
+        "params": {
+          "num_steps": 5,
+          "step_size": 4,
+          "items_to_place": ["crystal", "crystal", "crystal", "crystal", "crystal"]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": { "crystal": 5 }
+      }
+    },
+    {
+      "id": "test_staircase_02_3d",
+      "level": 2,
+      "titleKey": "Challenge.test_staircase_02.Title",
+      "descriptionKey": "Challenge.test_staircase_02.Description",
+      "translations": {
+        "vi": {
+          "Challenge.test_staircase_02.Title": "Test: Cầu thang 3D",
+          "Challenge.test_staircase_02.Description": "Kiểm tra map 'staircase_3d' đi lên theo cả hai trục X và Z."
+        }
+      },
+      "generation_config": {
+        "map_type": "staircase_3d",
+        "logic_type": "staircase_3d",
+        "num_variants": 1,
+        "params": {
+          "num_steps": 6
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": { "crystal": "all" }
+      }
+    },
+    {
+      "id": "test_staircase_03_hub_islands",
+      "level": 3,
+      "titleKey": "Challenge.test_staircase_03.Title",
+      "descriptionKey": "Challenge.test_staircase_03.Description",
+      "translations": {
+        "vi": {
+          "Challenge.test_staircase_03.Title": "Test: Đảo trung tâm và vệ tinh",
+          "Challenge.test_staircase_03.Description": "Kiểm tra map 'hub_with_stepped_islands' với các đảo ở độ cao khác nhau."
+        }
+      },
+      "generation_config": {
+        "map_type": "hub_with_stepped_islands",
+        "logic_type": "island_tour",
+        "num_variants": 1,
+        "params": {
+          "items_to_place": ["crystal", "crystal", "crystal", "crystal", "crystal", "crystal", "crystal", "crystal"]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": { "crystal": 8 }
+      }
+    },
+    {
+      "id": "test_staircase_04_stepped_clusters",
+      "level": 4,
+      "titleKey": "Challenge.test_staircase_04.Title",
+      "descriptionKey": "Challenge.test_staircase_04.Description",
+      "translations": {
+        "vi": {
+          "Challenge.test_staircase_04.Title": "Test: Cụm đảo bậc thang",
+          "Challenge.test_staircase_04.Description": "Kiểm tra map 'stepped_island_clusters' với các cụm đảo nối bằng cầu thang."
+        }
+      },
+      "generation_config": {
+        "map_type": "stepped_island_clusters",
+        "logic_type": "for_loop_simple",
+        "num_variants": 4,
+        "params": {
+          "num_clusters": 2,
+          "items_count": 2,
+          "item_type": "crystal"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": { "crystal": 2 }
+      }
+    },
+    {
+      "id": "test_staircase_05_spiral_up",
+      "level": 5,
+      "titleKey": "Challenge.test_staircase_05.Title",
+      "descriptionKey": "Challenge.test_staircase_05.Description",
+      "translations": {
+        "vi": {
+          "Challenge.test_staircase_05.Title": "Test: Xoắn ốc đi lên",
+          "Challenge.test_staircase_05.Description": "Kiểm tra map 'spiral_3d' đi từ dưới lên."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_3d",
+        "logic_type": "spiral_3d_placer",
+        "num_variants": 1,
+        "params": {
+          "num_turns": 6,
+          "reverse": false,
+          "items_to_place": ["crystal", "crystal", "crystal"]
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": 3 } }
+    },
+    {
+      "id": "test_staircase_06_spiral_down",
+      "level": 6,
+      "titleKey": "Challenge.test_staircase_06.Title",
+      "descriptionKey": "Challenge.test_staircase_06.Description",
+      "translations": {
+        "vi": {
+          "Challenge.test_staircase_06.Title": "Test: Xoắn ốc đi xuống",
+          "Challenge.test_staircase_06.Description": "Kiểm tra map 'spiral_3d' đi từ trên xuống (reverse)."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_3d",
+        "logic_type": "spiral_3d_placer",
+        "num_variants": 1,
+        "params": {
+          "num_turns": 6,
+          "reverse": true,
+          "items_to_place": ["crystal", "crystal", "crystal"]
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": 3 } }
+    },
+    {
+      "id": "test_staircase_07_swift_maze",
+      "level": 7,
+      "titleKey": "Challenge.test_staircase_07.Title",
+      "descriptionKey": "Challenge.test_staircase_07.Description",
+      "translations": {
+        "vi": {
+          "Challenge.test_staircase_07.Title": "Test: Mê cung nhiều tầng",
+          "Challenge.test_staircase_07.Description": "Kiểm tra map 'swift_playground_maze' với các sàn nối bằng bậc thang."
+        }
+      },
+      "generation_config": {
+        "map_type": "swift_playground_maze",
+        "logic_type": "swift_playground_placer",
+        "num_variants": 1,
+        "params": {
+          "items_to_place": ["crystal", "crystal", "crystal", "crystal"]
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": 4 } }
+    }
+  ]
+}

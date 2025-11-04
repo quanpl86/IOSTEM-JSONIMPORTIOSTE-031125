@@ -34,8 +34,11 @@ class StaircaseTopology(BaseTopology):
 
         # Đảm bảo cầu thang không quá dài/cao so với map
         max_dim = min(grid_size[0], grid_size[1], grid_size[2]) - 2
-        if num_steps * step_size >= max_dim:
-            num_steps = max_dim -1
+        # [SỬA LỖI] Nếu tổng chiều dài vượt quá kích thước map, tính lại num_steps một cách hợp lý.
+        # Thay vì gán cứng, ta sẽ tính số bậc tối đa có thể có với step_size đã cho.
+        total_length = num_steps * step_size
+        if total_length >= max_dim:
+            num_steps = (max_dim - 1) // step_size
         
         # Chọn hướng đi tới trên mặt phẳng XZ (tiến hoặc lùi theo X hoặc Z)
         axis = random.choice(['x', 'z'])
@@ -77,7 +80,7 @@ class StaircaseTopology(BaseTopology):
         # [CẢI TIẾN] Định nghĩa các bậc thang là các khối vật lý để solver có thể "jump" lên.
         # Chúng ta sẽ coi mỗi ô đi lên là một "obstacle" có thể đứng được.
         stair_blocks = [pos for pos in path_coords if pos[1] > start_pos[1]]
-        obstacles.extend([{"type": "obstacle", "modelKey": "ground.checker", "pos": pos} for pos in stair_blocks])
+        obstacles.extend([{"type": "obstacle", "modelKey": "wall.brick01", "pos": pos} for pos in stair_blocks])
 
         return PathInfo(
             start_pos=start_pos,

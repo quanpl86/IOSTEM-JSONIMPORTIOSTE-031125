@@ -37,8 +37,8 @@ class IslandTourPlacer(BasePlacer):
 
         # [CẢI TIẾN & SỬA LỖI] Chuyển sang sử dụng `items_to_place` thay vì `item_count`.
         # Việc mặc định đặt đầy (len(island_coords)) khiến solver bị treo với các map lớn.
-        # Hành vi mặc định mới là đặt 4 crystal, một con số an toàn và hợp lý cho các map dạng đảo.
-        items_to_place_param = params.get('items_to_place', ['crystal'] * 4)
+        # [HIỆU CHỈNH] Lấy chính xác `items_to_place` từ params. Nếu không có, mặc định là danh sách rỗng (không đặt gì).
+        items_to_place_param = params.get('items_to_place', [])
         # Đảm bảo items_to_place luôn là một danh sách, ngay cả khi input là một string đơn.
         items_to_place = items_to_place_param if isinstance(items_to_place_param, list) else [items_to_place_param]
         

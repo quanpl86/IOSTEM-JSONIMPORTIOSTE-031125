@@ -56,8 +56,8 @@ class FunctionPlacer(BasePlacer):
                     print(f"   - ℹ️ INFO: Bỏ qua việc đặt thêm chướng ngại vật cho map 3D '{map_type}'.")
                     break
                 else:
-                    pos = possible_coords.pop(0)
-                    obstacles.append({"type": "obstacle", "modelKey": "wall.brick01", "pos": pos})
+                    pos = possible_coords.pop(0) # Lấy vị trí
+                    obstacles.append({"type": "obstacle", "pos": pos}) # Chỉ định nghĩa type và pos
 
             # 2. Đặt các vật phẩm vào các vị trí còn lại
             for item_type in items_to_place:

@@ -1,0 +1,381 @@
+{
+  "topic_code": "TOPIC_103_TEST_T1",
+  "topic_name": "Kiểm tra Topic 1 - Lệnh Tuần Tự",
+  "suggested_maps": [
+    {
+      "id": "Test.T1.StraightLine.01",
+      "level": 1,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.StraightLine.01.Title",
+      "descriptionKey": "Challenge.Test.T1.StraightLine.01.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.StraightLine.01.Title": "Thử thách Đường thẳng",
+          "Challenge.Test.T1.StraightLine.01.Description": "Sử dụng lệnh 'tiến' và 'thu thập' để lấy 2 viên pha lê trên đường đi."
+        },
+        "en": {
+          "Challenge.Test.T1.StraightLine.01.Title": "Straight Line Challenge",
+          "Challenge.Test.T1.StraightLine.01.Description": "Use 'move' and 'collect' commands to get 2 crystals on the path."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "path_length": 5,
+          "items_to_place": ["crystal", "crystal"],
+          "asset_theme": {
+            "ground": "stone.stone01",
+            "obstacle": "wall.brick03"
+          }
+        }       
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.T1.LShape.02",
+      "level": 2,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.LShape.02.Title",
+      "descriptionKey": "Challenge.Test.T1.LShape.02.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.LShape.02.Title": "Thử thách Hình chữ L",
+          "Challenge.Test.T1.LShape.02.Description": "Kết hợp lệnh 'tiến' và 'rẽ' để đi hết con đường hình chữ L và bật công tắc."
+        },
+        "en": {
+          "Challenge.Test.T1.LShape.02.Title": "L-Shape Challenge",
+          "Challenge.Test.T1.LShape.02.Description": "Combine 'move' and 'turn' commands to navigate the L-shaped path and toggle the switch."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "side_a_length": 4,
+          "side_b_length": 3,
+          "items_to_place": ["switch"],
+          "asset_theme": {
+            "ground": "stone.stone03",
+            "obstacle": "wall.brick03"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "switch": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.T1.Staircase.03",
+      "level": 3,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.Staircase.03.Title",
+      "descriptionKey": "Challenge.Test.T1.Staircase.03.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.Staircase.03.Title": "Thử thách Cầu thang",
+          "Challenge.Test.T1.Staircase.03.Description": "Sử dụng lệnh 'nhảy' để đi lên các bậc thang và thu thập pha lê."
+        },
+        "en": {
+          "Challenge.Test.T1.Staircase.03.Title": "Staircase Challenge",
+          "Challenge.Test.T1.Staircase.03.Description": "Use the 'jump' command to climb the stairs and collect the crystal."
+        }
+      },
+      "generation_config": {
+        "map_type": "staircase",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "steps": 4,
+          "items_to_place": ["crystal"],
+          "asset_theme": {
+            "ground": "stone.stone04",
+            "obstacle": "wall.brick03"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.T1.Zigzag.04",
+      "level": 4,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.Zigzag.04.Title",
+      "descriptionKey": "Challenge.Test.T1.Zigzag.04.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.Zigzag.04.Title": "Thử thách Ziczac",
+          "Challenge.Test.T1.Zigzag.04.Description": "Luyện tập kỹ năng rẽ liên tục để đi hết con đường ziczac."
+        },
+        "en": {
+          "Challenge.Test.T1.Zigzag.04.Title": "Zigzag Challenge",
+          "Challenge.Test.T1.Zigzag.04.Description": "Practice your turning skills to navigate the zigzag path."
+        }
+      },
+      "generation_config": {
+        "map_type": "zigzag",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "segments": 3,
+          "segment_length": 3,
+          "items_to_place": ["crystal", "crystal"]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.T1.Square.05",
+      "level": 5,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.Square.05.Title",
+      "descriptionKey": "Challenge.Test.T1.Square.05.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.Square.05.Title": "Thử thách Hình vuông",
+          "Challenge.Test.T1.Square.05.Description": "Đi một vòng quanh hình vuông, thu thập vật phẩm và bật công tắc."
+        },
+        "en": {
+          "Challenge.Test.T1.Square.05.Title": "Square Challenge",
+          "Challenge.Test.T1.Square.05.Description": "Go around the square, collecting items and toggling the switch."
+        }
+      },
+      "generation_config": {
+        "map_type": "square_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "side_length": 4,
+          "items_to_place": ["crystal", "switch"]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all",
+          "switch": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.T1.Interspersed.06",
+      "level": 6,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.Interspersed.06.Title",
+      "descriptionKey": "Challenge.Test.T1.Interspersed.06.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.Interspersed.06.Title": "Thử thách Nhảy qua hố",
+          "Challenge.Test.T1.Interspersed.06.Description": "Cẩn thận! Hãy dùng lệnh 'nhảy' để vượt qua các chướng ngại vật trên đường."
+        },
+        "en": {
+          "Challenge.Test.T1.Interspersed.06.Title": "Jump Over Gaps Challenge",
+          "Challenge.Test.T1.Interspersed.06.Description": "Be careful! Use the 'jump' command to cross the obstacles on the path."
+        }
+      },
+      "generation_config": {
+        "map_type": "interspersed_path",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "main_path_length": 7,
+          "num_branches": 2,
+          "branch_length": 0,
+          "obstacle_count": 2,
+          "asset_theme": {
+            "ground": "stone.stone01",
+            "obstacle": "wall.brick03"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Test.T1.UShape.07",
+      "level": 7,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.UShape.07.Title",
+      "descriptionKey": "Challenge.Test.T1.UShape.07.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.UShape.07.Title": "Thử thách Hình chữ U",
+          "Challenge.Test.T1.UShape.07.Description": "Đi vào, thu thập vật phẩm, và đi ra khỏi con đường hình chữ U."
+        },
+        "en": {
+          "Challenge.Test.T1.UShape.07.Title": "U-Shape Challenge",
+          "Challenge.Test.T1.UShape.07.Description": "Go in, collect the item, and get out of the U-shaped path."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "side_length": 3,
+          "bottom_length": 3,
+          "items_to_place": ["crystal"]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.T1.Spiral.08",
+      "level": 8,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.Spiral.08.Title",
+      "descriptionKey": "Challenge.Test.T1.Spiral.08.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.Spiral.08.Title": "Thử thách Xoắn ốc",
+          "Challenge.Test.T1.Spiral.08.Description": "Đi theo con đường xoắn ốc vào trung tâm để lấy vật phẩm."
+        },
+        "en": {
+          "Challenge.Test.T1.Spiral.08.Title": "Spiral Challenge",
+          "Challenge.Test.T1.Spiral.08.Description": "Follow the spiral path to the center to get the item."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_path",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "size": 5,
+          "items_to_place": ["crystal"]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.T1.SShape.09",
+      "level": 9,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.SShape.09.Title",
+      "descriptionKey": "Challenge.Test.T1.SShape.09.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.SShape.09.Title": "Thử thách Hình chữ S",
+          "Challenge.Test.T1.SShape.09.Description": "Một thử thách phức tạp hơn về điều hướng. Hãy đi hết con đường hình chữ S."
+        },
+        "en": {
+          "Challenge.Test.T1.SShape.09.Title": "S-Shape Challenge",
+          "Challenge.Test.T1.SShape.09.Description": "A more complex navigation challenge. Navigate the S-shaped path."
+        }
+      },
+      "generation_config": {
+        "map_type": "s_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "segment_length": 3,
+          "items_to_place": ["switch", "crystal"]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "switch": "all",
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.T1.Complex.10",
+      "level": 10,
+      "grade": 7,
+      "titleKey": "Challenge.Test.T1.Complex.10.Title",
+      "descriptionKey": "Challenge.Test.T1.Complex.10.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.T1.Complex.10.Title": "Thử thách Tổng hợp",
+          "Challenge.Test.T1.Complex.10.Description": "Áp dụng tất cả các lệnh đã học: tiến, rẽ, nhảy, thu thập và bật công tắc để hoàn thành màn chơi cuối cùng này."
+        },
+        "en": {
+          "Challenge.Test.T1.Complex.10.Title": "Comprehensive Challenge",
+          "Challenge.Test.T1.Complex.10.Description": "Apply all learned commands: move, turn, jump, collect, and toggle to complete this final level."
+        }
+      },
+      "generation_config": {
+        "map_type": "interspersed_path",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "main_path_length": 8,
+          "num_branches": 3,
+          "branch_length": 1,
+          "obstacle_count": 1,
+          "items_to_place": ["crystal", "switch", "crystal"]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "topic_1_sequencing"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all",
+          "switch": "all"
+        }
+      }
+    }
+  ]
+}

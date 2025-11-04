@@ -1,0 +1,98 @@
+{
+  "topic_code": "TOPIC_98",
+  "topic_name": "For Loop Showcase",
+  "suggested_maps": [
+    {
+      "id": "ForLoop.Showcase.LShape",
+      "level": 1,
+      "titleKey": "Challenge.ForLoop.Showcase.LShape.Title",
+      "descriptionKey": "Challenge.ForLoop.Showcase.LShape.Description",
+      "translations": {
+        "vi": {
+          "Challenge.ForLoop.Showcase.LShape.Title": "Vòng lặp trên chữ L",
+          "Challenge.ForLoop.Showcase.LShape.Description": "Sử dụng vòng lặp để thu thập tất cả pha lê trên đường đi hình chữ L."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "for_loop_simple",
+        "num_variants": 1,
+        "params": {
+          "side_a_length": 4,
+          "side_b_length": 5
+        }
+      },
+      "blockly_config": { "toolbox_preset": "loops_simple" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": "all" } }
+    },
+    {
+      "id": "ForLoop.Showcase.Square",
+      "level": 2,
+      "titleKey": "Challenge.ForLoop.Showcase.Square.Title",
+      "descriptionKey": "Challenge.ForLoop.Showcase.Square.Description",
+      "translations": {
+        "vi": {
+          "Challenge.ForLoop.Showcase.Square.Title": "Vòng lặp trên hình vuông",
+          "Challenge.ForLoop.Showcase.Square.Description": "Sử dụng vòng lặp để đi qua 4 góc của hình vuông."
+        }
+      },
+      "generation_config": {
+        "map_type": "square_shape",
+        "logic_type": "for_loop_simple",
+        "num_variants": 1,
+        "params": {
+          "side_length": 5,
+          "item_count": 6,
+          "item_type": "crystal"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "loops_simple" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": "all" } }
+    },
+    {
+      "id": "ForLoop.Showcase.Zigzag",
+      "level": 3,
+      "titleKey": "Challenge.ForLoop.Showcase.Zigzag.Title",
+      "descriptionKey": "Challenge.ForLoop.Showcase.Zigzag.Description",
+      "translations": {
+        "vi": {
+          "Challenge.ForLoop.Showcase.Zigzag.Title": "Vòng lặp trên đường Ziczac",
+          "Challenge.ForLoop.Showcase.Zigzag.Description": "Sử dụng vòng lặp để thu thập pha lê trên đường ziczac."
+        }
+      },
+      "generation_config": {
+        "map_type": "zigzag",
+        "logic_type": "for_loop_simple",
+        "num_variants": 1,
+        "params": {
+          "segments": 4,
+          "segment_length": 3
+        }
+      },
+      "blockly_config": { "toolbox_preset": "loops_simple" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": "all" } }
+    },
+    {
+      "id": "ForLoop.Showcase.Staircase",
+      "level": 4,
+      "titleKey": "Challenge.ForLoop.Showcase.Staircase.Title",
+      "descriptionKey": "Challenge.ForLoop.Showcase.Staircase.Description",
+      "translations": {
+        "vi": {
+          "Challenge.ForLoop.Showcase.Staircase.Title": "Vòng lặp trên cầu thang",
+          "Challenge.ForLoop.Showcase.Staircase.Description": "Sử dụng vòng lặp để nhảy lên các bậc thang và thu thập pha lê."
+        }
+      },
+      "generation_config": {
+        "map_type": "staircase",
+        "logic_type": "for_loop_simple",
+        "num_variants": 1,
+        "params": {
+          "steps": 6
+        }
+      },
+      "blockly_config": { "toolbox_preset": "loops_simple" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": "all" } }
+    }
+  ]
+}

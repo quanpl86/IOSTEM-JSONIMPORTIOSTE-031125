@@ -44,7 +44,7 @@ class ObstaclePlacer(BasePlacer):
             coords_after_obstacles = []
             for pos in possible_coords:
                 if random.random() < obstacle_chance:
-                    obstacles.append({"type": "obstacle", "modelKey": "wall.brick01", "pos": pos})
+                    obstacles.append({"type": "obstacle", "pos": pos})
                 else:
                     coords_after_obstacles.append(pos)
             possible_coords = coords_after_obstacles # Cập nhật lại các vị trí còn trống
@@ -53,7 +53,7 @@ class ObstaclePlacer(BasePlacer):
             num_obstacles = params.get('obstacle_count', 0)
             for _ in range(min(num_obstacles, len(possible_coords))):
                 pos = possible_coords.pop(0)
-                obstacles.append({"type": "obstacle", "modelKey": "wall.brick01", "pos": pos})
+                obstacles.append({"type": "obstacle", "pos": pos})
 
         # 2. [MỞ RỘNG] Đặt các vật phẩm và công tắc khác vào các vị trí còn lại
         # [CHUẨN HÓA] Chỉ sử dụng chuẩn 'items_to_place'

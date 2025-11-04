@@ -1,0 +1,176 @@
+{
+  "topic_code": "TOPIC_99",
+  "topic_name": "Tests for ForLoopPlacer",
+  "suggested_maps": [
+    {
+      "id": "Test.ForLoop.Simple.ExactCount",
+      "level": 1,
+      "titleKey": "Challenge.Test.ForLoop.Simple.ExactCount.Title",
+      "descriptionKey": "Challenge.Test.ForLoop.Simple.ExactCount.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.ForLoop.Simple.ExactCount.Title": "Test Vòng lặp For: Đếm chính xác",
+          "Challenge.Test.ForLoop.Simple.ExactCount.Description": "Kiểm tra placer đặt đúng 5 vật phẩm trên đường thẳng."
+        },
+        "en": {
+          "Challenge.Test.ForLoop.Simple.ExactCount.Title": "For Loop Test: Exact Count",
+          "Challenge.Test.ForLoop.Simple.ExactCount.Description": "Test if the placer places exactly 5 items on a straight line."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "for_loop_simple",
+        "num_variants": 1,
+        "params": {
+          "path_length": 5,
+          "item_count": 3,
+          "item_type": "crystal"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "loops_simple"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.ForLoop.Simple.DefaultFill",
+      "level": 2,
+      "titleKey": "Challenge.Test.ForLoop.Simple.DefaultFill.Title",
+      "descriptionKey": "Challenge.Test.ForLoop.Simple.DefaultFill.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.ForLoop.Simple.DefaultFill.Title": "Test Vòng lặp For: Lấp đầy mặc định",
+          "Challenge.Test.ForLoop.Simple.DefaultFill.Description": "Kiểm tra placer lấp đầy tất cả các ô khi không có item_count."
+        },
+        "en": {
+          "Challenge.Test.ForLoop.Simple.DefaultFill.Title": "For Loop Test: Default Fill",
+          "Challenge.Test.ForLoop.Simple.DefaultFill.Description": "Test if the placer fills all coords when item_count is omitted."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "for_loop_simple",
+        "num_variants": 1,
+        "params": {
+          "path_length": 7
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "loops_simple"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.ForLoop.Simple.RandomSample",
+      "level": 3,
+      "titleKey": "Challenge.Test.ForLoop.Simple.RandomSample.Title",
+      "descriptionKey": "Challenge.Test.ForLoop.Simple.RandomSample.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.ForLoop.Simple.RandomSample.Title": "Test Vòng lặp For: Chọn ngẫu nhiên",
+          "Challenge.Test.ForLoop.Simple.RandomSample.Description": "Kiểm tra placer đặt 3 vật phẩm ngẫu nhiên trên đường đi dài 8 ô."
+        },
+        "en": {
+          "Challenge.Test.ForLoop.Simple.RandomSample.Title": "For Loop Test: Random Sample",
+          "Challenge.Test.ForLoop.Simple.RandomSample.Description": "Test if the placer places 3 items randomly on a path of 8."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "for_loop_simple",
+        "num_variants": 1,
+        "params": {
+          "path_length": 8,
+          "item_count": 3,
+          "item_type": "crystal"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "loops_simple"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": { "crystal": "all" }
+      }
+    },
+    {
+      "id": "Test.ForLoop.Complex.Square",
+      "level": 4,
+      "titleKey": "Challenge.Test.ForLoop.Complex.Square.Title",
+      "descriptionKey": "Challenge.Test.ForLoop.Complex.Square.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.ForLoop.Complex.Square.Title": "Test Vòng lặp For: Hình vuông",
+          "Challenge.Test.ForLoop.Complex.Square.Description": "Kiểm tra placer đặt vật phẩm trên placement_coords (4 góc)."
+        },
+        "en": {
+          "Challenge.Test.ForLoop.Complex.Square.Title": "For Loop Test: Square Shape",
+          "Challenge.Test.ForLoop.Complex.Square.Description": "Test if the placer uses placement_coords (4 corners)."
+        }
+      },
+      "generation_config": {
+        "map_type": "square_shape",
+        "logic_type": "for_loop_complex",
+        "num_variants": 1,
+        "params": {
+          "side_length": 4,
+          "item_count": 8,
+          "item_type": "crystal"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "loops_simple"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "Test.ForLoop.Nested.PlowingField",
+      "level": 5,
+      "titleKey": "Challenge.Test.ForLoop.Nested.PlowingField.Title",
+      "descriptionKey": "Challenge.Test.ForLoop.Nested.PlowingField.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Test.ForLoop.Nested.PlowingField.Title": "Test Vòng lặp lồng nhau: Luống cày",
+          "Challenge.Test.ForLoop.Nested.PlowingField.Description": "Kiểm tra placer lấp đầy toàn bộ luống cày khi không có item_count."
+        },
+        "en": {
+          "Challenge.Test.ForLoop.Nested.PlowingField.Title": "Nested Loop Test: Plowing Field",
+          "Challenge.Test.ForLoop.Nested.PlowingField.Description": "Test if the placer fills the entire field when item_count is omitted."
+        }
+      },
+      "generation_config": {
+        "map_type": "plowing_field",
+        "logic_type": "nested_for_loop",
+        "num_variants": 1,
+        "params": {
+          "rows": 4,
+          "cols": 5
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "loops_simple"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    }
+  ]
+}

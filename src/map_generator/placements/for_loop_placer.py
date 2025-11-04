@@ -1,5 +1,6 @@
 # src/map_generator/placements/for_loop_placer.py
 
+import random
 from .base_placer import BasePlacer
 from src.map_generator.models.path_info import PathInfo
 
@@ -30,15 +31,24 @@ class ForLoopPlacer(BasePlacer):
         # (CẢI TIẾN) Ưu tiên sử dụng placement_coords nếu có, nếu không thì dùng path_coords
         coords_to_place_on = path_info.placement_coords if path_info.placement_coords else path_info.path_coords
 
-        # Logic cốt lõi: Đặt một vật phẩm ('crystal') tại mỗi tọa độ
-        # mà lớp Topology đã xác định là một phần của con đường lặp lại.
-        # - Với StraightLine/Staircase, đây là các ô liên tiếp.
-        # - Với Square, đây là 4 góc.
-        # - Với PlowingField, đây là các ô trên luống cày.
+        # [CẢI TIẾN] Đọc loại và số lượng vật phẩm từ params để tăng tính linh hoạt.
+        # Nếu không có, quay về hành vi mặc định là đặt 'crystal' ở mọi nơi.
+        item_type = params.get('item_type', 'crystal')
+        item_count = params.get('item_count')
         
-        # (SỬA LỖI) Không đặt vật phẩm ở vị trí đích cuối cùng.
-        # Điều này áp dụng cho các map như Staircase, PlowingField.
-        items = [{"type": "crystal", "pos": pos} for pos in coords_to_place_on if pos != path_info.target_pos and pos != path_info.start_pos]
+        # Lấy tất cả các vị trí có thể đặt (trừ start và target)
+        possible_coords = [pos for pos in coords_to_place_on if pos != path_info.target_pos and pos != path_info.start_pos]
+        
+        items = []
+        if item_count is not None:
+            # Nếu có 'item_count', chọn ngẫu nhiên 'item_count' vị trí để đặt.
+            selected_coords = random.sample(possible_coords, min(item_count, len(possible_coords)))
+            items = [{"type": item_type, "pos": pos} for pos in selected_coords]
+        else:
+            # Nếu không có 'item_count', giữ nguyên logic cũ: đặt ở tất cả các vị trí.
+            # Logic này rất quan trọng cho các map như PlowingField (nested_for_loop)
+            # nơi tất cả các ô cần có vật phẩm để tạo ra quy luật.
+            items = [{"type": item_type, "pos": pos} for pos in possible_coords]
         
         # Trong các bài toán về vòng lặp for, chúng ta thường không thêm chướng ngại vật
         # để người chơi có thể tập trung hoàn toàn vào việc nhận biết quy luật lặp.
