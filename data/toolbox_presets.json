@@ -39,7 +39,7 @@
       ]}
     ]
   },
-  "movement_full": {
+  "movement_full_collect": {
     "kind": "categoryToolbox",
     "contents": [
       { "kind": "category", "name": "%{BKY_GAMES_CATMOVEMENT}", "categorystyle": "movement_category", "contents": [

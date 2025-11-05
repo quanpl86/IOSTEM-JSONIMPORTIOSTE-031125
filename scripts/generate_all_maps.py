@@ -314,6 +314,17 @@ def main():
             # Lặp để tạo ra số lượng biến thể mong muốn
             for variant_index in range(num_variants):
                 try:
+                    # [SỬA LỖI] Di chuyển logic tạo ID lên đầu để các biến luôn được khởi tạo.
+                    # Điều này khắc phục lỗi "UnboundLocalError" cho `topic_num_str`.
+                    # Ví dụ: T01.G34.C01.Move.Apply.1-var1
+                    topic_num_match = re.search(r'TOPIC_(\d+)', topic_code)
+                    topic_num_str = f"T{topic_num_match.group(1)}" if topic_num_match else "TXX"
+                    grade_str = map_request.get('grade', 'G00')
+                    # Tách phần còn lại của ID gốc, ví dụ: từ T01.C01... -> C01...
+                    original_id_parts = map_request.get('id', 'unknown').split('.')
+                    challenge_id_part = ".".join(original_id_parts[1:]) if len(original_id_parts) > 1 else ".".join(original_id_parts)
+
+
                     # --- Bước 4: Sinh map và tạo gameConfig ---
                     base_params = generation_config.get('params', {})
                     params_for_generation = copy.deepcopy(base_params)
@@ -368,12 +379,13 @@ def main():
                         game_config['gameConfig']['obstacles'] = final_obstacles
 
                     # --- [MỚI] Lưu file gameConfig vào base_maps để test ---
-                    test_map_filename = f"{map_request.get('id', 'unknown')}-var{variant_index + 1}.json"
+                    # [CẢI TIẾN] Sử dụng ID mới cho tên file base map, có tiền tố BASEMAP.
+                    base_map_id = f"{topic_num_str}.{grade_str}.{challenge_id_part}-var{variant_index + 1}"
+                    test_map_filename = f"BASEMAP.{base_map_id}.json"
                     test_map_filepath = os.path.join(base_maps_output_dir, test_map_filename)
                     try:
                         with open(test_map_filepath, 'w', encoding='utf-8') as f:
                             json.dump(game_config, f, indent=2, ensure_ascii=False)
-                        print(f"✅ Đã tạo thành công file map test: {test_map_filename}")
                     except Exception as e:
                         print(f"   - ⚠️ Lỗi khi lưu file map test: {e}")
 
@@ -567,12 +579,14 @@ def main():
                         final_translations['en'][topic_key] = topic_name_en
 
                     # --- Bước 7: Tổng hợp file JSON cuối cùng ---
-                    final_json = {
-                        "id": f"{map_request.get('id', 'unknown')}-var{variant_index + 1}",
+                    # [SỬA LỖI] Logic tạo ID đã được chuyển lên đầu vòng lặp.
+                    new_id = f"{topic_num_str}.{grade_str}.{challenge_id_part}-var{variant_index + 1}"
+
+                    final_json_content = {
+                        "id": new_id,
                         "gameType": "maze",
-                        "grade": 4,
                         "topic": topic_key, # [SỬA] Sử dụng topic key duy nhất
-                        "level": map_request.get('level', 1),
+                        "level": map_request.get('level', 1), # [THÊM MỚI] Thêm thông tin level từ curriculum
                         "titleKey": map_request.get('titleKey'),
                         "questTitleKey": map_request.get('descriptionKey'),
                         "descriptionKey": map_request.get('descriptionKey'), # [MỚI] Thêm trường topic
@@ -598,14 +612,15 @@ def main():
 
                     # [MỚI] Thêm trường structuredSolution_fixbug_version nếu có
                     if structured_solution_fixbug:
-                        final_json["solution"]["structuredSolution_fixbug_version"] = structured_solution_fixbug
+                        final_json_content["solution"]["structuredSolution_fixbug_version"] = structured_solution_fixbug
 
                     # --- Bước 8: Lưu file JSON cuối cùng ---
-                    filename = f"{final_json['id']}.json"
+                    filename = f"{final_json_content['id']}.json"
                     output_filepath = os.path.join(final_output_dir, filename)
                     with open(output_filepath, 'w', encoding='utf-8') as f:
-                        json.dump(final_json, f, indent=2, ensure_ascii=False)                
-                    print(f"✅ Đã tạo thành công file game hoàn chỉnh: {filename}")
+                        json.dump(final_json_content, f, indent=2, ensure_ascii=False)
+                    print(f"    ✅ Đã tạo: {test_map_filename} & {filename}")
+
                     total_maps_generated += 1
                     
                 except Exception as e:

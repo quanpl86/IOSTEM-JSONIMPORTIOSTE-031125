@@ -62,11 +62,13 @@ def main():
         print(f"❌ Lỗi khi đọc file Excel: {e}")
         return
 
-    # Nhóm các thử thách theo topic_code
-    challenges_by_topic = defaultdict(lambda: {'topic_name': '', 'suggested_maps': []})
+    # [CẢI TIẾN] Nhóm các thử thách theo topic_code, lưu thêm grade
+    challenges_by_topic = defaultdict(lambda: {'topic_name': '', 'grade': 'GXX', 'suggested_maps': []})
 
     # Lặp qua từng dòng trong file Excel để tạo cấu trúc map
     for index, row in df.iterrows():
+        if pd.isna(row['topic_code']) or row['topic_code'] == '': continue
+
         topic_code = row['topic_code']
         challenges_by_topic[topic_code]['topic_name'] = row['topic_name']
 
@@ -74,6 +76,7 @@ def main():
         map_request = {
             "id": row['id'],
             "level": int(row['level']),
+            "grade": row.get('Grade', 'G00'), # [MỚI] Đọc cột Grade, mặc định là G00 nếu không có
             "titleKey": f"Challenge.{row['id']}.Title",
             "descriptionKey": f"Challenge.{row['id']}.Description",
             "translations": {}, # Khởi tạo translations rỗng để điền sau
@@ -125,18 +128,12 @@ def main():
     for topic_code, data in challenges_by_topic.items():
         # [CẢI TIẾN] Sắp xếp các map theo level trước khi ghi file
         data['suggested_maps'].sort(key=lambda x: x['level'])
-        
-        # [CẢI TIẾN] Tạo tên file thân thiện và an toàn hơn
-        match = re.search(r'TOPIC_(\d+)', topic_code)
-        if match:
-            topic_num = match.group(1)
-            # Chuẩn hóa topic_name để làm tên file, loại bỏ ký tự không an toàn
-            safe_topic_name = data['topic_name'].lower()
-            safe_topic_name = re.sub(r'[\s&]+', '_', safe_topic_name) # Thay khoảng trắng, & bằng _
-            safe_topic_name = re.sub(r'[^\w-]', '', safe_topic_name) # Loại bỏ các ký tự không phải chữ, số, _, -
-            filename = f"{topic_num}_{safe_topic_name}.json"
-        else:
-            filename = f"{topic_code.lower()}.json"
+
+        # [CẢI TIẾN] Tạo tên file curriculum theo định dạng mới: CURRICULUM.{topic_code}_{Grade}.json
+        # Lấy Grade từ map đầu tiên trong topic làm đại diện
+        first_map_grade = data['suggested_maps'][0].get('grade', 'GXX') if data['suggested_maps'] else 'GXX'
+
+        filename = f"CURRICULUM.{topic_code}_{first_map_grade}.json"
 
         output_path = os.path.join(OUTPUT_DIR, filename)
         

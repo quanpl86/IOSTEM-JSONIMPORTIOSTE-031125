@@ -26,15 +26,7 @@
           "maze_depth": 14,
           "items_to_place": [
             "crystal",
-            "crystal",
-            "crystal",
-            "crystal",
-            "crystal",
-            "crystal",
-            "crystal",
-            "crystal",
-            "crystal",
-            "crystal"
+            "key"
           ],
           "asset_theme": {
             "ground": "ground.snow",
@@ -48,7 +40,8 @@
       "solution_config": {
         "type": "reach_target",
         "itemGoals": {
-          "crystal": 10
+          "crystal": 1,
+          "key": 1
         }
       }
     },
@@ -74,12 +67,8 @@
         "params": {
           "num_turns": 8,
           "reverse": "true",
-          "items_to_place": [
-            "crystal",
-            "crystal",
-            "crystal",
-            "crystal"
-          ],
+          "item_count": 4,
+          "item_type": "crystal",
           "asset_theme": {
             "ground": "ground.snow",
             "obstacle": "ice.ice01"
@@ -117,12 +106,8 @@
         "num_variants": 1,
         "params": {
           "num_turns": 8,
-          "items_to_place": [
-            "crystal",
-            "crystal",
-            "crystal",
-            "crystal"
-          ],
+          "item_count": 4,
+          "item_type": "crystal",
           "asset_theme": {
             "ground": "stone.stone01",
             "obstacle": "wall.brick03"

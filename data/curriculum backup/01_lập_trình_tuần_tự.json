@@ -19,7 +19,7 @@
       },
       "generation_config": {
         "map_type": "simple_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 1,
         "params": {
           "path_length": 3
@@ -82,7 +82,7 @@
       },
       "generation_config": {
         "map_type": "l_shape",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 2,
         "params": {
           "path_length": 3,
@@ -116,7 +116,7 @@
       },
       "generation_config": {
         "map_type": "l_shape",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 2,
         "params": {
           "path_length": 3,
@@ -152,7 +152,7 @@
       },
       "generation_config": {
         "map_type": "simple_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 1,
         "params": {
           "path_length": 4,
@@ -189,7 +189,7 @@
       },
       "generation_config": {
         "map_type": "simple_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 1,
         "params": {
           "path_length": 3,
@@ -225,7 +225,7 @@
       },
       "generation_config": {
         "map_type": "simple_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 2,
         "params": {
           "path_length": [
@@ -267,7 +267,7 @@
       },
       "generation_config": {
         "map_type": "simple_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 1,
         "params": {
           "path_length": 4,
@@ -308,7 +308,7 @@
       },
       "generation_config": {
         "map_type": "simple_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 1,
         "params": {
           "path_length": 3,
@@ -342,13 +342,14 @@
       },
       "generation_config": {
         "map_type": "z_shape",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 1,
         "params": {
           "leg1_length": 3,
           "leg2_length": 3,
           "leg3_length": 3,
           "items_to_place": [
+            "crystal",
             "crystal"
           ]
         }
@@ -359,7 +360,7 @@
       "solution_config": {
         "type": "reach_target",
         "itemGoals": {
-          "crystal": 1
+          "crystal": 2
         }
       }
     },
@@ -380,15 +381,20 @@
       },
       "generation_config": {
         "map_type": "interspersed_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 1,
         "params": {
-          "main_path_length": 9,
-          "num_branches": 2,
-          "branch_length": 2,
+          "num_islands": 3,
+          "obstacle_count": 4,
+          "island_spacing": 1,
           "items_to_place": [
+            "switch",
             "switch"
-          ]
+          ],
+          "asset_theme": {
+            "ground": "ground.mud",
+            "obstacle": "wall.brick03"
+          }
         }
       },
       "blockly_config": {
@@ -397,7 +403,7 @@
       "solution_config": {
         "type": "reach_target",
         "itemGoals": {
-          "switch": 1
+          "switch": 2
         }
       }
     },
@@ -424,10 +430,6 @@
           "maze_width": 9,
           "items_to_place": [
             "crystal",
-            "crystal",
-            "crystal",
-            "crystal",
-            "crystal",
             "crystal"
           ],
           "asset_theme": {
@@ -441,7 +443,7 @@
       "solution_config": {
         "type": "reach_target",
         "itemGoals": {
-          "crystal": 6
+          "crystal": 2
         }
       }
     },
@@ -462,7 +464,7 @@
       },
       "generation_config": {
         "map_type": "interspersed_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 1,
         "params": {
           "num_branches": 3,
