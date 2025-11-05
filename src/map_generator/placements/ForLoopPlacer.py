@@ -147,7 +147,7 @@ class ForLoopPlacer(BasePlacer):
         # Đặt obstacle
         obstacles = self._place_obstacles(coords, used, obstacle_count)
 
-        return self._base_layout(path_info, items, obstacles)
+        return self._base_layout(self.path_info, items, obstacles)
 
     # ==================================================================
     # 8. CÁC HÀM ĐẶT THEO MẪU
@@ -156,16 +156,27 @@ class ForLoopPlacer(BasePlacer):
         items = []
         i = 0
         while i + p['cluster_size'] < len(coords):
+            # [CẢI TIẾN] Sử dụng danh sách item_types để đặt xen kẽ
+            item_types = p.get('item_types', [p.get('item_type', 'crystal')])
+            if not item_types: item_types = ['crystal']
+
             for j in range(p['cluster_size']):
                 idx = i + j
                 if idx < len(coords) and idx not in used:
-                    items.append({"type": p['item_type'], "pos": coords[idx]})
+                    # Lấy item tiếp theo trong danh sách, lặp lại nếu cần
+                    current_item_type = item_types[j % len(item_types)]
+                    items.append({"type": current_item_type, "pos": coords[idx]})
                     used.add(idx)
             i += p['cluster_size'] + p['gap']
         return items
 
     def _place_nested_grid(self, coords, p, used):
         items = []
+        # [CẢI TIẾN] Sử dụng danh sách item_types để đặt xen kẽ
+        item_types = p.get('item_types', [p.get('item_type', 'gem')])
+        if not item_types: item_types = ['gem']
+        item_idx_counter = 0
+
         total = len(coords)
         step = max(1, total // (p['rows'] * p['cols']))
         idx = 0
@@ -174,20 +185,28 @@ class ForLoopPlacer(BasePlacer):
                 if idx >= total: break
                 if not p['checkerboard'] or (row + col) % 2 == 0:
                     if idx not in used:
-                        items.append({"type": p['item_type'], "pos": coords[idx]})
+                        # Lấy item tiếp theo trong danh sách, lặp lại nếu cần
+                        current_item_type = item_types[item_idx_counter % len(item_types)]
+                        items.append({"type": current_item_type, "pos": coords[idx]})
                         used.add(idx)
+                        item_idx_counter += 1
                 idx += step
             idx += step
         return items
 
     def _place_staircase(self, coords, p, used):
         items = []
+        # [CẢI TIẾN] Sử dụng danh sách item_types để đặt xen kẽ
+        item_types = p.get('item_types', ['crystal'])
+        if not item_types: item_types = ['crystal']
+
         i = 0
         while i + p['step_height'] * p['items_per_step'] < len(coords):
             for j in range(p['items_per_step']):
                 idx = i + j * p['step_height']
                 if idx < len(coords) and idx not in used:
-                    items.append({"type": 'crystal', "pos": coords[idx]})
+                    current_item_type = item_types[j % len(item_types)]
+                    items.append({"type": current_item_type, "pos": coords[idx]})
                     used.add(idx)
             i += p['step_height'] * p['items_per_step']
         return items
@@ -195,13 +214,18 @@ class ForLoopPlacer(BasePlacer):
     def _place_symmetric(self, coords, p, used):
         items = []
         center = len(coords) // 2
+        # [CẢI TIẾN] Sử dụng danh sách item_types để đặt xen kẽ
+        item_types = p.get('item_types', ['switch'])
+        if not item_types: item_types = ['switch']
+
         arm_len = p['items_per_arm']
         step = len(coords) // 8
         for offset in [step, -step, step*3, -step*3]:
             for i in range(1, arm_len + 1):
                 idx = (center + offset * i) % len(coords)
                 if idx not in used:
-                    items.append({"type": 'switch', "pos": coords[idx]})
+                    current_item_type = item_types[i % len(item_types)]
+                    items.append({"type": current_item_type, "pos": coords[idx]})
                     used.add(idx)
         return items
 
@@ -209,19 +233,29 @@ class ForLoopPlacer(BasePlacer):
         items = []
         seg_len = len(coords) // p['segments']
         for seg in range(p['segments']):
+            # [CẢI TIẾN] Sử dụng danh sách item_types để đặt xen kẽ
+            item_types = p.get('item_types', ['key'])
+            if not item_types: item_types = ['key']
+
             idx = seg * seg_len + seg_len // 2
             if idx < len(coords) and idx not in used:
-                items.append({"type": 'key', "pos": coords[idx]})
+                current_item_type = item_types[seg % len(item_types)]
+                items.append({"type": current_item_type, "pos": coords[idx]})
                 used.add(idx)
         return items
 
     def _place_simple_repeat(self, coords, p, used):
         items = []
+        # [CẢI TIẾN] Sử dụng danh sách item_types để đặt xen kẽ
+        item_types = p.get('item_types', [p.get('item_type', 'crystal')])
+        if not item_types: item_types = ['crystal']
+
         step = len(coords) // (p['repeat_count'] + 1)
         for i in range(1, p['repeat_count'] + 1):
             idx = i * step
             if idx < len(coords) and idx not in used:
-                items.append({"type": p['item_type'], "pos": coords[idx]})
+                current_item_type = item_types[i % len(item_types)]
+                items.append({"type": current_item_type, "pos": coords[idx]})
                 used.add(idx)
         return items
 
@@ -229,6 +263,11 @@ class ForLoopPlacer(BasePlacer):
     # 9. ĐẶT ITEM & OBSTACLE
     # ==================================================================
     def _place_custom_items(self, items, coords, item_counts, used):
+        # [CẢI TIẾN] Không đặt lại các item đã được đặt theo pattern
+        # Đếm số lượng item đã được đặt
+        placed_counts = Counter(item['type'] for item in items)
+        # Trừ đi số lượng đã đặt khỏi tổng số cần đặt
+        item_counts = Counter(item_counts) - placed_counts
         available = [i for i in range(len(coords)) if i not in used]
         for item_type, count in item_counts.items():
             if item_type == 'obstacle': continue
@@ -239,7 +278,7 @@ class ForLoopPlacer(BasePlacer):
                 available.remove(pos_idx)
 
     def _place_obstacles(self, coords, used, count):
-        obstacles = path_info.obstacles.copy()
+        obstacles = self.path_info.obstacles.copy()
         available = [i for i in range(len(coords)) if i not in used]
         wall_count = min(count, len(available) // 4)
         for idx in random.sample(available, wall_count):
@@ -250,31 +289,47 @@ class ForLoopPlacer(BasePlacer):
     # 10. DEBUG & REFACTOR
     # ==================================================================
     def _place_with_sequence_bug(self, coords, pattern, obstacle_count):
+        # [CẢI TIẾN] Lấy item_counts để có thể đặt custom items
+        item_counts = self._merge_item_counts(self.raw_items, self.goal_counts)
+
         if pattern['type'] == 'cluster_gap':
             pattern['cluster_size'], pattern['gap'] = pattern['gap'], pattern['cluster_size']
             logger.info("BUG: Đảo ngược cluster và gap")
         elif pattern['type'] == 'nested_grid':
             pattern['rows'], pattern['cols'] = pattern['cols'], pattern['rows']
             logger.info("BUG: Đảo ngược rows và cols")
-        return self._place_normal(coords, pattern, obstacle_count, {})
+        # [CẢI TIẾN] Truyền item_counts vào _place_normal
+        return self._place_normal(coords, pattern, obstacle_count, item_counts)
 
     def _place_with_logic_bug(self, coords, pattern, obstacle_count):
+        # [CẢI TIẾN] Lấy item_counts để có thể đặt custom items
+        item_counts = self._merge_item_counts(self.raw_items, self.goal_counts)
+
         if pattern['type'] == 'nested_grid':
             pattern['checkerboard'] = not pattern.get('checkerboard', False)
             logger.info("BUG: Đặt sai ô chẵn/lẻ")
         elif pattern['type'] == 'cluster_gap':
             pattern['cluster_size'] += 1
             logger.info("BUG: Lặp thừa 1 lần")
-        return self._place_normal(coords, pattern, obstacle_count, {})
+        # [CẢI TIẾN] Truyền item_counts vào _place_normal
+        return self._place_normal(coords, pattern, obstacle_count, item_counts)
 
     def _place_refactor(self, coords, pattern, obstacle_count):
         items = []
+        used = set()
+        # [CẢI TIẾN] Lấy item_counts để có thể đặt custom items
+        item_counts = self._merge_item_counts(self.raw_items, self.goal_counts)
+
         # Lặp tay 3-4 lần → học sinh dùng for
         for _ in range(4):
             sub_coords = coords[_*10:(_+1)*10]
-            items.extend(self._place_cluster_gap(sub_coords, {'cluster_size': 2, 'gap': 1, 'item_type': 'crystal'}, set()))
+            items.extend(self._place_cluster_gap(sub_coords, {'cluster_size': 2, 'gap': 1, 'item_type': 'crystal'}, used))
         logger.info("REFACTOR: Tạo lặp tay → học sinh dùng for")
-        return self._base_layout(path_info, items, path_info.obstacles.copy())
+
+        # [CẢI TIẾN] Gọi hàm đặt custom items và obstacles
+        self._place_custom_items(items, coords, item_counts, used)
+        obstacles = self._place_obstacles(coords, used, obstacle_count)
+        return self._base_layout(self.path_info, items, obstacles)
 
     # ==================================================================
     # 11. HỖ TRỢ

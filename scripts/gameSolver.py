@@ -150,7 +150,14 @@ def _solve_multi_goal_tsp(world: GameWorld) -> Optional[List[Action]]:
 
     # 1. Xác định tất cả các điểm cần đi qua
     start_pos = {'x': world.start_info['x'], 'y': world.start_info['y'], 'z': world.start_info['z']}
-    goal_positions = [c['position'] for c in world.collectibles_by_id.values()]
+    
+    # [SỬA LỖI] Thêm vị trí của các công tắc vào danh sách điểm mục tiêu
+    goal_positions = []
+    # Thêm vị trí các vật phẩm cần thu thập
+    goal_positions.extend([c['position'] for c in world.collectibles_by_id.values()])
+    # Thêm vị trí các công tắc cần tương tác
+    if world.solution_config.get("itemGoals", {}).get("switch", 0) > 0:
+        goal_positions.extend([s['position'] for s in world.switches.values()])
     
     # Tạo một cache để lưu trữ đường đi giữa hai điểm bất kỳ, tránh tính toán lại
     path_cache: Dict[Tuple[str, str], Optional[List[Action]]] = {}
@@ -246,13 +253,17 @@ def _solve_multi_goal_tsp(world: GameWorld) -> Optional[List[Action]]:
             if possible and total_cost < min_total_cost:
                 min_total_cost, best_order = total_cost, current_order
 
-    # 3. Nếu tìm thấy thứ tự tối ưu, ghép các đường đi lại
+    # 3. [SỬA LỖI] Nếu tìm thấy thứ tự tối ưu, ghép các đường đi lại và thêm hành động tương ứng
     if best_order:
         print(f"    LOG: (Solver) Đã tìm thấy một thứ tự hợp lệ để đi qua các mục tiêu.")
         full_path: List[Action] = []
         # [SỬA LỖI] Theo dõi các vật phẩm đã thu thập cho đường đi tốt nhất
         final_collected: Set[str] = set()
-        # Thêm hành động 'collect' vào đúng vị trí
+        
+        # [MỚI] Tạo các set vị trí để dễ dàng kiểm tra loại mục tiêu
+        collectible_positions = {tuple(p.values()) for p in [c['position'] for c in world.collectibles_by_id.values()]}
+        switch_positions = {tuple(p.values()) for p in [s['position'] for s in world.switches.values()]}
+
         for i in range(len(best_order) - 1):
             sub_path = get_path_between(best_order[i], best_order[i+1], final_collected)
             # Cập nhật trạng thái thu thập cho bước tiếp theo
@@ -262,18 +273,21 @@ def _solve_multi_goal_tsp(world: GameWorld) -> Optional[List[Action]]:
                 final_collected.add(item_id)
             if sub_path:
                 full_path.extend(sub_path)
-                # Nếu điểm đến là một vật phẩm (không phải start/finish), thêm lệnh collect
-                is_collectible_destination = any(
-                    p == best_order[i+1] for p in goal_positions
-                )
-                if is_collectible_destination:
+                
+                # [SỬA LỖI] Thêm hành động tương ứng (collect hoặc toggleSwitch)
+                dest_pos_tuple = tuple(best_order[i+1].values())
+                if dest_pos_tuple in collectible_positions:
                     full_path.append('collect')
+                elif dest_pos_tuple in switch_positions:
+                    full_path.append('toggleSwitch')
         
-        # Loại bỏ lệnh collect cuối cùng nếu nó nằm ngay trước khi kết thúc
-        if full_path and full_path[-1] == 'collect':
-             # Kiểm tra xem điểm cuối có phải là vật phẩm không
-             is_finish_collectible = any(p == world.finish_pos for p in goal_positions)
-             if not is_finish_collectible:
+        # Loại bỏ hành động cuối cùng nếu nó nằm ngay trước khi kết thúc và điểm kết thúc không phải là mục tiêu
+        if full_path and full_path[-1] in ['collect', 'toggleSwitch']:
+             finish_pos_tuple = tuple(world.finish_pos.values())
+             is_finish_a_goal = (finish_pos_tuple in collectible_positions) or \
+                                (finish_pos_tuple in switch_positions)
+             
+             if not is_finish_a_goal:
                  full_path.pop()
 
         return full_path

@@ -15,10 +15,14 @@
       },
       "generation_config": {
         "map_type": "square_shape",
-        "logic_type": "for_loop_simple",
+        "logic_type": "for_loop",
         "num_variants": 2,
         "params": {
           "side_length": [ 4, 5 ],
+          "asset_theme": {
+            "ground": "wall.brick06",
+            "obstacle": "stone.stone04"
+          },
           "start_blocks_type": "buggy_solution",
           "bug_type": "incorrect_loop_count",
           "bug_config": {
@@ -48,7 +52,7 @@
       },
       "generation_config": {
         "map_type": "simple_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 2,
         "params": {
           "turns": 1,
@@ -80,7 +84,7 @@
       },
       "generation_config": {
         "map_type": "simple_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 2,
         "params": {
           "path_length": [ 4, 5 ],
@@ -115,7 +119,7 @@
       },
       "generation_config": {
         "map_type": "simple_path",
-        "logic_type": "sequencing",
+        "logic_type": "command_obstacle",
         "num_variants": 2,
         "params": {
           "path_length": [ 5, 6 ],

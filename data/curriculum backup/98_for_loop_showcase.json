@@ -1,10 +1,11 @@
 {
-  "topic_code": "TOPIC_98",
+  "topic_code": "TOPIC_03",
   "topic_name": "For Loop Showcase",
   "suggested_maps": [
     {
       "id": "ForLoop.Showcase.LShape",
       "level": 1,
+      "grade": "G58",
       "titleKey": "Challenge.ForLoop.Showcase.LShape.Title",
       "descriptionKey": "Challenge.ForLoop.Showcase.LShape.Description",
       "translations": {
@@ -15,19 +16,22 @@
       },
       "generation_config": {
         "map_type": "l_shape",
-        "logic_type": "for_loop_simple",
+        "logic_type": "for_loop",
         "num_variants": 1,
         "params": {
           "side_a_length": 4,
-          "side_b_length": 5
+          "side_b_length": 5,
+          "item_count": 4,
+          "item_type": "switch"
         }
       },
       "blockly_config": { "toolbox_preset": "loops_simple" },
-      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": "all" } }
+      "solution_config": { "type": "reach_target", "itemGoals": { "switch": "all" } }
     },
     {
       "id": "ForLoop.Showcase.Square",
       "level": 2,
+      "grade": "G58",
       "titleKey": "Challenge.ForLoop.Showcase.Square.Title",
       "descriptionKey": "Challenge.ForLoop.Showcase.Square.Description",
       "translations": {
@@ -38,7 +42,7 @@
       },
       "generation_config": {
         "map_type": "square_shape",
-        "logic_type": "for_loop_simple",
+        "logic_type": "for_loop",
         "num_variants": 1,
         "params": {
           "side_length": 5,
@@ -52,6 +56,7 @@
     {
       "id": "ForLoop.Showcase.Zigzag",
       "level": 3,
+      "grade": "G58",
       "titleKey": "Challenge.ForLoop.Showcase.Zigzag.Title",
       "descriptionKey": "Challenge.ForLoop.Showcase.Zigzag.Description",
       "translations": {
@@ -62,7 +67,7 @@
       },
       "generation_config": {
         "map_type": "zigzag",
-        "logic_type": "for_loop_simple",
+        "logic_type": "for_loop",
         "num_variants": 1,
         "params": {
           "segments": 4,
@@ -75,6 +80,7 @@
     {
       "id": "ForLoop.Showcase.Staircase",
       "level": 4,
+      "grade": "G58",
       "titleKey": "Challenge.ForLoop.Showcase.Staircase.Title",
       "descriptionKey": "Challenge.ForLoop.Showcase.Staircase.Description",
       "translations": {
@@ -85,7 +91,7 @@
       },
       "generation_config": {
         "map_type": "staircase",
-        "logic_type": "for_loop_simple",
+        "logic_type": "for_loop",
         "num_variants": 1,
         "params": {
           "steps": 6

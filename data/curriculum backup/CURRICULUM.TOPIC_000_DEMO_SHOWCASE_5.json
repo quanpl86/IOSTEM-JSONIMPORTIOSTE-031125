@@ -1,0 +1,1280 @@
+{
+  "topic_code": "TOPIC_000_DEMO_SHOWCASE",
+  "topic_name": "Lộ trình Trải nghiệm Nền tảng",
+  "suggested_maps": [
+    {
+      "id": "Demo.S1.C01.Apply.FirstSteps",
+      "level": 1,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S1.C01.Apply.FirstSteps.Title",
+      "descriptionKey": "Challenge.Demo.S1.C01.Apply.FirstSteps.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S1.C01.Apply.FirstSteps.Title": "Bước Chân Đầu Tiên",
+          "Challenge.Demo.S1.C01.Apply.FirstSteps.Description": "Lệnh moveForward() giúp nhân vật đi tới. Hãy kết hợp nó với turnLeft() và collectItem() để đi theo con đường chữ L và thu thập viên pha lê ở cuối đường."
+        },
+        "en": {
+          "Challenge.Demo.S1.C01.Apply.FirstSteps.Title": "First Steps",
+          "Challenge.Demo.S1.C01.Apply.FirstSteps.Description": "The moveForward() command moves the character. Combine it with turnLeft() and collectItem() to follow the L-shaped path and collect the crystal at the end."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 4,
+          "leg2_length": 3,
+          "turn_direction": "left",
+          "items_to_place": [
+            "crystal"
+          ],
+          "asset_theme": {
+            "ground": "ground.earth"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1
+        }
+      }
+    },
+    {
+      "id": "Demo.S1.C02.Apply.BumpyRoad",
+      "level": 2,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S1.C02.Apply.BumpyRoad.Title",
+      "descriptionKey": "Challenge.Demo.S1.C02.Apply.BumpyRoad.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S1.C02.Apply.BumpyRoad.Title": "Con Đường Gập Ghềnh",
+          "Challenge.Demo.S1.C02.Apply.BumpyRoad.Description": "Có những vật cản trên đường! Sử dụng lệnh jump() để nhảy lên và nhảy xuống khỏi chúng. Hãy kết hợp di chuyển, rẽ, và nhảy để vượt qua con đường ziczac này."
+        },
+        "en": {
+          "Challenge.Demo.S1.C02.Apply.BumpyRoad.Title": "A Bumpy Road",
+          "Challenge.Demo.S1.C02.Apply.BumpyRoad.Description": "There are obstacles in the way! Use the jump() command to leap up and down from them. Combine moving, turning, and jumping to overcome this zigzag path."
+        }
+      },
+      "generation_config": {
+        "map_type": "zigzag",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "segments": 3,
+          "segment_length": 2,
+          "obstacle_count": 2,
+          "asset_theme": {
+            "ground": "stone.stone01",
+            "obstacle": "wall.brick01"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Demo.S2.C03.Refactor.Reuse",
+      "level": 3,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S2.C03.Refactor.Reuse.Title",
+      "descriptionKey": "Challenge.Demo.S2.C03.Refactor.Reuse.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S2.C03.Refactor.Reuse.Title": "Sức mạnh Tái sử dụng",
+          "Challenge.Demo.S2.C03.Refactor.Reuse.Description": "Đoạn code này hoạt động đúng nhưng rất dài và lặp lại. Hãy tìm các đoạn code giống nhau, tạo một hàm mới (ví dụ: moveColumn()) và sử dụng nó để làm cho chương trình ngắn gọn hơn."
+        },
+        "en": {
+          "Challenge.Demo.S2.C03.Refactor.Reuse.Title": "The Power of Reuse",
+          "Challenge.Demo.S2.C03.Refactor.Reuse.Description": "This code works correctly but is very long and repetitive. Find the similar code segments, create a new function (e.g., moveColumn), and use it to make the program shorter."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "column_length": 6,
+          "column_spacing": 4,
+          "items_to_place": [
+            "crystal",
+            "switch",
+            "crystal",
+            "switch",
+            "crystal",
+            "switch",
+            "crystal",
+            "switch"
+          ],
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "long_solution",
+          "asset_theme": {
+            "ground": "ground.checker"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 4,
+          "switch": 4
+        }
+      }
+    },
+    {
+      "id": "Demo.S2.C04.Debug.LogicFix",
+      "level": 4,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S2.C04.Debug.LogicFix.Title",
+      "descriptionKey": "Challenge.Demo.S2.C04.Debug.LogicFix.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S2.C04.Debug.LogicFix.Title": "Sửa chữa Logic",
+          "Challenge.Demo.S2.C04.Debug.LogicFix.Description": "Chương trình này có một lỗi logic! Nhân vật đáng lẽ phải rẽ phải để đến chỗ công tắc, nhưng lại rẽ trái. Hãy tìm dòng code sai và sửa nó từ turnLeft() thành turnRight()."
+        },
+        "en": {
+          "Challenge.Demo.S2.C04.Debug.LogicFix.Title": "Fixing the Logic",
+          "Challenge.Demo.S2.C04.Debug.LogicFix.Description": "This program has a logic error! The character is supposed to turn right to reach the switch but turns left instead. Find the incorrect line of code and fix it from turnLeft() to turnRight()."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "side_legs_length": 4,
+          "base_leg_length": 3,
+          "items_to_place": [
+            "switch"
+          ],
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_block",
+          "bug_config": {
+            "options": {
+              "from": "turnRight",
+              "to": "turnLeft"
+            }
+          },
+          "asset_theme": {
+            "ground": "ground.snow"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "switch": 1
+        }
+      }
+    },
+    {
+      "id": "Demo.S2.C05.Apply.MultiIsland",
+      "level": 5,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S2.C05.Apply.MultiIsland.Title",
+      "descriptionKey": "Challenge.Demo.S2.C05.Apply.MultiIsland.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S2.C05.Apply.MultiIsland.Title": "Nhiệm vụ Đa đảo",
+          "Challenge.Demo.S2.C05.Apply.MultiIsland.Description": "Để lấy được viên pha lê, bạn phải đến hòn đảo thứ nhất để bật công tắc, sau đó nhảy qua hòn đảo thứ hai để lấy phần thưởng. Hãy lên kế hoạch cho lộ trình của mình!"
+        },
+        "en": {
+          "Challenge.Demo.S2.C05.Apply.MultiIsland.Title": "Multi-Island Mission",
+          "Challenge.Demo.S2.C05.Apply.MultiIsland.Description": "To get the crystal, you must go to the first island to flip the switch, then jump to the second island to claim your prize. Plan your route carefully!"
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 2,
+          "island_pattern": "l_shape",
+          "items_to_place": [
+            "switch",
+            "crystal"
+          ],
+          "asset_theme": {
+            "ground": "ice.ice01"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1,
+          "switch": 1
+        }
+      }
+    },
+    {
+      "id": "Demo.S3.C06.Apply.Climb3D",
+      "level": 6,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S3.C06.Apply.Climb3D.Title",
+      "descriptionKey": "Challenge.Demo.S3.C06.Apply.Climb3D.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S3.C06.Apply.Climb3D.Title": "Leo lên Đỉnh cao",
+          "Challenge.Demo.S3.C06.Apply.Climb3D.Description": "Chào mừng đến với không gian 3D! Hãy sử dụng các lệnh bạn đã biết, đặc biệt là jump(), để di chuyển giữa các cụm đảo có độ cao khác nhau và lấy viên pha lê đang chờ ở nơi cao nhất."
+        },
+        "en": {
+          "Challenge.Demo.S3.C06.Apply.Climb3D.Title": "Climbing to the Top",
+          "Challenge.Demo.S3.C06.Apply.Climb3D.Description": "Welcome to the 3D world! Use the commands you already know, especially jump(), to move between island clusters at different heights and grab the crystal waiting at the summit."
+        }
+      },
+      "generation_config": {
+        "map_type": "stepped_island_clusters",
+        "logic_type": "for_loop",
+        "num_variants": 1,
+        "params": {
+          "num_clusters": 3,
+          "islands_per_cluster": 1,
+          "height_step": 2,
+          "items_to_place": [
+            "crystal"
+          ],
+          "asset_theme": {
+            "ground": "stone.stone06"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1
+        }
+      }
+    },
+    {
+      "id": "Demo.S3.C07.Refactor.SpiralTower",
+      "level": 7,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S3.C07.Refactor.SpiralTower.Title",
+      "descriptionKey": "Challenge.Demo.S3.C07.Refactor.SpiralTower.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S3.C07.Refactor.SpiralTower.Title": "Tháp Xoắn Ốc",
+          "Challenge.Demo.S3.C07.Refactor.SpiralTower.Description": "Đoạn code này có thể leo lên đỉnh tháp, nhưng nó quá dài. Hãy tạo một hàm climbOneLevel() để xử lý việc leo một tầng, sau đó dùng vòng lặp for để gọi hàm đó và chinh phục ngọn tháp."
+        },
+        "en": {
+          "Challenge.Demo.S3.C07.Refactor.SpiralTower.Title": "The Spiral Tower",
+          "Challenge.Demo.S3.C07.Refactor.SpiralTower.Description": "This code can climb to the top of the tower, but it's too long. Create a function climbOneLevel() to handle climbing one floor, then use a for loop to call that function and conquer the tower."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_3d",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_turns": 8,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "long_solution",
+          "items_to_place": [
+            "switch",
+            "switch",
+            "crystal",
+            "crystal"
+          ],
+          "asset_theme": {
+            "ground": "wall.brick04"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 2,
+          "switch": 2
+        }
+      }
+    },
+    {
+      "id": "Demo.S3.C08.Apply.LogicMaze",
+      "level": 8,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S3.C08.Apply.LogicMaze.Title",
+      "descriptionKey": "Challenge.Demo.S3.C08.Apply.LogicMaze.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S3.C08.Apply.LogicMaze.Title": "Mê cung Logic",
+          "Challenge.Demo.S3.C08.Apply.LogicMaze.Description": "Mục tiêu của bạn là tìm đường đến công tắc, bật nó lên, và sau đó tìm đường đến viên pha lê. Hãy viết một thuật toán tuần tự để nhân vật điều hướng trong mê cung phức tạp này."
+        },
+        "en": {
+          "Challenge.Demo.S3.C08.Apply.LogicMaze.Title": "The Logic Maze",
+          "Challenge.Demo.S3.C08.Apply.LogicMaze.Description": "Your goal is to find the path to the switch, flip it, and then find the path to the crystal. Write a sequential algorithm for the character to navigate this complex maze."
+        }
+      },
+      "generation_config": {
+        "map_type": "complex_maze_2d",
+        "logic_type": "algorithm_design",
+        "num_variants": 1,
+        "params": {
+          "maze_width": 9,
+          "maze_depth": 9,
+          "items_to_place": [
+            "switch",
+            "crystal"
+          ],
+          "asset_theme": {
+            "ground": "stone.stone02",
+            "obstacle": "wall.stone01"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1,
+          "switch": 1
+        }
+      }
+    },
+    {
+      "id": "Demo.S3.C09.Debug.3DFall",
+      "level": 9,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S3.C09.Debug.3DFall.Title",
+      "descriptionKey": "Challenge.Demo.S3.C09.Debug.3DFall.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S3.C09.Debug.3DFall.Title": "Tìm Lỗi Giữa Các Tầng",
+          "Challenge.Demo.S3.C09.Debug.3DFall.Description": "Chương trình này được thiết kế để đi từ đảo thấp lên đảo cao, nhưng nhân vật lại bị rơi. Hãy xem kỹ code và tìm ra lỗi: có thể là thiếu lệnh jump hoặc dùng moveForward sai chỗ."
+        },
+        "en": {
+          "Challenge.Demo.S3.C09.Debug.3DFall.Title": "Debugging Between Floors",
+          "Challenge.Demo.S3.C09.Debug.3DFall.Description": "This program is designed to go from the low island to the high one, but the character keeps falling. Look closely at the code and find the error: it could be a missing jump or a misplaced moveForward."
+        }
+      },
+      "generation_config": {
+        "map_type": "stepped_island_clusters",
+        "logic_type": "for_loop",
+        "num_variants": 1,
+        "params": {
+          "num_clusters": 2,
+          "islands_per_cluster": 1,
+          "height_step": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "options": {
+              "block_type_to_remove": "jump"
+            }
+          },
+          "asset_theme": {
+            "ground": "ice.ice01",
+            "obstacle": "ice.ice01"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Demo.S3.C10.Apply.SynthesisIslands",
+      "level": 10,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S3.C10.Apply.SynthesisIslands.Title",
+      "descriptionKey": "Challenge.Demo.S3.C10.Apply.SynthesisIslands.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S3.C10.Apply.SynthesisIslands.Title": "Quần Đảo Tổng Hợp",
+          "Challenge.Demo.S3.C10.Apply.SynthesisIslands.Description": "Thử thách cuối cùng! Từ đảo trung tâm, bạn phải lập kế hoạch đi đến 3 hòn đảo vệ tinh ở các độ cao khác nhau. Mỗi đảo có một nhiệm vụ riêng. Hãy vận dụng mọi kỹ năng để hoàn thành tất cả."
+        },
+        "en": {
+          "Challenge.Demo.S3.C10.Apply.SynthesisIslands.Title": "The Synthesis Archipelago",
+          "Challenge.Demo.S3.C10.Apply.SynthesisIslands.Description": "The final challenge! From the central island, you must plan a route to 3 satellite islands at different heights. Each island has its own task. Use all your skills to complete everything."
+        }
+      },
+      "generation_config": {
+        "map_type": "hub_with_stepped_islands",
+        "logic_type": "island_tour",
+        "num_variants": 1,
+        "params": {
+          "hub_size": 3,
+          "island_size": 2,
+          "gap_size": 2,
+          "items_to_place": [
+            "crystal",
+            "switch",
+            "crystal"
+          ],
+          "asset_theme": {
+            "ground": "ground.mud",
+            "obstacle": "stone.stone07"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 2,
+          "switch": 1
+        }
+      }
+    },
+    {
+      "id": "Demo.S4.C11.Apply.PlusShape",
+      "level": 11,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S4.C11.Apply.PlusShape.Title",
+      "descriptionKey": "Challenge.Demo.S4.C11.Apply.PlusShape.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S4.C11.Apply.PlusShape.Title": "Dọn dẹp Ngã tư",
+          "Challenge.Demo.S4.C11.Apply.PlusShape.Description": "Thu thập tất cả các viên pha lê ở bốn nhánh của con đường hình dấu cộng. Bạn sẽ phải đi qua tâm nhiều lần, hãy lên kế hoạch thật hiệu quả!"
+        },
+        "en": {
+          "Challenge.Demo.S4.C11.Apply.PlusShape.Title": "Crossroads Cleanup",
+          "Challenge.Demo.S4.C11.Apply.PlusShape.Description": "Collect all the crystals on the four arms of the plus-shaped path. You'll have to pass through the center multiple times, so plan your route efficiently!"
+        }
+      },
+      "generation_config": {
+        "map_type": "plus_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "arm_length": 2,
+          "items_to_place": [
+            "crystal",
+            "crystal",
+            "crystal",
+            "crystal"
+          ],
+          "asset_theme": {
+            "ground": "stone.stone07"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 4
+        }
+      }
+    },
+    {
+      "id": "Demo.S4.C12.Debug.WrongTurn",
+      "level": 12,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S4.C12.Debug.WrongTurn.Title",
+      "descriptionKey": "Challenge.Demo.S4.C12.Debug.WrongTurn.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S4.C12.Debug.WrongTurn.Title": "Sửa lỗi: Rẽ nhầm hướng",
+          "Challenge.Demo.S4.C12.Debug.WrongTurn.Description": "Nhân vật cần rẽ trái ở góc cua để đi theo con đường chữ L, nhưng chương trình lại ra lệnh rẽ phải. Hãy tìm khối lệnh turnRight sai và thay thế nó bằng turnLeft."
+        },
+        "en": {
+          "Challenge.Demo.S4.C12.Debug.WrongTurn.Title": "Fix the Bug: Wrong Way Turn",
+          "Challenge.Demo.S4.C12.Debug.WrongTurn.Description": "The character needs to turn left at the corner to follow the L-shaped path, but the program is telling it to turn right. Find the incorrect turnRight block and replace it with turnLeft."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 3,
+          "leg2_length": 2,
+          "turn_direction": "left",
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_block",
+          "bug_config": {
+            "options": {
+              "from": "turnLeft",
+              "to": "turnRight"
+            }
+          },
+          "asset_theme": {
+            "ground": "ground.checker"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Demo.S4.C13.Apply.ArrowShape",
+      "level": 13,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S4.C13.Apply.ArrowShape.Title",
+      "descriptionKey": "Challenge.Demo.S4.C13.Apply.ArrowShape.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S4.C13.Apply.ArrowShape.Title": "Theo dấu Mũi tên",
+          "Challenge.Demo.S4.C13.Apply.ArrowShape.Description": "Sử dụng kết hợp các lệnh di chuyển và rẽ để lái nhân vật đi theo đúng lộ trình hình mũi tên và thu thập viên pha lê ở cuối đường."
+        },
+        "en": {
+          "Challenge.Demo.S4.C13.Apply.ArrowShape.Title": "Following the Arrow",
+          "Challenge.Demo.S4.C13.Apply.ArrowShape.Description": "Use a combination of move and turn commands to navigate the character along the arrow-shaped path and collect the crystal at the end."
+        }
+      },
+      "generation_config": {
+        "map_type": "arrow_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "shaft_length": 3,
+          "head_size": 2,
+          "items_to_place": [
+            "crystal"
+          ],
+          "asset_theme": {
+            "ground": "ground.mud"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1
+        }
+      }
+    },
+    {
+      "id": "Demo.S5.C14.Refactor.Staircase",
+      "level": 14,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S5.C14.Refactor.Staircase.Title",
+      "descriptionKey": "Challenge.Demo.S5.C14.Refactor.Staircase.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S5.C14.Refactor.Staircase.Title": "Tối ưu hóa Leo thang",
+          "Challenge.Demo.S5.C14.Refactor.Staircase.Description": "Đoạn code này giúp nhân vật leo lên cầu thang nhưng nó quá dài. Hãy sử dụng vòng lặp 'repeat' để làm cho chương trình ngắn gọn và hiệu quả hơn."
+        },
+        "en": {
+          "Challenge.Demo.S5.C14.Refactor.Staircase.Title": "Staircase Refactor",
+          "Challenge.Demo.S5.C14.Refactor.Staircase.Description": "This code gets the character up the stairs, but it's very long. Use a 'repeat' loop to make the program shorter and more efficient."
+        }
+      },
+      "generation_config": {
+        "map_type": "staircase",
+        "logic_type": "for_loop",
+        "num_variants": 1,
+        "params": {
+          "num_steps": 5,
+          "step_size": 1,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "long_solution",
+          "asset_theme": {
+            "ground": "wall.brick02"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Demo.S5.C15.Debug.ExtraBlock",
+      "level": 15,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S5.C15.Debug.ExtraBlock.Title",
+      "descriptionKey": "Challenge.Demo.S5.C15.Debug.ExtraBlock.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S5.C15.Debug.ExtraBlock.Title": "Sửa lỗi: Lệnh thừa",
+          "Challenge.Demo.S5.C15.Debug.ExtraBlock.Description": "Chương trình này có một lệnh rẽ không cần thiết khiến nhân vật quay sai hướng trên con đường chữ U. Hãy tìm và loại bỏ khối lệnh thừa để sửa lỗi."
+        },
+        "en": {
+          "Challenge.Demo.S5.C15.Debug.ExtraBlock.Title": "Fix the Bug: An Extra Command",
+          "Challenge.Demo.S5.C15.Debug.ExtraBlock.Description": "This program has an unnecessary turn command that makes the character face the wrong way on the U-shaped path. Find and remove the extra block to fix the bug."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "side_legs_length": 3,
+          "base_leg_length": 2,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "extra_block",
+          "bug_config": {
+            "options": {
+              "block_type_to_add": "turnRight"
+            }
+          },
+          "asset_theme": {
+            "ground": "wall.brick06"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Demo.S7.C21.Apply.SpiralDown",
+      "level": 21,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S7.C21.Apply.SpiralDown.Title",
+      "descriptionKey": "Challenge.Demo.S7.C21.Apply.SpiralDown.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S7.C21.Apply.SpiralDown.Title": "Xoắn ốc đi xuống",
+          "Challenge.Demo.S7.C21.Apply.SpiralDown.Description": "Bạn đang ở trên đỉnh một tòa tháp. Hãy tìm đường đi xuống theo hình xoắn ốc để đến đích."
+        },
+        "en": {
+          "Challenge.Demo.S7.C21.Apply.SpiralDown.Title": "Descending Spiral",
+          "Challenge.Demo.S7.C21.Apply.SpiralDown.Description": "You are at the top of a tower. Find your way down the spiral path to reach the goal."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_3d",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_turns": 6,
+          "reverse": true,
+          "items_to_place": [ "crystal" ],
+          "asset_theme": { "ground": "stone.stone03" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": 1 } }
+    },
+    {
+      "id": "Demo.S7.C22.Apply.BigArrow",
+      "level": 22,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S7.C22.Apply.BigArrow.Title",
+      "descriptionKey": "Challenge.Demo.S7.C22.Apply.BigArrow.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S7.C22.Apply.BigArrow.Title": "Mũi tên lớn",
+          "Challenge.Demo.S7.C22.Apply.BigArrow.Description": "Đi theo con đường hình mũi tên với phần đầu lớn để bật công tắc."
+        },
+        "en": {
+          "Challenge.Demo.S7.C22.Apply.BigArrow.Title": "Big Arrow",
+          "Challenge.Demo.S7.C22.Apply.BigArrow.Description": "Follow the arrow-shaped path with a large head to toggle the switch."
+        }
+      },
+      "generation_config": {
+        "map_type": "arrow_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "shaft_length": 2,
+          "head_size": 4,
+          "items_to_place": [ "switch", "crystal", "crystal" ,"switch"],
+          "obstacle_count": 2,
+          "asset_theme": { "ground": "stone.stone01","obstacle":"ice.ice01" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": 2, "switch": 2 } }
+    },
+    {
+      "id": "Demo.S7.C23.Apply.VShape",
+      "level": 23,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S7.C23.Apply.VShape.Title",
+      "descriptionKey": "Challenge.Demo.S7.C23.Apply.VShape.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S7.C23.Apply.VShape.Title": "Đường chữ V",
+          "Challenge.Demo.S7.C23.Apply.VShape.Description": "Thu thập các viên pha lê ở hai nhánh của con đường hình chữ V."
+        },
+        "en": {
+          "Challenge.Demo.S7.C23.Apply.VShape.Title": "The V-Path",
+          "Challenge.Demo.S7.C23.Apply.VShape.Description": "Collect the crystals on both arms of the V-shaped path."
+        }
+      },
+      "generation_config": {
+        "map_type": "v_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "arm_length": 4,
+          "items_to_place": [ "crystal", "crystal" ],
+          "asset_theme": { "ground": "stone.stone01" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": 2 } }
+    },
+    {
+      "id": "Demo.S7.C24.Apply.EShape",
+      "level": 24,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S7.C24.Apply.EShape.Title",
+      "descriptionKey": "Challenge.Demo.S7.C24.Apply.EShape.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S7.C24.Apply.EShape.Title": "Khám phá chữ E",
+          "Challenge.Demo.S7.C24.Apply.EShape.Description": "Con đường này có hình chữ E. Hãy khám phá cả ba nhánh để thu thập tất cả vật phẩm."
+        },
+        "en": {
+          "Challenge.Demo.S7.C24.Apply.EShape.Title": "Exploring the E",
+          "Challenge.Demo.S7.C24.Apply.EShape.Description": "This path is shaped like an E. Explore all three branches to collect all the items."
+        }
+      },
+      "generation_config": {
+        "map_type": "ef_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "stem_length": 5,
+          "num_branches": 3,
+          "branch_length": 2,
+          "items_to_place": [ "crystal", "crystal", "crystal" ],
+          "asset_theme": { "ground": "ground.earthChecker" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": 3 } }
+    },
+    {
+      "id": "Demo.S8.C25.Apply.FShape",
+      "level": 25,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S8.C25.Apply.FShape.Title",
+      "descriptionKey": "Challenge.Demo.S8.C25.Apply.FShape.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S8.C25.Apply.FShape.Title": "Chinh phục chữ F",
+          "Challenge.Demo.S8.C25.Apply.FShape.Description": "Tương tự chữ E, nhưng lần này là chữ F với hai nhánh. Hãy lấy pha lê và bật công tắc."
+        },
+        "en": {
+          "Challenge.Demo.S8.C25.Apply.FShape.Title": "Conquering the F",
+          "Challenge.Demo.S8.C25.Apply.FShape.Description": "Similar to the E, but this time it's an F with two branches. Get the crystal and toggle the switch."
+        }
+      },
+      "generation_config": {
+        "map_type": "ef_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "stem_length": 5,
+          "num_branches": 2,
+          "branch_length": 3,
+          "items_to_place": [ "switch", "crystal" ],
+          "asset_theme": { "ground": "wall.brick01" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "switch": 1, "crystal": 1 } }
+    },
+    {
+      "id": "Demo.S8.C26.Apply.Triangle",
+      "level": 26,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S8.C26.Apply.Triangle.Title",
+      "descriptionKey": "Challenge.Demo.S8.C26.Apply.Triangle.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S8.C26.Apply.Triangle.Title": "Vòng quanh Tam giác",
+          "Challenge.Demo.S8.C26.Apply.Triangle.Description": "Sử dụng vòng lặp để đi hết 3 cạnh của hình tam giác."
+        },
+        "en": {
+          "Challenge.Demo.S8.C26.Apply.Triangle.Title": "Around the Triangle",
+          "Challenge.Demo.S8.C26.Apply.Triangle.Description": "Use a loop to traverse all 3 sides of the triangle."
+        }
+      },
+      "generation_config": {
+        "map_type": "triangle",
+        "logic_type": "for_loop",
+        "num_variants": 1,
+        "params": {
+          "side_length": 4,
+          "asset_theme": { "ground": "stone.stone04" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "Demo.S8.C27.Apply.SpiralPath",
+      "level": 27,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S8.C27.Apply.SpiralPath.Title",
+      "descriptionKey": "Challenge.Demo.S8.C27.Apply.SpiralPath.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S8.C27.Apply.SpiralPath.Title": "Mê cung Xoắn ốc 2D",
+          "Challenge.Demo.S8.C27.Apply.SpiralPath.Description": "Tìm đường vào tâm của mê cung xoắn ốc và thu thập tất cả vật phẩm."
+        },
+        "en": {
+          "Challenge.Demo.S8.C27.Apply.SpiralPath.Title": "2D Spiral Maze",
+          "Challenge.Demo.S8.C27.Apply.SpiralPath.Description": "Find your way to the center of the spiral maze and collect all the items."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_path",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_turns": 7,
+          "items_to_place": [ "crystal", "switch", "crystal" ],
+          "asset_theme": { "ground": "ground.mud" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": 2, "switch": 1 } }
+    },
+    {
+      "id": "Demo.S8.C28.Apply.InterspersedPath",
+      "level": 28,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S8.C28.Apply.InterspersedPath.Title",
+      "descriptionKey": "Challenge.Demo.S8.C28.Apply.InterspersedPath.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S8.C28.Apply.InterspersedPath.Title": "Đường đi xen kẽ",
+          "Challenge.Demo.S8.C28.Apply.InterspersedPath.Description": "Con đường này có các hòn đảo nhỏ xen kẽ. Hãy dùng lệnh nhảy để vượt qua chúng."
+        },
+        "en": {
+          "Challenge.Demo.S8.C28.Apply.InterspersedPath.Title": "Interspersed Path",
+          "Challenge.Demo.S8.C28.Apply.InterspersedPath.Description": "This path has small interspersed islands. Use the jump command to cross them."
+        }
+      },
+      "generation_config": {
+        "map_type": "interspersed_path",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 3,
+          "obstacle_count": 4,
+          "island_spacing": 1,
+          "items_to_place": [
+            "crystal",
+            "crystal"
+          ],
+          "asset_theme": {
+            "ground": "ground.mud",
+            "obstacle": "wall.brick03"
+          }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": {"crystal":2} }
+    },
+    {
+      "id": "Demo.S9.C29.Apply.GridWithHoles",
+      "level": 29,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S9.C29.Apply.GridWithHoles.Title",
+      "descriptionKey": "Challenge.Demo.S9.C29.Apply.GridWithHoles.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S9.C29.Apply.GridWithHoles.Title": "Lưới tử thần",
+          "Challenge.Demo.S9.C29.Apply.GridWithHoles.Description": "Bản đồ này đầy những cái hố. Hãy cẩn thận tìm đường đi để không bị rơi xuống!"
+        },
+        "en": {
+          "Challenge.Demo.S9.C29.Apply.GridWithHoles.Title": "Grid of Death",
+          "Challenge.Demo.S9.C29.Apply.GridWithHoles.Description": "This map is full of holes. Carefully find a path to avoid falling!"
+        }
+      },
+      "generation_config": {
+        "map_type": "grid_with_holes",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "grid_width": 6,
+          "grid_depth": 6,
+          "hole_chance": 0.4,
+          "asset_theme": { "ground": "ground.normal" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "Demo.S9.C30.Apply.SymmetricalIslandsL",
+      "level": 30,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S9.C30.Apply.SymmetricalIslandsL.Title",
+      "descriptionKey": "Challenge.Demo.S9.C30.Apply.SymmetricalIslandsL.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S9.C30.Apply.SymmetricalIslandsL.Title": "Các đảo chữ L đối xứng",
+          "Challenge.Demo.S9.C30.Apply.SymmetricalIslandsL.Description": "Hai hòn đảo này có hình dạng chữ L giống hệt nhau. Hãy viết một hàm để giải quyết một đảo, sau đó tái sử dụng nó."
+        },
+        "en": {
+          "Challenge.Demo.S9.C30.Apply.SymmetricalIslandsL.Title": "Symmetrical L-Islands",
+          "Challenge.Demo.S9.C30.Apply.SymmetricalIslandsL.Description": "These two islands have an identical L-shape. Write a function to solve one island, then reuse it."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_decomposition",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 2,
+          "island_pattern": "l_shape",
+          "items_to_place": [ "crystal", "crystal" ],
+          "asset_theme": { "ground": "ice.ice01" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": 2 } }
+    },
+    {
+      "id": "Demo.S9.C31.Apply.SymmetricalIslandsU",
+      "level": 31,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S9.C31.Apply.SymmetricalIslandsU.Title",
+      "descriptionKey": "Challenge.Demo.S9.C31.Apply.SymmetricalIslandsU.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S9.C31.Apply.SymmetricalIslandsU.Title": "Các đảo chữ U đối xứng",
+          "Challenge.Demo.S9.C31.Apply.SymmetricalIslandsU.Description": "Tương tự, hãy dùng hàm để chinh phục hai hòn đảo hình chữ U này."
+        },
+        "en": {
+          "Challenge.Demo.S9.C31.Apply.SymmetricalIslandsU.Title": "Symmetrical U-Islands",
+          "Challenge.Demo.S9.C31.Apply.SymmetricalIslandsU.Description": "Similarly, use a function to conquer these two U-shaped islands."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_decomposition",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 2,
+          "island_pattern": "u_shape",
+          "items_to_place": [ "switch", "switch" ],
+          "asset_theme": { "ground": "stone.stone06" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "switch": 2 } }
+    },
+    {
+      "id": "Demo.S9.C32.Apply.Staircase3D",
+      "level": 32,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S9.C32.Apply.Staircase3D.Title",
+      "descriptionKey": "Challenge.Demo.S9.C32.Apply.Staircase3D.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S9.C32.Apply.Staircase3D.Title": "Cầu thang 3D",
+          "Challenge.Demo.S9.C32.Apply.Staircase3D.Description": "Cầu thang này vừa đi lên vừa rẽ. Hãy cẩn thận lập trình để lên đến đỉnh."
+        },
+        "en": {
+          "Challenge.Demo.S9.C32.Apply.Staircase3D.Title": "3D Staircase",
+          "Challenge.Demo.S9.C32.Apply.Staircase3D.Description": "This staircase both ascends and turns. Program carefully to reach the top."
+        }
+      },
+      "generation_config": {
+        "map_type": "staircase_3d",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_steps": 7,
+          "asset_theme": { "ground": "wall.brick03" }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "Demo.S10.C33.Debug.RepeatCount",
+      "level": 33,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S10.C33.Debug.RepeatCount.Title",
+      "descriptionKey": "Challenge.Demo.S10.C33.Debug.RepeatCount.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S10.C33.Debug.RepeatCount.Title": "Sửa lỗi: Sai số lần lặp",
+          "Challenge.Demo.S10.C33.Debug.RepeatCount.Description": "Nhân vật cần đi hết 5 ô, nhưng vòng lặp chỉ chạy 4 lần. Hãy tìm và sửa lại số lần lặp cho đúng."
+        },
+        "en": {
+          "Challenge.Demo.S10.C33.Debug.RepeatCount.Title": "Fix the Bug: Incorrect Repeat Count",
+          "Challenge.Demo.S10.C33.Debug.RepeatCount.Description": "The character needs to move 5 steps, but the loop only runs 4 times. Find and correct the number of repetitions."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "for_loop",
+        "num_variants": 1,
+        "params": {
+          "path_length": 5,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_loop_count",
+          "bug_config": {
+            "options": {
+              "change_by": -1
+            }
+          },
+          "asset_theme": {
+            "ground": "ground.earth"
+          }
+        }
+      }
+    },
+    {
+      "id": "Demo.S5.C16.Apply.TShape",
+      "level": 16,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S5.C16.Apply.TShape.Title",
+      "descriptionKey": "Challenge.Demo.S5.C16.Apply.TShape.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S5.C16.Apply.TShape.Title": "Khám phá Ngã ba",
+          "Challenge.Demo.S5.C16.Apply.TShape.Description": "Con đường có hình chữ T. Hãy đi thẳng, sau đó rẽ để thu thập các vật phẩm ở cả hai bên nhánh."
+        },
+        "en": {
+          "Challenge.Demo.S5.C16.Apply.TShape.Title": "Exploring the T-Junction",
+          "Challenge.Demo.S5.C16.Apply.TShape.Description": "The path is T-shaped. Go straight, then turn to collect the items on both branches."
+        }
+      },
+      "generation_config": {
+        "map_type": "t_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "stem_length": 3,
+          "bar_length": 5,
+          "items_to_place": [
+            "crystal",
+            "switch"
+          ],
+          "asset_theme": {
+            "ground": "ground.earth"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1,
+          "switch": 1
+        }
+      }
+    },
+    {
+      "id": "Demo.S5.C17.Debug.IncorrectLoopCount",
+      "level": 17,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S5.C17.Debug.IncorrectLoopCount.Title",
+      "descriptionKey": "Challenge.Demo.S5.C17.Debug.IncorrectLoopCount.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S5.C17.Debug.IncorrectLoopCount.Title": "Sửa lỗi: Lặp không đủ",
+          "Challenge.Demo.S5.C17.Debug.IncorrectLoopCount.Description": "Nhân vật cần đi hết 4 cạnh của hình vuông, nhưng vòng lặp chỉ chạy 3 lần. Hãy tìm và sửa lại số lần lặp cho đúng."
+        },
+        "en": {
+          "Challenge.Demo.S5.C17.Debug.IncorrectLoopCount.Title": "Fix the Bug: Not Enough Loops",
+          "Challenge.Demo.S5.C17.Debug.IncorrectLoopCount.Description": "The character needs to traverse all 4 sides of the square, but the loop only runs 3 times. Find and correct the number of repetitions."
+        }
+      },
+      "generation_config": {
+        "map_type": "square_shape",
+        "logic_type": "for_loop",
+        "num_variants": 1,
+        "params": {
+          "side_length": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_loop_count",
+          "bug_config": {
+            "options": {
+              "change_by": -1
+            }
+          },
+          "asset_theme": {
+            "ground": "wall.brick05"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Demo.S6.C18.Apply.SShape",
+      "level": 18,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S6.C18.Apply.SShape.Title",
+      "descriptionKey": "Challenge.Demo.S6.C18.Apply.SShape.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S6.C18.Apply.SShape.Title": "Đường cong chữ S",
+          "Challenge.Demo.S6.C18.Apply.SShape.Description": "Hãy lập trình cho nhân vật đi theo con đường hình chữ S, thu thập pha lê và bật công tắc trên đường đi."
+        },
+        "en": {
+          "Challenge.Demo.S6.C18.Apply.SShape.Title": "The S-Curve",
+          "Challenge.Demo.S6.C18.Apply.SShape.Description": "Program the character to follow the S-shaped path, collecting the crystal and toggling the switch along the way."
+        }
+      },
+      "generation_config": {
+        "map_type": "s_shape",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 3,
+          "leg2_length": 3,
+          "leg3_length": 3,
+          "items_to_place": [
+            "crystal",
+            "switch"
+          ],
+          "asset_theme": {
+            "ground": "ground.normal"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1,
+          "switch": 1
+        }
+      }
+    },
+    {
+      "id": "Demo.S6.C19.Refactor.PlowingField",
+      "level": 19,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S6.C19.Refactor.PlowingField.Title",
+      "descriptionKey": "Challenge.Demo.S6.C19.Refactor.PlowingField.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S6.C19.Refactor.PlowingField.Title": "Tối ưu hóa Cày ruộng",
+          "Challenge.Demo.S6.C19.Refactor.PlowingField.Description": "Đoạn code này giúp nhân vật đi hết cánh đồng nhưng nó rất dài. Hãy sử dụng vòng lặp lồng nhau để tối ưu hóa nó."
+        },
+        "en": {
+          "Challenge.Demo.S6.C19.Refactor.PlowingField.Title": "Plowing Field Refactor",
+          "Challenge.Demo.S6.C19.Refactor.PlowingField.Description": "This code gets the character across the field, but it's very long. Use nested loops to optimize it."
+        }
+      },
+      "generation_config": {
+        "map_type": "plowing_field",
+        "logic_type": "nested_for_loop",
+        "num_variants": 1,
+        "params": {
+          "rows": 3,
+          "cols": 4,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "long_solution",
+          "asset_theme": {
+            "ground": "ground.earthChecker"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "full_toolbox"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "Demo.S6.C20.Debug.SequenceError",
+      "level": 20,
+      "grade": 5,
+      "titleKey": "Challenge.Demo.S6.C20.Debug.SequenceError.Title",
+      "descriptionKey": "Challenge.Demo.S6.C20.Debug.SequenceError.Description",
+      "translations": {
+        "vi": {
+          "Challenge.Demo.S6.C20.Debug.SequenceError.Title": "Sửa lỗi: Sai thứ tự",
+          "Challenge.Demo.S6.C20.Debug.SequenceError.Description": "Nhân vật đang cố gắng thu thập vật phẩm trước khi nhảy qua hố. Hãy sắp xếp lại các khối lệnh để nhân vật nhảy trước, rồi mới thu thập."
+        },
+        "en": {
+          "Challenge.Demo.S6.C20.Debug.SequenceError.Title": "Fix the Bug: Sequence Error",
+          "Challenge.Demo.S6.C20.Debug.SequenceError.Description": "The character is trying to collect the item before jumping over the gap. Rearrange the blocks to make the character jump first, then collect."
+        }
+      },
+      "generation_config": {
+        "map_type": "grid_with_holes",
+        "logic_type": "command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "grid_width": 5,
+          "grid_depth": 5,
+          "hole_chance": 0.3,
+          "obstacle_count":4,
+          "items_to_place": [
+            "crystal",
+            "crystal"
+          ],
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "extra_block",
+          "bug_config": {
+            "options": {
+              "block_type_to_add": "turnRight"
+            }
+          },
+          "asset_theme": {
+            "ground": "wall.brick06",
+            "obstacle": "stone.stone04"
+          }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "full_toolbox" },
+      "solution_config": { "type": "reach_target", "itemGoals": { "crystal": "all" } }
+    }
+  ]
+}

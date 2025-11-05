@@ -101,7 +101,7 @@
         }
       },
       "blockly_config": {
-        "toolbox_preset": "movement_only"
+        "toolbox_preset": "movement_jump"
       },
       "solution_config": {
         "type": "reach_target",
@@ -211,7 +211,7 @@
         }
       },
       "blockly_config": {
-        "toolbox_preset": "movement_only"
+        "toolbox_preset": "movement_jump"
       },
       "solution_config": {
         "type": "reach_target",

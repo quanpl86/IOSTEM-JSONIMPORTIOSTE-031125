@@ -9,9 +9,13 @@ def _find_blocks_recursively(program_part: List[Dict], condition: callable) -> L
     for block in program_part:
         if condition(block):
             found_blocks.append(block)
-        # Đệ quy vào các khối lồng nhau (vòng lặp, hàm)
+        # [SỬA LỖI] Đệ quy vào các khối lồng nhau (vòng lặp, if, v.v.)
+        # Logic cũ chỉ tìm trong "body" của hàm, bỏ qua "body" của vòng lặp.
         if "body" in block and isinstance(block["body"], list):
             found_blocks.extend(_find_blocks_recursively(block["body"], condition))
+        # [MỚI] Xử lý các nhánh khác của khối if/else
+        if "orelse" in block and isinstance(block["orelse"], list):
+            found_blocks.extend(_find_blocks_recursively(block["orelse"], condition))
     return found_blocks
 
 class MisplacedBlocksBug(BaseBugStrategy):
@@ -88,16 +92,23 @@ class MissingBlockBug(BaseBugStrategy):
             specific_blocks = [
                 item for item in all_removable_blocks
                 if (
-                    # [MỚI] Nếu yêu cầu xóa "turn", tìm bất kỳ khối "maze_turn" nào.
-                    (block_type_to_remove == 'turn' and item['block'].get("type") == "maze_turn")
+                    # [SỬA LỖI] Nếu yêu cầu xóa "turn" hoặc "any_turn", tìm bất kỳ khối "maze_turn" nào.
+                    (block_type_to_remove in ['turn', 'any_turn'] and
+                     item['block'].get("type") == "maze_turn")
                     or
                     # [CŨ] Nếu yêu cầu xóa "turnLeft"/"turnRight" cụ thể.
                     (('turn' in block_type_to_remove and block_type_to_remove != 'turn') and
                      item['block'].get("type") == "maze_turn" and
                      item['block'].get("direction") == block_type_to_remove)
                     or
-                    # [CŨ] Logic cho các khối khác.
-                    item['block'].get("type") == f"maze_{block_type_to_remove}"
+                    # [SỬA LỖI] Logic cho các khối khác, xử lý đúng các trường hợp tên
+                    # như 'collect' hoặc 'collectItem'.
+                    # Nếu block_type_to_remove đã chứa 'maze_', dùng trực tiếp.
+                    # Nếu không, thêm tiền tố 'maze_'.
+                    # Xử lý trường hợp đặc biệt 'collectItem' -> 'maze_collect'.
+                    (item['block'].get("type") == ('maze_collect' if block_type_to_remove == 'collectItem' else
+                                                   block_type_to_remove if block_type_to_remove.startswith('maze_') else
+                                                   f"maze_{block_type_to_remove}"))
                 )
             ]
             if specific_blocks:
@@ -190,7 +201,7 @@ class IncorrectParameterBug(BaseBugStrategy):
                     # Thay đổi toàn bộ type của khối
                     target_block["type"] = f"maze_{to_block_type}"
                     if "direction" in target_block: del target_block["direction"]
-                    print(f"      -> Bug 'incorrect_block': Thay thế khối '{original_type}' bằng '{target_block['type']}'.")
+                    print(f"      -> Bug 'incorrect_parameter': Thay thế khối '{original_type}' bằng '{target_block['type']}'.")
             else:
                 print(f"   - ⚠️ Không tìm thấy khối loại 'maze_{from_block_type}' để tạo lỗi incorrect_block.")
         else:

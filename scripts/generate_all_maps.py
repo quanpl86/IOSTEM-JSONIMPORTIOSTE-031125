@@ -538,7 +538,7 @@ def main():
                                 print(f"   - ⚠️ Cảnh báo: Không thể tạo lỗi cho bug_type '{bug_type}'.")
                                 final_inner_blocks = '' # Để trống nếu không tạo được lỗi
                     
-                    elif start_blocks_type in ["raw_solution", "unrefactored_solution"] and solution_result:
+                    elif start_blocks_type in ["raw_solution", "unrefactored_solution", "long_solution"] and solution_result:
                         # Cung cấp lời giải tuần tự (chưa tối ưu)
                         raw_actions = solution_result.get("raw_actions", [])
                         # [SỬA LỖI] Bọc các khối tuần tự trong một khối maze_start

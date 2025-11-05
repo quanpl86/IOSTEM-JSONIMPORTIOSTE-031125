@@ -128,6 +128,7 @@ class MapGeneratorService:
             'function_with_multi_params': FunctionPlacer(),
             'advanced_functions': FunctionPlacer(), # [SỬA LỖI] Đăng ký placer còn thiếu
             'for_loop_simple': ForLoopPlacer(),
+            'for_loop': ForLoopPlacer(), # [THÊM MỚI] Hợp nhất các for_loop placer
             'for_loop_complex': ForLoopPlacer(),
             'nested_for_loop': ForLoopPlacer(),
             # Các placer cho Topic 4 (Biến & Toán học)

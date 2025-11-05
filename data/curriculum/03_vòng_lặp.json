@@ -29,8 +29,8 @@
           "bug_config": {
             "target": "main",
             "options": {
-              "from": "turn_right",
-              "to": "turn_left"
+              "from": "turnRight",
+              "to": "turnLeft"
             }
           }
         }

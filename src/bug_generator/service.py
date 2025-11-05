@@ -16,10 +16,10 @@ from .strategies.main_thread_bugs import (
     # IncorrectInitialValueBug,
     # IncorrectMathOperatorBug,
 )
-# from .strategies.function_bugs import (
-#     IncorrectFunctionLogicBug,
-#     MissingFunctionCallBug,
-# )
+from .strategies.control_flow_bugs import (
+    IncorrectLoopConditionBug,
+    MissingFunctionCallBug,
+)
 
 # --- SECTION 2: Nhà máy tạo lỗi (Bug Strategy Factory) ---
 # Ánh xạ bug_type tới lớp chiến lược tương ứng.
@@ -33,8 +33,8 @@ BUG_STRATEGIES: Dict[str, Type[BaseBugStrategy]] = {
     # Nhóm 1.2: Lỗi Cấu Hình Khối Điều Khiển
     'incorrect_loop_count': IncorrectLoopCountBug,
     'incorrect_parameter': IncorrectParameterBug, # Ví dụ: sai hướng rẽ
-    'incorrect_block': IncorrectParameterBug, # [MỚI] Thêm alias cho bug rẽ sai hướng
-    # 'incorrect_loop_condition': # Sẽ thêm lớp này sau
+    'incorrect_block': IncorrectParameterBug, # Alias cho incorrect_parameter
+    'incorrect_loop_condition': IncorrectLoopConditionBug, # [MỚI]
     
     # Nhóm 1.3: Lỗi Dữ Liệu và Tính Toán    
     'incorrect_initial_value': IncorrectInitialValueBug,
@@ -51,7 +51,7 @@ BUG_STRATEGIES: Dict[str, Type[BaseBugStrategy]] = {
     
     # Nhóm 2.2: Lỗi Gọi Hàm
     'incorrect_function_call_order': MisplacedBlocksBug, # Dùng lại logic hoán đổi khối
-    # 'missing_function_call': MissingBlockBug, # Dùng lại logic xóa khối
+    'missing_function_call': MissingFunctionCallBug, # [MỚI]
 }
 
 # --- SECTION 3: Hàm điều phối chính (Dispatcher) ---
