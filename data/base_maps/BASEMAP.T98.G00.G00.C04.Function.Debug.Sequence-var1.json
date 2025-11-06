@@ -6,41 +6,9 @@
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 4,
+          "x": 7,
           "y": 0,
-          "z": 10
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 4,
-          "y": 0,
-          "z": 11
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 4,
-          "y": 0,
-          "z": 12
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 5,
-          "y": 0,
-          "z": 11
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 6,
-          "y": 0,
-          "z": 11
+          "z": 6
         }
       },
       {
@@ -48,7 +16,15 @@
         "position": {
           "x": 7,
           "y": 0,
-          "z": 11
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 7,
+          "y": 0,
+          "z": 8
         }
       },
       {
@@ -56,23 +32,47 @@
         "position": {
           "x": 8,
           "y": 0,
-          "z": 10
+          "z": 7
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 8,
+          "x": 9,
           "y": 0,
-          "z": 11
+          "z": 7
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 8,
+          "x": 10,
           "y": 0,
-          "z": 12
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 11,
+          "y": 0,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 11,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 11,
+          "y": 0,
+          "z": 8
         }
       }
     ],
@@ -80,9 +80,9 @@
       {
         "id": "player1",
         "start": {
-          "x": 4,
+          "x": 7,
           "y": 1,
-          "z": 10,
+          "z": 6,
           "direction": 1
         }
       }
@@ -92,26 +92,26 @@
         "id": "c1",
         "type": "crystal",
         "position": {
-          "x": 8,
+          "x": 11,
           "y": 1,
-          "z": 12
+          "z": 8
         }
       },
       {
         "id": "c2",
         "type": "crystal",
         "position": {
-          "x": 8,
+          "x": 11,
           "y": 1,
-          "z": 11
+          "z": 7
         }
       }
     ],
     "interactibles": [],
     "finish": {
-      "x": 8,
+      "x": 11,
       "y": 1,
-      "z": 10
+      "z": 6
     }
   }
 }

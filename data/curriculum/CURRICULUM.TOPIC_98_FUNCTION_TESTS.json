@@ -65,7 +65,9 @@
             "target": "function_body",
             "options": {
               "function_name": "collectOnIsland",
-              "change_block_type": "maze_turn"
+              "change_block_type": "maze_turn",
+              "from": "turnRight",
+              "to": "turnLeft"
             }
           }
         }

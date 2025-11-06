@@ -78,7 +78,7 @@
       ]
     },
     "maxBlocks": 18,
-    "startBlocks": "<xml><block type=\"procedures_defnoreturn\" deletable=\"false\"><field name=\"NAME\">PROCEDURE_1</field><statement name=\"STACK\"><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></statement></block><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"><block type=\"procedures_callnoreturn\"><mutation name=\"PROCEDURE_1\" /><next><block type=\"maze_collect\"><next><block type=\"maze_turn\"><field name=\"DIR\">turnRight</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_collect\"><next><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></xml>"
+    "startBlocks": "<xml><block type=\"procedures_defnoreturn\" deletable=\"false\"><field name=\"NAME\">PROCEDURE_1</field><statement name=\"STACK\"><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></statement></block><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"><block type=\"maze_collect\"><next><block type=\"maze_turn\"><field name=\"DIR\">turnRight</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_collect\"><next><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"procedures_callnoreturn\"><mutation name=\"PROCEDURE_1\" /></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></xml>"
   },
   "gameConfig": {
     "type": "maze",
@@ -87,65 +87,65 @@
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 5,
+          "x": 1,
           "y": 0,
-          "z": 10
+          "z": 8
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 5,
+          "x": 1,
           "y": 0,
-          "z": 11
+          "z": 9
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 6,
+          "x": 2,
           "y": 0,
-          "z": 10
+          "z": 8
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 6,
+          "x": 2,
           "y": 0,
-          "z": 11
+          "z": 9
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 7,
+          "x": 3,
           "y": 0,
-          "z": 10
+          "z": 8
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 7,
+          "x": 3,
           "y": 0,
-          "z": 11
+          "z": 9
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 8,
+          "x": 4,
           "y": 0,
-          "z": 10
+          "z": 8
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 8,
+          "x": 4,
           "y": 0,
-          "z": 11
+          "z": 9
         }
       }
     ],
@@ -153,9 +153,9 @@
       {
         "id": "player1",
         "start": {
-          "x": 5,
+          "x": 1,
           "y": 1,
-          "z": 10,
+          "z": 8,
           "direction": 1
         }
       }
@@ -165,26 +165,26 @@
         "id": "c1",
         "type": "crystal",
         "position": {
-          "x": 8,
+          "x": 4,
           "y": 1,
-          "z": 11
+          "z": 9
         }
       },
       {
         "id": "c2",
         "type": "crystal",
         "position": {
-          "x": 8,
+          "x": 4,
           "y": 1,
-          "z": 10
+          "z": 8
         }
       }
     ],
     "interactibles": [],
     "finish": {
-      "x": 5,
+      "x": 1,
       "y": 1,
-      "z": 11
+      "z": 9
     }
   },
   "solution": {
@@ -257,10 +257,6 @@
     "structuredSolution_fixbug_version": {
       "main": [
         {
-          "type": "CALL",
-          "name": "PROCEDURE_1"
-        },
-        {
           "type": "maze_collect"
         },
         {
@@ -280,6 +276,10 @@
         {
           "type": "maze_turn",
           "direction": "turnLeft"
+        },
+        {
+          "type": "CALL",
+          "name": "PROCEDURE_1"
         }
       ],
       "procedures": {

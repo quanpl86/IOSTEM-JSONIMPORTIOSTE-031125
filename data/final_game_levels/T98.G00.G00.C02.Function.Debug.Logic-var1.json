@@ -78,7 +78,7 @@
       ]
     },
     "maxBlocks": 14,
-    "startBlocks": "<xml><block type=\"procedures_defnoreturn\" deletable=\"false\"><field name=\"NAME\">collectOnIsland</field><statement name=\"STACK\"><block type=\"maze_turn\"><field name=\"DIR\">turnRight</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></statement></block><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"><block type=\"procedures_callnoreturn\"><mutation name=\"collectOnIsland\" /><next><block type=\"maze_turn\"><field name=\"DIR\">turnRight</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></next></block></statement></block></xml>"
+    "startBlocks": "<xml><block type=\"procedures_defnoreturn\" deletable=\"false\"><field name=\"NAME\">collectOnIsland</field><statement name=\"STACK\"><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></statement></block><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"><block type=\"procedures_callnoreturn\"><mutation name=\"collectOnIsland\" /><next><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></next></block></statement></block></xml>"
   },
   "gameConfig": {
     "type": "maze",
@@ -89,7 +89,7 @@
         "position": {
           "x": 1,
           "y": 0,
-          "z": 6
+          "z": 1
         }
       },
       {
@@ -97,7 +97,7 @@
         "position": {
           "x": 1,
           "y": 0,
-          "z": 7
+          "z": 2
         }
       },
       {
@@ -105,7 +105,7 @@
         "position": {
           "x": 1,
           "y": 0,
-          "z": 8
+          "z": 3
         }
       },
       {
@@ -113,7 +113,7 @@
         "position": {
           "x": 2,
           "y": 0,
-          "z": 8
+          "z": 3
         }
       },
       {
@@ -121,7 +121,7 @@
         "position": {
           "x": 3,
           "y": 0,
-          "z": 8
+          "z": 3
         }
       }
     ],
@@ -131,7 +131,7 @@
         "start": {
           "x": 1,
           "y": 1,
-          "z": 6,
+          "z": 1,
           "direction": 1
         }
       }
@@ -141,7 +141,7 @@
     "finish": {
       "x": 3,
       "y": 1,
-      "z": 8
+      "z": 3
     }
   },
   "solution": {
@@ -199,7 +199,7 @@
         },
         {
           "type": "maze_turn",
-          "direction": "turnRight"
+          "direction": "turnLeft"
         },
         {
           "type": "maze_moveForward"
@@ -212,7 +212,7 @@
         "collectOnIsland": [
           {
             "type": "maze_turn",
-            "direction": "turnRight"
+            "direction": "turnLeft"
           },
           {
             "type": "maze_moveForward"
