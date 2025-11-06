@@ -1,3 +1,4 @@
+# scripts/gameSolver.py
 import json
 import sys
 import traceback
@@ -240,12 +241,18 @@ def _solve_multi_goal_tsp(world: GameWorld) -> Optional[List[Action]]:
         min_total_cost = float('inf')
         for order in permutations(goal_positions):
             current_order = [start_pos] + list(order) + [world.finish_pos]
+            # [SỬA LỖI] Không thêm world.finish_pos vào mỗi hoán vị.
+            # Thay vào đó, tìm đường đi ngắn nhất qua các mục tiêu, sau đó mới tìm đường từ mục tiêu cuối cùng đến finish.
+            current_order = [start_pos] + list(order)
             total_cost = 0
             possible = True
             temp_collected: Set[str] = set()
             for i in range(len(current_order) - 1):
                 path = get_path_between(current_order[i], current_order[i+1], temp_collected)
                 if path is None: possible = False; break
+                if path is None:
+                    possible = False
+                    break
                 total_cost += len(path)
                 dest_pos_key = f"{current_order[i+1]['x']}-{current_order[i+1]['y']}-{current_order[i+1]['z']}"
                 if dest_pos_key in world.collectibles_by_pos:
@@ -256,6 +263,8 @@ def _solve_multi_goal_tsp(world: GameWorld) -> Optional[List[Action]]:
     # 3. [SỬA LỖI] Nếu tìm thấy thứ tự tối ưu, ghép các đường đi lại và thêm hành động tương ứng
     if best_order:
         print(f"    LOG: (Solver) Đã tìm thấy một thứ tự hợp lệ để đi qua các mục tiêu.")
+        # [SỬA LỖI] Thêm điểm kết thúc vào cuối lộ trình TỐT NHẤT, thay vì thêm vào mọi hoán vị.
+        best_order.append(world.finish_pos)
         full_path: List[Action] = []
         # [SỬA LỖI] Theo dõi các vật phẩm đã thu thập cho đường đi tốt nhất
         final_collected: Set[str] = set()
@@ -393,13 +402,13 @@ def solve_level(world: GameWorld, is_sub_problem=False, initial_state_override: 
     # --- [CẢI TIẾN] Logic điều phối ---
     # Nếu đây là bài toán phức tạp (nhiều mục tiêu), sử dụng meta-solver
     required_goals = world.solution_config.get("itemGoals", {})
-    # [SỬA LỖI] Kích hoạt meta-solver cho BẤT KỲ bài toán nào có nhiều hơn 1 mục tiêu
-    # (không tính công tắc) hoặc là bài toán 'algorithm_design' có ít nhất 1 mục tiêu.
-    # Điều này đảm bảo các bài toán như z_shape với nhiều crystal cũng được giải đúng.
+    # [SỬA LỖI] Chỉ kích hoạt meta-solver cho các bài toán có nhiều hơn 1 mục tiêu CẦN THU THẬP.
+    # Các mục tiêu như 'switch' không nên được tính vào đây vì chúng không ảnh hưởng đến thứ tự đường đi tối ưu theo kiểu TSP.
     collectible_goals = {k: v for k, v in required_goals.items() if k != 'switch'}
     # [SỬA LỖI] Chỉ tính tổng các giá trị là số nguyên để tránh lỗi TypeError khi giá trị là "all".
     # Điều này đảm bảo solver vẫn hoạt động đúng khi itemGoals chưa được tính toán (vd: {"crystal": "all"}).
     is_multi_goal_problem = sum(v for v in collectible_goals.values() if isinstance(v, int)) > 1
+
     is_algorithm_design_with_items = world.solution_config.get('logic_type') == 'algorithm_design' and any(collectible_goals)
     is_maze_with_items = is_multi_goal_problem or is_algorithm_design_with_items
     if not is_sub_problem and is_maze_with_items:
@@ -660,6 +669,7 @@ def synthesize_program(actions: List[Action], world: GameWorld) -> Dict:
         # mà không cố gắng tạo ra các hàm (function) phức tạp.
         def find_factors(n):
             """Tìm các cặp thừa số của n, ưu tiên các cặp không quá chênh lệch."""
+            if not isinstance(n, int): return None # Guard clause
             if n < 4: return None # Chỉ tạo lồng nhau cho số lần lặp >= 4
             factors = []
             for i in range(2, int(n**0.5) + 1):
@@ -744,25 +754,32 @@ def synthesize_program(actions: List[Action], world: GameWorld) -> Dict:
 
         # Logic cho bài toán dùng biểu thức toán học
         if logic_type in ['math_expression_loop', 'math_complex', 'math_basic']:
-            # Giả lập tạo 2 biến và dùng chúng trong vòng lặp
-            total_moves = actions.count('moveForward')
-            if total_moves < 2: # Cần ít nhất 2 bước để chia thành a+b
+            # [CẢI TIẾN] Tìm chuỗi lặp lại dài nhất để đưa vào vòng lặp, thay vì chỉ 'moveForward'
+            best_seq, best_repeats, best_len, best_start_index = find_longest_repeating_sequence(actions)
+
+            if not best_seq or best_repeats < 2:
+                print("   - ⚠️ Cảnh báo (math_expression_loop): Không tìm thấy chuỗi lặp lại đủ dài. Trả về lời giải tuần tự.")
                 return {"main": compress_actions_to_structure(actions, available_blocks), "procedures": {}}
 
-            val_a = random.randint(1, total_moves - 1)
-            val_b = total_moves - val_a
+            val_a = random.randint(1, best_repeats - 1)
+            val_b = best_repeats - val_a
             
             # [REWRITTEN] Logic tạo toán tử dựa trên ngữ cảnh
             # Nếu đây là bài fixbug, chủ động tạo ra toán tử sai.
             # Nếu không, luôn dùng toán tử đúng (ADD).
             bug_type = world.solution_config.get('bug_type')
             operator = "ADD"
-            if bug_type == 'incorrect_math_expression':
+            # [SỬA LỖI] Đảm bảo chỉ tạo toán tử sai khi bug_type là 'incorrect_math_expression'
+            if world.solution_config.get('params', {}).get('bug_type') == 'incorrect_math_expression':
                 possible_ops = ["SUBTRACT", "MULTIPLY", "DIVIDE"]
                 operator = random.choice(possible_ops)
                 print(f"    LOG: (Solver) Ép buộc tạo lời giải với toán tử sai '{operator}' cho bài fixbug.")
 
-            main_program = [
+            # Tách các hành động thành 3 phần: trước, trong và sau vòng lặp
+            before_loop = actions[:best_start_index]
+            after_loop = actions[best_start_index + best_repeats * best_len:]
+            main_program = compress_actions_to_structure(before_loop, available_blocks)
+            main_program.extend([
                 {"type": "variables_set", "variable": "a", "value": val_a},
                 {"type": "variables_set", "variable": "b", "value": val_b},
                 {
@@ -773,12 +790,10 @@ def synthesize_program(actions: List[Action], world: GameWorld) -> Dict:
                         "var_a": "a",
                         "var_b": "b"
                     },
-                    "body": [{"type": "moveForward"}]
+                    "body": compress_actions_to_structure(best_seq, available_blocks)
                 }
-            ]
-            # Thêm các hành động không phải moveForward
-            other_actions = [a for a in actions if a != 'moveForward']
-            main_program.extend(compress_actions_to_structure(other_actions, available_blocks))
+            ])
+            main_program.extend(compress_actions_to_structure(after_loop, available_blocks))
             return {"main": main_program, "procedures": {}}
 
         # [CẢI TIẾN] Logic cho các bài toán thuật toán phức tạp (Fibonacci, config-driven)
@@ -958,12 +973,29 @@ def find_most_frequent_sequence(actions: List[str], min_len=3, max_len=10, force
     actions_tuple = tuple(actions)
     for length in range(min_len, max_len + 1):
         for i in range(len(actions_tuple) - length + 1):
-            sequence_counts[actions_tuple[i:i+length]] += 1
+            # [SỬA LỖI] Logic mới để nhóm các chuỗi tương tự.
+            # Biến đổi chuỗi con thành một dạng chuẩn hóa, ví dụ: thay thế 'turnLeft'/'turnRight' bằng một placeholder 'TURN'.
+            # Điều này giúp tìm thấy các mẫu lặp lại ngay cả khi chúng không giống hệt nhau.
+            original_sequence = actions_tuple[i:i+length]
+            normalized_sequence_list = []
+            for action in original_sequence:
+                if action in ['turnLeft', 'turnRight']:
+                    normalized_sequence_list.append('TURN_ACTION')
+                else:
+                    normalized_sequence_list.append(action)
+            normalized_sequence = tuple(normalized_sequence_list)
+
+            # Đếm dựa trên chuỗi đã chuẩn hóa, nhưng lưu lại chuỗi gốc đầu tiên tìm thấy.
+            if normalized_sequence not in sequence_counts:
+                sequence_counts[normalized_sequence] = {'freq': 0, 'original': original_sequence}
+            sequence_counts[normalized_sequence]['freq'] += 1
 
     # [CẢI TIẾN] Ưu tiên tìm các chuỗi có 'jump' khi force_function=True
     def find_best_sequence(sequences: List[Tuple[Tuple[str, ...], int]]) -> Optional[Tuple[List[str], int]]:
         most_common, max_freq, best_savings = None, 1, 0
-        for seq, freq in sequences:
+        for seq_info in sequences:
+            # [SỬA LỖI] Trích xuất đúng chuỗi gốc và tần suất từ cấu trúc mới.
+            seq, freq = seq_info['original'], seq_info['freq']
             if freq > 1:
                 # Nếu không ép buộc tạo hàm, chỉ tạo khi nó thực sự tiết kiệm khối lệnh.
                 # Nếu ép buộc, chỉ cần nó xuất hiện nhiều hơn 1 lần là đủ.
@@ -972,11 +1004,11 @@ def find_most_frequent_sequence(actions: List[str], min_len=3, max_len=10, force
                     best_savings, most_common, max_freq = savings, seq, freq
         return (list(most_common), max_freq) if most_common else None
 
-    all_sequences = list(sequence_counts.items())
+    all_sequences = list(sequence_counts.values())
     
     if force_function:
         # Ưu tiên các chuỗi có 'jump'
-        jump_sequences = [item for item in all_sequences if 'jump' in item[0]]
+        jump_sequences = [item for item in all_sequences if 'jump' in item['original']]
         best_jump_seq = find_best_sequence(jump_sequences)
         if best_jump_seq:
             return best_jump_seq
@@ -1082,6 +1114,7 @@ def synthesize_program(actions: List[Action], world: GameWorld) -> Dict:
         # mà không cố gắng tạo ra các hàm (function) phức tạp.
         def find_factors(n):
             """Tìm các cặp thừa số của n, ưu tiên các cặp không quá chênh lệch."""
+            if not isinstance(n, int): return None # Guard clause
             if n < 4: return None # Chỉ tạo lồng nhau cho số lần lặp >= 4
             factors = []
             for i in range(2, int(n**0.5) + 1):
@@ -1096,39 +1129,37 @@ def synthesize_program(actions: List[Action], world: GameWorld) -> Dict:
             # Trả về cặp tốt nhất (outer_loops, inner_loops)
             return factors[0]
 
+        def find_longest_repeating_sequence(actions: List[str]) -> Tuple[Optional[List[str]], int, int, int]:
+            """Tìm chuỗi con lặp lại liên tiếp dài nhất và hiệu quả nhất."""
+            n = len(actions)
+            best_seq, best_repeats, best_len, best_start_index = None, 0, 0, -1
+            
+            for length in range(1, n // 2 + 1):
+                for i in range(n - length + 1):
+                    repeats = 1
+                    # Đếm số lần lặp lại liên tiếp của chuỗi actions[i:i+length]
+                    while i + (repeats + 1) * length <= n and \
+                          actions[i : i + length] == actions[i + repeats * length : i + (repeats + 1) * length]:
+                        repeats += 1
+                    
+                    # So sánh với kết quả tốt nhất hiện tại
+                    # Ưu tiên chuỗi tiết kiệm được nhiều khối lệnh nhất
+                    current_savings = (repeats * length) - (1 + length)
+                    best_savings = (best_repeats * best_len) - (1 + best_len)
+                    if repeats > 1 and current_savings > best_savings:
+                        best_seq = actions[i : i + length]
+                        best_repeats, best_len, best_start_index = repeats, length, i
+            return best_seq, best_repeats, best_len, best_start_index
+
         # [REWRITTEN] Logic cho bài toán dùng biến để lặp (variable_loop)
         if logic_type in ['variable_loop', 'variable_counter']:
-            # Tìm chuỗi con lặp lại nhiều nhất, ví dụ: ['moveForward', 'collect']
-            best_seq, best_repeats, best_len, best_start_index = None, 0, 0, -1
-            for seq_len in range(1, len(actions) // 2 + 1):
-                for i in range(len(actions) - 2 * seq_len + 1):
-                    sequence = tuple(actions[i:i+seq_len])
-                    repeats = 1
-                    # Đếm số lần chuỗi này lặp lại liên tiếp
-                    while i + (repeats + 1) * seq_len <= len(actions) and \
-                          tuple(actions[i + repeats * seq_len : i + (repeats + 1) * seq_len]) == sequence:
-                        repeats += 1
-
-                    # Ưu tiên chuỗi lặp dài nhất và xuất hiện nhiều lần nhất
-                    current_total_len = repeats * seq_len
-                    best_total_len = best_repeats * best_len
-                    if repeats > 1 and current_total_len > best_total_len:
-                        best_seq, best_repeats, best_len, best_start_index = list(sequence), repeats, seq_len, i
-
+            best_seq, best_repeats, best_len, best_start_index = find_longest_repeating_sequence(actions)
 
             if best_seq and best_repeats > 1:
-                # Tìm vị trí bắt đầu của chuỗi lặp
-                start_index = -1
-                for i in range(len(actions)):
-                    if actions[i:i+best_len] == best_seq:
-                        start_index = i
-                        break
-                
-                start_index = best_start_index
                 # Tách các hành động thành 3 phần: trước, trong và sau vòng lặp
-                before_loop = actions[:start_index]
+                before_loop = actions[:best_start_index]
                 loop_body_actions = best_seq
-                after_loop = actions[start_index + best_repeats * best_len:]
+                after_loop = actions[best_start_index + best_repeats * best_len:]
                 # [REWRITTEN] Logic tạo vòng lặp đơn hoặc lồng nhau dựa trên cấu hình
                 factors = None
                 if loop_structure_config == 'nested' and 'maze_repeat_variable' in available_blocks:
@@ -1217,23 +1248,31 @@ def synthesize_program(actions: List[Action], world: GameWorld) -> Dict:
         return {"main": compress_actions_to_structure(remaining_actions, available_blocks), "procedures": procedures}
     # --- Logic cũ để tạo hàm ---
     can_use_procedures = 'PROCEDURE' in available_blocks
-    if can_use_procedures and logic_type not in ['math_basic', 'variable_loop', 'variable_counter']: # Không tạo hàm cho các bài toán biến/toán đơn giản
+    if can_use_procedures and logic_type not in ['math_basic', 'variable_loop', 'variable_counter', 'math_expression_loop']: # Không tạo hàm cho các bài toán biến/toán đơn giản
         for i in range(3): # Thử tạo tối đa 3 hàm
             result = find_most_frequent_sequence(remaining_actions, force_function=force_function)
             if result:
                 sequence = result[0]
-                # [CẢI TIẾN] Ưu tiên sử dụng tên hàm được định nghĩa trong curriculum
-                proc_name = suggested_function_names[i] if i < len(suggested_function_names) else f"PROCEDURE_{i+1}"
+                # [SỬA LỖI] Logic lấy tên hàm mới. Ưu tiên lấy tên từ `suggested_function_names` nếu danh sách này còn phần tử.
+                # Điều này đảm bảo tên hàm được chỉ định trong curriculum sẽ được sử dụng trước.
+                if suggested_function_names:
+                    proc_name = suggested_function_names.pop(0) # Lấy và xóa phần tử đầu tiên
+                else:
+                    proc_name = f"PROCEDURE_{i+1}" # Dùng tên mặc định nếu hết tên gợi ý
 
                 procedures[proc_name] = compress_actions_to_structure(sequence, available_blocks)
-                new_actions, j, seq_tuple = [], 0, tuple(sequence)
+                # [SỬA LỖI] Logic thay thế chuỗi mới để tránh xử lý lồng nhau.
+                # Khi một chuỗi được thay thế, con trỏ 'j' sẽ nhảy qua toàn bộ chuỗi đó.
+                new_actions, j = [], 0
+                seq_len = len(sequence)
                 while j < len(remaining_actions):
-                    if tuple(remaining_actions[j:j+len(sequence)]) == seq_tuple:
+                    # Kiểm tra xem chuỗi con từ vị trí j có khớp với chuỗi cần thay thế không
+                    if remaining_actions[j:j+seq_len] == sequence:
                         new_actions.append(f"CALL:{proc_name}")
-                        j += len(sequence)
+                        j += seq_len # Nhảy qua toàn bộ chuỗi đã được thay thế
                     else:
                         new_actions.append(remaining_actions[j])
-                        j += 1
+                        j += 1 # Di chuyển tới hành động tiếp theo
                 remaining_actions = new_actions
             else: break
 

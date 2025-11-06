@@ -177,11 +177,3 @@ class CommandObstaclePlacer(BasePlacer):
         if isinstance(goals_input, dict):
             return {k: v for k, v in goals_input.items() if isinstance(v, (int, str)) and str(v).lower() != 'all'}
         return {}
-
-    def _base_layout(self, path_info: PathInfo, items: List[Dict], obstacles: List[Dict]) -> Dict[str, Any]:
-        return {
-            "start_pos": path_info.start_pos,
-            "target_pos": path_info.target_pos,
-            "items": items,
-            "obstacles": obstacles
-        }

@@ -1,0 +1,231 @@
+{
+  "id": "T98.G00.G00.C02.Function.Debug.Logic-var1",
+  "gameType": "maze",
+  "topic": "topic-title-topic_98_function_tests",
+  "level": 2,
+  "titleKey": "Test.Function.Debug.Logic.Title",
+  "questTitleKey": "Test.Function.Debug.Logic.Description",
+  "descriptionKey": "Test.Function.Debug.Logic.Description",
+  "translations": {
+    "vi": {
+      "Test.Function.Debug.Logic.Title": "Sửa lỗi: Logic sai trong Hàm",
+      "Test.Function.Debug.Logic.Description": "Hàm 'collectOnIsland' được cho là sẽ giúp nhân vật rẽ phải, nhưng nó lại rẽ trái. Hãy tìm lỗi bên trong khối định nghĩa hàm và sửa nó.",
+      "topic-title-topic_98_function_tests": "Kiểm thử Toàn diện về Hàm"
+    }
+  },
+  "supportedEditors": [
+    "blockly",
+    "monaco"
+  ],
+  "blocklyConfig": {
+    "toolbox": {
+      "kind": "categoryToolbox",
+      "contents": [
+        {
+          "kind": "category",
+          "name": "%{BKY_GAMES_CATEVENTS}",
+          "categorystyle": "events_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "maze_start"
+            }
+          ]
+        },
+        {
+          "kind": "category",
+          "name": "%{BKY_GAMES_CATMOVEMENT}",
+          "categorystyle": "movement_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "maze_moveForward"
+            },
+            {
+              "kind": "block",
+              "type": "maze_jump"
+            },
+            {
+              "kind": "block",
+              "type": "maze_turn"
+            }
+          ]
+        },
+        {
+          "kind": "category",
+          "name": "%{BKY_GAMES_CATACTIONS}",
+          "categorystyle": "actions_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "maze_collect"
+            },
+            {
+              "kind": "block",
+              "type": "maze_toggle_switch"
+            }
+          ]
+        },
+        {
+          "kind": "sep"
+        },
+        {
+          "kind": "category",
+          "name": "%{BKY_GAMES_CATPROCEDURES}",
+          "custom": "PROCEDURE",
+          "categorystyle": "procedure_category"
+        }
+      ]
+    },
+    "maxBlocks": 14,
+    "startBlocks": "<xml><block type=\"procedures_defnoreturn\" deletable=\"false\"><field name=\"NAME\">collectOnIsland</field><statement name=\"STACK\"><block type=\"maze_turn\"><field name=\"DIR\">turnRight</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></statement></block><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"><block type=\"procedures_callnoreturn\"><mutation name=\"collectOnIsland\" /><next><block type=\"maze_turn\"><field name=\"DIR\">turnRight</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></next></block></statement></block></xml>"
+  },
+  "gameConfig": {
+    "type": "maze",
+    "renderer": "3d",
+    "blocks": [
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 1,
+          "y": 0,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 1,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 1,
+          "y": 0,
+          "z": 8
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 2,
+          "y": 0,
+          "z": 8
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 3,
+          "y": 0,
+          "z": 8
+        }
+      }
+    ],
+    "players": [
+      {
+        "id": "player1",
+        "start": {
+          "x": 1,
+          "y": 1,
+          "z": 6,
+          "direction": 1
+        }
+      }
+    ],
+    "collectibles": [],
+    "interactibles": [],
+    "finish": {
+      "x": 3,
+      "y": 1,
+      "z": 8
+    }
+  },
+  "solution": {
+    "type": "reach_target",
+    "itemGoals": {
+      "crystal": 0
+    },
+    "optimalBlocks": 9,
+    "optimalLines": 8,
+    "rawActions": [
+      "turnRight",
+      "moveForward",
+      "moveForward",
+      "turnLeft",
+      "moveForward",
+      "moveForward"
+    ],
+    "structuredSolution": {
+      "main": [
+        {
+          "type": "CALL",
+          "name": "collectOnIsland"
+        },
+        {
+          "type": "maze_turn",
+          "direction": "turnLeft"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
+        }
+      ],
+      "procedures": {
+        "collectOnIsland": [
+          {
+            "type": "maze_turn",
+            "direction": "turnRight"
+          },
+          {
+            "type": "maze_moveForward"
+          },
+          {
+            "type": "maze_moveForward"
+          }
+        ]
+      }
+    },
+    "structuredSolution_fixbug_version": {
+      "main": [
+        {
+          "type": "CALL",
+          "name": "collectOnIsland"
+        },
+        {
+          "type": "maze_turn",
+          "direction": "turnRight"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
+        }
+      ],
+      "procedures": {
+        "collectOnIsland": [
+          {
+            "type": "maze_turn",
+            "direction": "turnRight"
+          },
+          {
+            "type": "maze_moveForward"
+          },
+          {
+            "type": "maze_moveForward"
+          }
+        ]
+      }
+    }
+  },
+  "sounds": {
+    "win": "/assets/maze/win.mp3",
+    "fail": "/assets/maze/fail_pegman.mp3"
+  }
+}

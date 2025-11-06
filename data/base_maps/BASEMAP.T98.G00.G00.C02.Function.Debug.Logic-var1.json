@@ -1,0 +1,66 @@
+{
+  "gameConfig": {
+    "type": "maze",
+    "renderer": "3d",
+    "blocks": [
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 1,
+          "y": 0,
+          "z": 6
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 1,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 1,
+          "y": 0,
+          "z": 8
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 2,
+          "y": 0,
+          "z": 8
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 3,
+          "y": 0,
+          "z": 8
+        }
+      }
+    ],
+    "players": [
+      {
+        "id": "player1",
+        "start": {
+          "x": 1,
+          "y": 1,
+          "z": 6,
+          "direction": 1
+        }
+      }
+    ],
+    "collectibles": [],
+    "interactibles": [],
+    "finish": {
+      "x": 3,
+      "y": 1,
+      "z": 8
+    }
+  }
+}

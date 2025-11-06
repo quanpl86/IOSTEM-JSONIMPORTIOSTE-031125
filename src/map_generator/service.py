@@ -117,16 +117,15 @@ class MapGeneratorService:
             'circle': CirclePlacer(),
             'spiral_path': SpiralPlacer(),
             'triangle': TrianglePlacer(),
-            'obstacle': ObstaclePlacer(), # THÊM MỚI
-            'function_definition': FunctionPlacer(),
-            'function_decomposition': FunctionPlacer(),
-            'function_with_params': FunctionPlacer(),
-            'functions_simple': FunctionPlacer(), # [FIX] Đăng ký placer cho hàm đơn giản
-            'functions_with_return': FunctionPlacer(), # [FIX] Đăng ký placer cho hàm có trả về
-            'functions_recursive': FunctionPlacer(), # [FIX] Đăng ký placer cho hàm đệ quy
-            'functions_with_params': FunctionPlacer(), # [FIX] Đảm bảo placer này được đăng ký (có thể đã có)
-            'function_with_multi_params': FunctionPlacer(),
-            'advanced_functions': FunctionPlacer(), # [SỬA LỖI] Đăng ký placer còn thiếu
+            'obstacle': ObstaclePlacer(),
+            # [RESTRUCTURED] Hợp nhất tất cả các logic liên quan đến hàm vào FunctionPlacer
+            'function_apply': FunctionPlacer(),          # Học cách gọi hàm có sẵn
+            'function_definition': FunctionPlacer(),     # Học cách tự viết hàm
+            'function_refactor': FunctionPlacer(),       # Tối ưu code lặp bằng hàm
+            'function_debug_sequence': FunctionPlacer(), # Sửa lỗi sai thứ tự gọi hàm
+            'function_debug_logic': FunctionPlacer(),    # Sửa lỗi logic bên trong hàm
+            'function_debug_missing_call': FunctionPlacer(), # Sửa lỗi thiếu lệnh gọi hàm
+            'advanced_functions': FunctionPlacer(),      # Các bài toán hàm phức tạp
             'for_loop_simple': ForLoopPlacer(),
             'for_loop': ForLoopPlacer(), # [THÊM MỚI] Hợp nhất các for_loop placer
             'for_loop_complex': ForLoopPlacer(),
@@ -146,6 +145,7 @@ class MapGeneratorService:
             'if_elseif_logic': WhileIfPlacer(),
             'logical_operators': WhileIfPlacer(),
             'while_loop': WhileIfPlacer(),
+            'while_loop_simple': WhileIfPlacer(), # [FIX] Đăng ký alias cho placer còn thiếu
             'algorithm_design': AlgorithmPlacer(),
             'advanced_algorithm': AlgorithmPlacer(),
             'island_tour': IslandTourPlacer(), # [MỚI] Đăng ký placer mới

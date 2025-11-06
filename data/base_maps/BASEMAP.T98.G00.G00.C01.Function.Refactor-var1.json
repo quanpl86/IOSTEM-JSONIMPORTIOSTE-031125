@@ -6,17 +6,9 @@
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 0,
+          "x": 1,
           "y": 0,
-          "z": 6
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 0,
-          "y": 0,
-          "z": 10
+          "z": 2
         }
       },
       {
@@ -24,7 +16,7 @@
         "position": {
           "x": 1,
           "y": 0,
-          "z": 6
+          "z": 3
         }
       },
       {
@@ -32,7 +24,7 @@
         "position": {
           "x": 1,
           "y": 0,
-          "z": 10
+          "z": 4
         }
       },
       {
@@ -40,15 +32,7 @@
         "position": {
           "x": 2,
           "y": 0,
-          "z": 6
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 2,
-          "y": 0,
-          "z": 10
+          "z": 4
         }
       },
       {
@@ -56,7 +40,7 @@
         "position": {
           "x": 3,
           "y": 0,
-          "z": 6
+          "z": 2
         }
       },
       {
@@ -64,7 +48,15 @@
         "position": {
           "x": 3,
           "y": 0,
-          "z": 10
+          "z": 3
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 3,
+          "y": 0,
+          "z": 4
         }
       },
       {
@@ -72,15 +64,7 @@
         "position": {
           "x": 4,
           "y": 0,
-          "z": 6
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 4,
-          "y": 0,
-          "z": 10
+          "z": 2
         }
       },
       {
@@ -88,39 +72,79 @@
         "position": {
           "x": 5,
           "y": 0,
-          "z": 6
+          "z": 2
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 5,
+          "x": 6,
           "y": 0,
-          "z": 7
+          "z": 2
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 5,
+          "x": 7,
           "y": 0,
-          "z": 8
+          "z": 2
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 5,
+          "x": 8,
           "y": 0,
-          "z": 9
+          "z": 2
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 5,
+          "x": 9,
           "y": 0,
-          "z": 10
+          "z": 2
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 10,
+          "y": 0,
+          "z": 2
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 10,
+          "y": 0,
+          "z": 3
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 10,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 11,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 12,
+          "y": 0,
+          "z": 4
         }
       }
     ],
@@ -128,9 +152,9 @@
       {
         "id": "player1",
         "start": {
-          "x": 0,
+          "x": 1,
           "y": 1,
-          "z": 6,
+          "z": 2,
           "direction": 1
         }
       }
@@ -140,44 +164,26 @@
         "id": "c1",
         "type": "crystal",
         "position": {
-          "x": 1,
+          "x": 2,
           "y": 1,
-          "z": 6
+          "z": 4
         }
       },
       {
         "id": "c2",
         "type": "crystal",
         "position": {
-          "x": 5,
+          "x": 10,
           "y": 1,
-          "z": 6
-        }
-      },
-      {
-        "id": "c3",
-        "type": "crystal",
-        "position": {
-          "x": 5,
-          "y": 1,
-          "z": 10
-        }
-      },
-      {
-        "id": "c4",
-        "type": "crystal",
-        "position": {
-          "x": 1,
-          "y": 1,
-          "z": 10
+          "z": 2
         }
       }
     ],
     "interactibles": [],
     "finish": {
-      "x": 0,
+      "x": 12,
       "y": 1,
-      "z": 10
+      "z": 4
     }
   }
 }

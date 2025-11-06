@@ -43,10 +43,11 @@ BUG_STRATEGIES: Dict[str, Type[BaseBugStrategy]] = {
     'wrong_logic_in_algorithm': WrongLogicInAlgorithmBug, # [MỚI] Đăng ký chiến lược
     
     # Nhóm 1.4: Lỗi Tối Ưu Hóa
-    'optimization': RedundantBlocksBug, # Dùng cho các bài tối ưu hóa nói chung
+    'optimization_no_function': RedundantBlocksBug, # Dùng cho các bài tối ưu hóa nói chung
     'extra_block': RedundantBlocksBug,  # [SỬA] Thêm alias cho bug khối lệnh thừa
     
     # Nhóm 2.1: Lỗi Bên Trong Hàm
+    'incorrect_logic_in_function': IncorrectParameterBug, # Dùng lại để thay đổi logic (vd: turnLeft -> turnRight)
     # 'incorrect_logic_in_function': IncorrectFunctionLogicBug,
     
     # Nhóm 2.2: Lỗi Gọi Hàm

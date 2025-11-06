@@ -65,10 +65,9 @@ class MissingBlockBug(BaseBugStrategy):
     def apply(self, program_dict: Dict[str, Any], config: Dict) -> Dict[str, Any]:
         # [MỚI] Helper để tìm tất cả các body và khối lệnh có thể xóa
         def find_removable_blocks_and_bodies(program_part: List[Dict]):
-            removable = []
-            if len(program_part) > 1:
-                for i, block in enumerate(program_part):
-                    removable.append({'body': program_part, 'index': i, 'block': block})
+            removable = [] # Luôn thêm các khối, bất kể độ dài danh sách
+            for i, block in enumerate(program_part): # Vòng lặp này phải luôn chạy
+                removable.append({'body': program_part, 'index': i, 'block': block})
             for block in program_part:
                 if "body" in block and isinstance(block["body"], list):
                     removable.extend(find_removable_blocks_and_bodies(block["body"]))
@@ -85,6 +84,18 @@ class MissingBlockBug(BaseBugStrategy):
         if not all_removable_blocks:
             print("   - ⚠️ Không tìm thấy nơi nào phù hợp để xóa khối lệnh (cần ít nhất 2 khối).")
             return program_dict
+        
+        bug_options = config.get("options", {})
+        bug_type_from_config = config.get("bug_type") # Lấy bug_type từ config
+
+        # [MỚI] Xử lý trường hợp đặc biệt 'missing_function_call'
+        if bug_type_from_config == "missing_function_call":
+            call_blocks = [item for item in all_removable_blocks if item['block'].get("type") == "CALL"]
+            if call_blocks:
+                target_item = random.choice(call_blocks)
+                removed_block = target_item['body'].pop(target_item['index'])
+                print(f"      -> Bug 'missing_function_call': Đã xóa khối gọi hàm '{removed_block.get('name')}' từ body của nó.")
+                return program_dict
 
         # [REWRITTEN] Ưu tiên tìm và xóa khối được chỉ định trong config trên TOÀN BỘ chương trình
         block_type_to_remove = config.get("options", {}).get("block_type_to_remove")
@@ -177,16 +188,22 @@ class IncorrectParameterBug(BaseBugStrategy):
             # - Nếu là khối 'turn', tìm type='maze_turn' VÀ direction khớp.
             # - Nếu là khối khác, tìm type='maze_{from_block_type}'.
             is_turn_bug = 'turn' in from_block_type
+            # [MỚI] Thêm trường hợp đặc biệt cho jump
+            is_jump_bug = from_block_type == 'jump'
             
             def find_condition(block):
                 if is_turn_bug:
                     return block.get("type") == "maze_turn" and block.get("direction") == from_block_type
+                # [MỚI] Điều kiện tìm khối jump
+                elif is_jump_bug:
+                    return block.get("type") == "maze_jump"
                 else:
                     return block.get("type") == f"maze_{from_block_type}"
 
             possible_blocks = _find_blocks_recursively(program_dict.get("main", []), find_condition)
             for proc_body in program_dict.get("procedures", {}).values():
                 possible_blocks.extend(_find_blocks_recursively(proc_body, find_condition))
+
 
             if possible_blocks:
                 target_block = random.choice(possible_blocks)
@@ -197,6 +214,11 @@ class IncorrectParameterBug(BaseBugStrategy):
                     original_dir = target_block["direction"]
                     target_block["direction"] = to_block_type
                     print(f"      -> Bug 'incorrect_block': Thay đổi hướng rẽ từ '{original_dir}' thành '{to_block_type}'.")
+                # [MỚI] Xử lý tường minh cho việc thay thế khối jump
+                elif is_jump_bug:
+                    target_block["type"] = f"maze_{to_block_type}"
+                    if "direction" in target_block: del target_block["direction"]
+                    print(f"      -> Bug 'incorrect_block': Thay thế khối '{original_type}' bằng '{target_block['type']}'.")
                 else:
                     # Thay đổi toàn bộ type của khối
                     target_block["type"] = f"maze_{to_block_type}"
@@ -224,7 +246,7 @@ class IncorrectParameterBug(BaseBugStrategy):
                 target_turn["direction"] = bugged_dir
                 print(f"      -> Bug 'incorrect_parameter': Thay đổi hướng rẽ từ {original_dir} thành {bugged_dir}.")
             else:
-                print("   - ⚠️ Không tìm thấy khối 'maze_turn' để tạo lỗi incorrect_parameter.")
+                print("   - ⚠️ Không tìm thấy khối 'maze_turn' hoặc config 'from'/'to' để tạo lỗi incorrect_parameter.")
  
         return program_dict
 

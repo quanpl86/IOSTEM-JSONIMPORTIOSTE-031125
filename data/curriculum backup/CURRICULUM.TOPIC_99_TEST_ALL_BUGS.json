@@ -1,0 +1,535 @@
+{
+  "topic_code": "TOPIC_99_TEST_ALL_BUGS",
+  "topic_name": "Kiểm thử Toàn bộ Lỗi",
+  "suggested_maps": [
+    {
+      "id": "T99.G00.C01.sequence_error",
+      "level": 1,
+      "grade": "G00",
+      "titleKey": "Test.sequence_error.Title",
+      "descriptionKey": "Test.sequence_error.Description",
+      "translations": {
+        "vi": {
+          "Test.sequence_error.Title": "Test: Sai thứ tự lệnh",
+          "Test.sequence_error.Description": "Kiểm tra bug_type 'sequence_error'. Hoán đổi hai khối lệnh."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "command_obstacle",
+        "params": {
+          "path_length": 3,
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "sequence_error"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "movement_only" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C02.missing_block",
+      "level": 2,
+      "grade": "G00",
+      "titleKey": "Test.missing_block.Title",
+      "descriptionKey": "Test.missing_block.Description",
+      "translations": {
+        "vi": {
+          "Test.missing_block.Title": "Test: Thiếu khối lệnh",
+          "Test.missing_block.Description": "Kiểm tra bug_type 'missing_block' với bug_config."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "params": {
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": { "options": { "block_type_to_remove": "turnRight" } }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "movement_only" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C03.incorrect_loop_count",
+      "level": 3,
+      "grade": "G00",
+      "titleKey": "Test.incorrect_loop_count.Title",
+      "descriptionKey": "Test.incorrect_loop_count.Description",
+      "translations": {
+        "vi": {
+          "Test.incorrect_loop_count.Title": "Test: Sai số lần lặp",
+          "Test.incorrect_loop_count.Description": "Kiểm tra bug_type 'incorrect_loop_count'."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "for_loop",
+        "params": {
+          "path_length": 5,
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_loop_count"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "loops_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C04.incorrect_parameter_turn",
+      "level": 4,
+      "grade": "G00",
+      "titleKey": "Test.incorrect_parameter_turn.Title",
+      "descriptionKey": "Test.incorrect_parameter_turn.Description",
+      "translations": {
+        "vi": {
+          "Test.incorrect_parameter_turn.Title": "Test: Sai tham số (Rẽ)",
+          "Test.incorrect_parameter_turn.Description": "Kiểm tra bug_type 'incorrect_parameter' cho khối rẽ."
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "command_obstacle",
+        "params": {
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_parameter",
+          "bug_config": { "options": { "from": "turnRight", "to": "turnLeft" } }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "movement_only" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C05.incorrect_block_action",
+      "level": 5,
+      "grade": "G00",
+      "titleKey": "Test.incorrect_block_action.Title",
+      "descriptionKey": "Test.incorrect_block_action.Description",
+      "translations": {
+        "vi": {
+          "Test.incorrect_block_action.Title": "Test: Sai khối lệnh (Hành động)",
+          "Test.incorrect_block_action.Description": "Kiểm tra bug_type 'incorrect_block' cho khối hành động."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "command_obstacle",
+        "params": {
+          "path_length": 4,
+          "obstacle_count": 1,
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_block",
+          "bug_config": { "options": { "from": "jump", "to": "moveForward" } }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "movement_jump" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C06.incorrect_loop_condition",
+      "level": 6,
+      "grade": "G00",
+      "titleKey": "Test.incorrect_loop_condition.Title",
+      "descriptionKey": "Test.incorrect_loop_condition.Description",
+      "translations": {
+        "vi": {
+          "Test.incorrect_loop_condition.Title": "Test: Sai điều kiện lặp (While)",
+          "Test.incorrect_loop_condition.Description": "Kiểm tra bug_type 'incorrect_loop_condition' mới."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "while_loop_simple",
+        "params": {
+          "path_length": 4,
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_loop_condition"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "logic_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C07.incorrect_initial_value",
+      "level": 7,
+      "grade": "G00",
+      "titleKey": "Test.incorrect_initial_value.Title",
+      "descriptionKey": "Test.incorrect_initial_value.Description",
+      "translations": {
+        "vi": {
+          "Test.incorrect_initial_value.Title": "Test: Sai giá trị khởi tạo",
+          "Test.incorrect_initial_value.Description": "Kiểm tra bug_type 'incorrect_initial_value'."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "variable_loop",
+        "params": {
+          "path_length": 4,
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_initial_value"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "variables_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C08.incorrect_math_expression",
+      "level": 8,
+      "grade": "G00",
+      "titleKey": "Test.incorrect_math_expression.Title",
+      "descriptionKey": "Test.incorrect_math_expression.Description",
+      "translations": {
+        "vi": {
+          "Test.incorrect_math_expression.Title": "Test: Sai biểu thức toán học",
+          "Test.incorrect_math_expression.Description": "Kiểm tra bug_type 'incorrect_math_expression'."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "math_expression_loop",
+        "params": {
+          "path_length": 6,
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_math_expression"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "variables_full" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C09.wrong_logic_in_algorithm",
+      "level": 9,
+      "grade": "G00",
+      "titleKey": "Test.wrong_logic_in_algorithm.Title",
+      "descriptionKey": "Test.wrong_logic_in_algorithm.Description",
+      "translations": {
+        "vi": {
+          "Test.wrong_logic_in_algorithm.Title": "Test: Sai logic thuật toán",
+          "Test.wrong_logic_in_algorithm.Description": "Kiểm tra bug_type 'wrong_logic_in_algorithm' cho Fibonacci."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "advanced_algorithm",
+        "params": {
+          "path_length": 5,
+          "items_to_place": ["switch","switch","switch","switch","switch"],
+          "algorithm_template": {"name": "fibonacci"},
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "wrong_logic_in_algorithm"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "variables_full" },
+      "solution_config": { "type": "reach_target", "itemGoals": {"switch": 5} }
+    },
+    {
+      "id": "T99.G00.C10.extra_block",
+      "level": 10,
+      "grade": "G00",
+      "titleKey": "Test.extra_block.Title",
+      "descriptionKey": "Test.extra_block.Description",
+      "translations": {
+        "vi": {
+          "Test.extra_block.Title": "Test: Thừa khối lệnh",
+          "Test.extra_block.Description": "Kiểm tra bug_type 'extra_block' (optimization)."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "command_obstacle",
+        "params": {
+          "path_length": 3,
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "extra_block",
+          "bug_config": { "options": { "block_type_to_add": "turnLeft" } }
+        }
+      },
+      "blockly_config": { "toolbox_preset": "movement_only" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C11.missing_function_call",
+      "level": 11,
+      "grade": "G00",
+      "titleKey": "Test.missing_function_call.Title",
+      "descriptionKey": "Test.missing_function_call.Description",
+      "translations": {
+        "vi": {
+          "Test.missing_function_call.Title": "Test: Thiếu lệnh gọi hàm",
+          "Test.missing_function_call.Description": "Kiểm tra bug_type 'missing_function_call' mới."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_decomposition",
+        "params": {
+          "num_islands": 2,
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_function_call"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C12.optimization_no_loop",
+      "level": 12,
+      "grade": "G00",
+      "titleKey": "Test.optimization_no_loop.Title",
+      "descriptionKey": "Test.optimization_no_loop.Description",
+      "translations": {
+        "vi": {
+          "Test.optimization_no_loop.Title": "Test: Tối ưu hóa (Vòng lặp)",
+          "Test.optimization_no_loop.Description": "Kiểm tra thử thách tối ưu hóa bằng vòng lặp."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "for_loop_simple",
+        "params": {
+          "path_length": 5,
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "loops_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "T99.G00.C13.optimization_no_function",
+      "level": 13,
+      "grade": "G00",
+      "titleKey": "Test.optimization_no_function.Title",
+      "descriptionKey": "Test.optimization_no_function.Description",
+      "translations": {
+        "vi": {
+          "Test.optimization_no_function.Title": "Test: Tối ưu hóa (Hàm)",
+          "Test.optimization_no_function.Description": "Kiểm tra thử thách tối ưu hóa bằng hàm."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_decomposition",
+        "params": {
+          "num_islands": 2,
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {} }
+    },
+    {
+      "id": "topic03-req03-debug-logic",
+      "level": 3,
+      "titleKey": "Challenge.topic03-req03-debug-logic.Title",
+      "descriptionKey": "Challenge.topic03-req03-debug-logic.Description",
+      "translations": {
+        "vi": {
+          "Challenge.topic03-req03-debug-logic.Title": "Sửa lỗi: Rẽ sai hướng",
+          "Challenge.topic03-req03-debug-logic.Description": "Chương trình này làm nhân vật rẽ trái thay vì rẽ phải ở góc cua. Hãy tìm và sửa lại khối lệnh bị sai!"
+        },
+        "en": {
+          "Challenge.topic03-req03-debug-logic.Title": "Debug: Wrong Turn",
+          "Challenge.topic03-req03-debug-logic.Description": "This program makes the character turn left instead of right at the corner. Find and fix the incorrect block!"
+        }
+      },
+      "generation_config": {
+        "map_type": "l_shape",
+        "logic_type": "for_loop",
+        "num_variants": 1,
+        "params": {
+          "path_length": 4,
+          "turn_direction": "right",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_block",
+          "bug_config": {
+            "target": "main",
+            "options": {
+              "from": "turnRight",
+              "to": "turnLeft"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "loops_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1
+        }
+      }
+    },
+    {
+      "id": "topic03-req05-refactor",
+      "level": 5,
+      "titleKey": "Challenge.topic03-req05-refactor.Title",
+      "descriptionKey": "Challenge.topic03-req05-refactor.Description",
+      "translations": {
+        "vi": {
+          "Challenge.topic03-req05-refactor.Title": "Tối ưu: Vẽ hình vuông",
+          "Challenge.topic03-req05-refactor.Description": "Chương trình này chạy đúng nhưng quá dài. Hãy sử dụng kiến thức về vòng lặp để viết lại chương trình cho ngắn gọn hơn."
+        },
+        "en": {
+          "Challenge.topic03-req05-refactor.Title": "Refactor: Drawing a Square",
+          "Challenge.topic03-req05-refactor.Description": "This program draws the square correctly, but it's too long. Use your knowledge of loops to rewrite it more concisely."
+        }
+      },
+      "generation_config": {
+        "map_type": "square_shape",
+        "logic_type": "for_loop",
+        "num_variants": 1,
+        "params": {
+          "side_length": 4,
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "loops_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "topic10-req01-debug-param",
+      "level": 1,
+      "titleKey": "Challenge.topic10-req01-debug-param.Title",
+      "descriptionKey": "Challenge.topic10-req01-debug-param.Description",
+      "translations": {
+        "vi": {
+          "Challenge.topic10-req01-debug-param.Title": "Sửa lỗi: Sai số lần lặp",
+          "Challenge.topic10-req01-debug-param.Description": "Chương trình này gần đúng rồi, nhưng có vẻ nó lặp lại sai số lần. Hãy tìm và sửa lại con số đó!"
+        }
+      },
+      "generation_config": {
+        "map_type": "square_shape",
+        "logic_type": "for_loop",
+        "num_variants": 2,
+        "params": {
+          "side_length": [ 4, 5 ],
+          "asset_theme": {
+            "ground": "wall.brick06",
+            "obstacle": "stone.stone04"
+          },
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_loop_count",
+          "bug_config": {
+            "target": "loop",
+            "options": { "change_by": -1 }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "loops_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "topic10-req02-debug-param",
+      "level": 2,
+      "titleKey": "Challenge.topic10-req02-debug-param.Title",
+      "descriptionKey": "Challenge.topic10-req02-debug-param.Description",
+      "translations": {
+        "vi": {
+          "Challenge.topic10-req02-debug-param.Title": "Sửa lỗi: Rẽ sai hướng",
+          "Challenge.topic10-req02-debug-param.Description": "Nhân vật đang đi sai đường! Có vẻ như một lệnh rẽ đã bị nhầm. Bạn có thể sửa nó không?"
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "command_obstacle",
+        "num_variants": 2,
+        "params": {
+          "turns": 1,
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_parameter",
+          "bug_config": {
+            "target": "main"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "movement_only"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "topic10-req03-debug-order",
+      "level": 3,
+      "titleKey": "Challenge.topic10-req03-debug-order.Title",
+      "descriptionKey": "Challenge.topic10-req03-debug-order.Description",
+      "translations": {
+        "vi": {
+          "Challenge.topic10-req03-debug-order.Title": "Sửa lỗi: Sai thứ tự",
+          "Challenge.topic10-req03-debug-order.Description": "Các lệnh đều đúng, nhưng chúng đang ở sai vị trí. Hãy sắp xếp lại chúng để chương trình chạy đúng!"
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "command_obstacle",
+        "num_variants": 2,
+        "params": {
+          "path_length": [ 4, 5 ],
+          "items_to_place": "crystal",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "sequence_error",
+          "bug_config": {
+            "target": "main"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "movement_actions"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1
+        }
+      }
+    },
+    {
+      "id": "topic10-req04-debug-missing",
+      "level": 4,
+      "titleKey": "Challenge.topic10-req04-debug-missing.Title",
+      "descriptionKey": "Challenge.topic10-req04-debug-missing.Description",
+      "translations": {
+        "vi": {
+          "Challenge.topic10-req04-debug-missing.Title": "Sửa lỗi: Thiếu lệnh",
+          "Challenge.topic10-req04-debug-missing.Description": "Chương trình này bỏ lỡ một việc quan trọng. Hãy tìm xem lệnh nào còn thiếu và bổ sung nó vào."
+        }
+      },
+      "generation_config": {
+        "map_type": "simple_path",
+        "logic_type": "command_obstacle",
+        "num_variants": 2,
+        "params": {
+          "path_length": [ 5, 6 ],
+          "items_to_place": "crystal",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "target": "main"
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "movement_actions"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 1
+        }
+      }
+    }
+  ]
+}

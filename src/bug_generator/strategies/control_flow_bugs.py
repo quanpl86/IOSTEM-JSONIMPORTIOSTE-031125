@@ -61,11 +61,11 @@ class MissingFunctionCallBug(BaseBugStrategy):
     """
     def apply(self, program_dict: Dict[str, Any], config: Dict) -> Dict[str, Any]:
         main_body = program_dict.get("main", [])
-        
+
         # Tìm tất cả các khối gọi hàm trong chương trình chính
         function_calls = [
             (i, block) for i, block in enumerate(main_body)
-            if block.get("type") == "procedures_callnoreturn"
+            if block.get("type") == "CALL"
         ]
 
         if not function_calls:
@@ -74,7 +74,7 @@ class MissingFunctionCallBug(BaseBugStrategy):
 
         # Chọn một khối gọi hàm ngẫu nhiên để xóa
         index_to_remove, block_removed = random.choice(function_calls)
-        main_body.pop(index_to_remove)
-        print(f"      -> Bug 'missing_function_call': Đã xóa lệnh gọi hàm '{block_removed.get('name')}' ở vị trí {index_to_remove}.")
+        removed_block = main_body.pop(index_to_remove)
+        print(f"      -> Bug 'missing_function_call': Đã xóa lệnh gọi hàm '{removed_block.get('name')}' ở vị trí {index_to_remove}.")
 
         return program_dict

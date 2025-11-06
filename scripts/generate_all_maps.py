@@ -480,10 +480,10 @@ def main():
                     # --- [MỚI] Bước 6.5: Tính toán Optimal Lines of Code cho JavaScript ---
                     optimal_lloc = 0
                     if solution_result and solution_result.get('structuredSolution'):
-                        # [CẢI TIẾN] Tính toán LLOC trực tiếp từ structuredSolution
-                        optimal_lloc = calculate_optimal_lines_from_structured(solution_result.get('program_solution_dict', {}))
+                        optimal_lloc = calculate_optimal_lines_from_structured(solution_result.get('structuredSolution', {}))
 
                     # --- Logic mới để sinh startBlocks động cho các thử thách FixBug ---
+                    # [SỬA LỖI] Khởi tạo các biến ở phạm vi rộng hơn để tránh lỗi
                     final_inner_blocks = ''
                     # [MỚI] Khởi tạo các biến cho phiên bản lỗi
                     buggy_program_dict = None
@@ -492,7 +492,7 @@ def main():
                     start_blocks_type = generation_config.get("params", {}).get("start_blocks_type", "empty")
 
                     # [CẢI TIẾN LỚN] Logic sinh startBlocks
-                    program_dict = solution_result.get("program_solution_dict", {}) if solution_result else {}
+                    original_program_dict = solution_result.get("program_solution_dict", {}) if solution_result else {}
                     if start_blocks_type == "buggy_solution" and solution_result:
                         print("    LOG: Bắt đầu quy trình tạo lỗi cho 'buggy_solution'.")
                         bug_type = generation_config.get("params", {}).get("bug_type")
@@ -500,8 +500,7 @@ def main():
 
                         # [REWRITTEN] Logic tạo lỗi theo kiến trúc mới
                         # Bước 1: Tạo bản sao của lời giải đúng để chỉnh sửa
-                        original_program_dict = solution_result.get("program_solution_dict", {})
-                        program_to_be_bugged = copy.deepcopy(original_program_dict)
+                        program_to_be_bugged = copy.deepcopy(original_program_dict) # Sử dụng original_program_dict đã lấy ở trên
 
                         # Bước 2: Gọi service để tạo lỗi trực tiếp trên dictionary
                         # Giả định `create_bug` giờ đây nhận và trả về dict
@@ -540,14 +539,14 @@ def main():
                     
                     elif start_blocks_type in ["raw_solution", "unrefactored_solution", "long_solution"] and solution_result:
                         # Cung cấp lời giải tuần tự (chưa tối ưu)
-                        raw_actions = solution_result.get("raw_actions", [])
+                        raw_actions = solution_result.get("raw_actions", []) # noqa
                         # [SỬA LỖI] Bọc các khối tuần tự trong một khối maze_start
                         inner_xml = actions_to_xml(raw_actions)
                         final_inner_blocks = f'<block type="maze_start" deletable="false" movable="false"><statement name="DO">{inner_xml}</statement></block>'
                     
                     elif start_blocks_type == "optimized_solution" and solution_result:
                         # Cung cấp lời giải đã tối ưu
-                        final_inner_blocks = _create_xml_from_structured_solution(program_dict, solution_result.get("raw_actions", []))
+                        final_inner_blocks = _create_xml_from_structured_solution(original_program_dict, solution_result.get("raw_actions", []))
                     elif 'start_blocks' in blockly_config_req and blockly_config_req['start_blocks']:
                         raw_start_blocks = blockly_config_req['start_blocks']
                         # [CẢI TIẾN] Sử dụng XML parser để trích xuất nội dung một cách an toàn
@@ -604,15 +603,19 @@ def main():
                             "itemGoals": final_item_goals,
                             "optimalBlocks": solution_result['block_count'] if solution_result else 0,
                             "optimalLines": optimal_lloc, # Lời giải đúng
-                            "rawActions": solution_result['raw_actions'] if solution_result else [],
+                            "rawActions": solution_result.get('raw_actions', []) if solution_result else [],
                             "structuredSolution": solution_result.get('program_solution_dict', {}) if solution_result else {}, # Lời giải đúng
                         },
                         "sounds": { "win": "/assets/maze/win.mp3", "fail": "/assets/maze/fail_pegman.mp3" }
                     }
 
                     # [MỚI] Thêm trường structuredSolution_fixbug_version nếu có
-                    if structured_solution_fixbug:
-                        final_json_content["solution"]["structuredSolution_fixbug_version"] = structured_solution_fixbug
+                    # [SỬA LỖI] Gán đúng phiên bản lỗi vào đúng trường.
+                    # Nếu có phiên bản lỗi, gán nó. Nếu không, gán lại phiên bản đúng để đảm bảo trường luôn tồn tại.
+                    if buggy_program_dict:
+                        final_json_content["solution"]["structuredSolution_fixbug_version"] = buggy_program_dict
+                    elif solution_result: # Nếu không tạo được lỗi, dùng lại lời giải đúng
+                        final_json_content["solution"]["structuredSolution_fixbug_version"] = solution_result.get('program_solution_dict', {})
 
                     # --- Bước 8: Lưu file JSON cuối cùng ---
                     filename = f"{final_json_content['id']}.json"

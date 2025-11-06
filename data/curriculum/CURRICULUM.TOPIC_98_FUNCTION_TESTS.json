@@ -1,0 +1,157 @@
+{
+  "topic_code": "TOPIC_98_FUNCTION_TESTS",
+  "topic_name": "Kiểm thử Toàn diện về Hàm",
+  "suggested_maps": [
+    {
+      "id": "T98.G00.C01.Function.Refactor",
+      "level": 1,
+      "grade": "G00",
+      "titleKey": "Test.Function.Refactor.Title",
+      "descriptionKey": "Test.Function.Refactor.Description",
+      "translations": {
+        "vi": {
+          "Test.Function.Refactor.Title": "Tối ưu hóa: Sử dụng Hàm",
+          "Test.Function.Refactor.Description": "Chương trình này hoạt động, nhưng nó lặp lại cùng một chuỗi hành động. Hãy tạo một hàm để chứa đoạn code lặp lại đó và gọi nó hai lần để làm cho chương trình ngắn gọn hơn."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 2,
+          "island_pattern": "l_shape",
+          "items_to_place": ["crystal", "crystal"],
+          "start_blocks_type": "unrefactored_solution",
+          "challenge_type": "REFACTOR"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        },
+        "force_function": true
+      }
+    },
+    {
+      "id": "T98.G00.C02.Function.Debug.Logic",
+      "level": 2,
+      "grade": "G00",
+      "titleKey": "Test.Function.Debug.Logic.Title",
+      "descriptionKey": "Test.Function.Debug.Logic.Description",
+      "translations": {
+        "vi": {
+          "Test.Function.Debug.Logic.Title": "Sửa lỗi: Logic sai trong Hàm",
+          "Test.Function.Debug.Logic.Description": "Hàm 'collectOnIsland' được cho là sẽ giúp nhân vật rẽ phải, nhưng nó lại rẽ trái. Hãy tìm lỗi bên trong khối định nghĩa hàm và sửa nó."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 1,
+          "island_pattern": "l_shape",
+          "turn_direction": "right",
+          "items_to_place": ["crystal"],
+          "start_blocks_type": "buggy_solution",
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "collectOnIsland",
+              "change_block_type": "maze_turn"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        },
+        "force_function": true,
+        "function_names": ["collectOnIsland"]
+      }
+    },
+    {
+      "id": "T98.G00.C03.Function.Debug.MissingCall",
+      "level": 3,
+      "grade": "G00",
+      "titleKey": "Test.Function.Debug.MissingCall.Title",
+      "descriptionKey": "Test.Function.Debug.MissingCall.Description",
+      "translations": {
+        "vi": {
+          "Test.Function.Debug.MissingCall.Title": "Sửa lỗi: Thiếu lệnh gọi Hàm",
+          "Test.Function.Debug.MissingCall.Description": "Một hàm hữu ích đã được tạo sẵn, nhưng chương trình không chạy vì nó chưa được gọi. Hãy kéo khối 'gọi hàm' vào chương trình chính để sửa lỗi."
+        }
+      },
+      "generation_config": {
+        "map_type": "plowing_field",
+        "logic_type": "function_debug_missing_call",
+        "num_variants": 1,
+        "params": {
+          "rows": 2,
+          "cols": 4,
+          "items_to_place": ["crystal", "crystal"],
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_function_call"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        },
+        "force_function": true
+      }
+    },
+    {
+      "id": "T98.G00.C04.Function.Debug.Sequence",
+      "level": 4,
+      "grade": "G00",
+      "titleKey": "Test.Function.Debug.Sequence.Title",
+      "descriptionKey": "Test.Function.Debug.Sequence.Description",
+      "translations": {
+        "vi": {
+          "Test.Function.Debug.Sequence.Title": "Sửa lỗi: Sai thứ tự gọi Hàm",
+          "Test.Function.Debug.Sequence.Description": "Chương trình đang gọi các hàm sai thứ tự, khiến nhân vật đi sai đường. Hãy sắp xếp lại các khối 'gọi hàm' cho đúng."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_debug_sequence",
+        "num_variants": 1,
+        "params": {
+          "column_length": 3,
+          "column_spacing": 3,
+          "items_to_place": ["crystal", "switch"],
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_function_call_order"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all",
+          "switch": "all"
+        },
+        "force_function": true
+      }
+    }
+  ]
+}
