@@ -1,16 +1,21 @@
 {
-  "id": "T98.G00.G00.C03.Function.Debug.MissingCall-var1",
+  "id": "T01.G34.C28.Collect.Debug.3-var1",
   "gameType": "maze",
-  "topic": "topic-title-topic_98_function_tests",
-  "level": 3,
-  "titleKey": "Test.Function.Debug.MissingCall.Title",
-  "questTitleKey": "Test.Function.Debug.MissingCall.Description",
-  "descriptionKey": "Test.Function.Debug.MissingCall.Description",
+  "topic": "topic-title-topic_01_sequencing",
+  "level": 28,
+  "titleKey": "Challenge.T01.C28.Collect.Debug.3.Title",
+  "questTitleKey": "Challenge.T01.C28.Collect.Debug.3.Description",
+  "descriptionKey": "Challenge.T01.C28.Collect.Debug.3.Description",
   "translations": {
     "vi": {
-      "Test.Function.Debug.MissingCall.Title": "Sửa lỗi: Thiếu lệnh gọi Hàm",
-      "Test.Function.Debug.MissingCall.Description": "Một hàm hữu ích đã được tạo sẵn, nhưng chương trình không chạy vì nó chưa được gọi. Hãy kéo khối 'gọi hàm' vào chương trình chính để sửa lỗi.",
-      "topic-title-topic_98_function_tests": "Kiểm thử Toàn diện về Hàm"
+      "Challenge.T01.C28.Collect.Debug.3.Title": "Sửa lỗi: Bỏ sót pha lê",
+      "Challenge.T01.C28.Collect.Debug.3.Description": "Chương trình này chỉ thu thập một trong hai viên pha lê. Hãy kiểm tra lại mã và thêm lệnh collectItem còn thiếu để không bỏ sót gì cả.",
+      "topic-title-topic_01_sequencing": "LỆNH VÀ TUẦN TỰ"
+    },
+    "en": {
+      "Challenge.T01.C28.Collect.Debug.3.Title": "Fix the Bug: Leaving a Crystal Behind",
+      "Challenge.T01.C28.Collect.Debug.3.Description": "This program only collects one of the two crystals. Check the code and add the missing collectItem command to leave nothing behind.",
+      "topic-title-topic_01_sequencing": "LỆNH VÀ TUẦN TỰ"
     }
   },
   "supportedEditors": [
@@ -43,11 +48,11 @@
             },
             {
               "kind": "block",
-              "type": "maze_jump"
+              "type": "maze_turn"
             },
             {
               "kind": "block",
-              "type": "maze_turn"
+              "type": "maze_jump"
             }
           ]
         },
@@ -59,26 +64,13 @@
             {
               "kind": "block",
               "type": "maze_collect"
-            },
-            {
-              "kind": "block",
-              "type": "maze_toggle_switch"
             }
           ]
-        },
-        {
-          "kind": "sep"
-        },
-        {
-          "kind": "category",
-          "name": "%{BKY_GAMES_CATPROCEDURES}",
-          "custom": "PROCEDURE",
-          "categorystyle": "procedure_category"
         }
       ]
     },
     "maxBlocks": 18,
-    "startBlocks": "<xml><block type=\"procedures_defnoreturn\" deletable=\"false\"><field name=\"NAME\">PROCEDURE_1</field><statement name=\"STACK\"><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></statement></block><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"><block type=\"maze_collect\"><next><block type=\"maze_turn\"><field name=\"DIR\">turnRight</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_collect\"><next><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"procedures_callnoreturn\"><mutation name=\"PROCEDURE_1\" /></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></xml>"
+    "startBlocks": "<xml><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_collect\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></next></block></statement></block></xml>"
   },
   "gameConfig": {
     "type": "maze",
@@ -87,65 +79,73 @@
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 1,
-          "y": 0,
-          "z": 8
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 1,
-          "y": 0,
-          "z": 9
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 2,
-          "y": 0,
-          "z": 8
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 2,
-          "y": 0,
-          "z": 9
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 3,
-          "y": 0,
-          "z": 8
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 3,
-          "y": 0,
-          "z": 9
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
           "x": 4,
           "y": 0,
-          "z": 8
+          "z": 3
         }
       },
       {
         "modelKey": "ground.normal",
         "position": {
-          "x": 4,
+          "x": 5,
           "y": 0,
-          "z": 9
+          "z": 3
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 6,
+          "y": 0,
+          "z": 1
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 6,
+          "y": 0,
+          "z": 2
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 6,
+          "y": 0,
+          "z": 3
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 6,
+          "y": 0,
+          "z": 4
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 6,
+          "y": 0,
+          "z": 5
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 7,
+          "y": 0,
+          "z": 3
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 8,
+          "y": 0,
+          "z": 3
         }
       }
     ],
@@ -153,10 +153,10 @@
       {
         "id": "player1",
         "start": {
-          "x": 1,
+          "x": 8,
           "y": 1,
-          "z": 8,
-          "direction": 1
+          "z": 3,
+          "direction": 3
         }
       }
     ],
@@ -165,26 +165,26 @@
         "id": "c1",
         "type": "crystal",
         "position": {
-          "x": 4,
+          "x": 6,
           "y": 1,
-          "z": 9
+          "z": 3
         }
       },
       {
         "id": "c2",
         "type": "crystal",
         "position": {
-          "x": 4,
+          "x": 6,
           "y": 1,
-          "z": 8
+          "z": 4
         }
       }
     ],
     "interactibles": [],
     "finish": {
-      "x": 1,
+      "x": 4,
       "y": 1,
-      "z": 9
+      "z": 3
     }
   },
   "solution": {
@@ -197,13 +197,13 @@
     "rawActions": [
       "moveForward",
       "moveForward",
+      "collect",
+      "moveForward",
+      "moveForward",
+      "turnLeft",
       "moveForward",
       "collect",
-      "turnRight",
       "moveForward",
-      "collect",
-      "turnLeft",
-      "turnLeft",
       "moveForward",
       "moveForward",
       "moveForward"
@@ -211,15 +211,7 @@
     "structuredSolution": {
       "main": [
         {
-          "type": "CALL",
-          "name": "PROCEDURE_1"
-        },
-        {
-          "type": "maze_collect"
-        },
-        {
-          "type": "maze_turn",
-          "direction": "turnRight"
+          "type": "maze_moveForward"
         },
         {
           "type": "maze_moveForward"
@@ -228,40 +220,40 @@
           "type": "maze_collect"
         },
         {
-          "type": "maze_turn",
-          "direction": "turnLeft"
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
         },
         {
           "type": "maze_turn",
           "direction": "turnLeft"
         },
         {
-          "type": "CALL",
-          "name": "PROCEDURE_1"
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_collect"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
         }
       ],
-      "procedures": {
-        "PROCEDURE_1": [
-          {
-            "type": "maze_moveForward"
-          },
-          {
-            "type": "maze_moveForward"
-          },
-          {
-            "type": "maze_moveForward"
-          }
-        ]
-      }
+      "procedures": {}
     },
     "structuredSolution_fixbug_version": {
       "main": [
         {
-          "type": "maze_collect"
-        },
-        {
-          "type": "maze_turn",
-          "direction": "turnRight"
+          "type": "maze_moveForward"
         },
         {
           "type": "maze_moveForward"
@@ -270,31 +262,32 @@
           "type": "maze_collect"
         },
         {
-          "type": "maze_turn",
-          "direction": "turnLeft"
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
         },
         {
           "type": "maze_turn",
           "direction": "turnLeft"
         },
         {
-          "type": "CALL",
-          "name": "PROCEDURE_1"
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
         }
       ],
-      "procedures": {
-        "PROCEDURE_1": [
-          {
-            "type": "maze_moveForward"
-          },
-          {
-            "type": "maze_moveForward"
-          },
-          {
-            "type": "maze_moveForward"
-          }
-        ]
-      }
+      "procedures": {}
     }
   },
   "sounds": {

@@ -1,0 +1,1833 @@
+{
+  "topic_code": "TOPIC_02_FUNCTIONS",
+  "topic_name": "HÀM VÀ TÁI SỬ DỤNG",
+  "suggested_maps": [
+    {
+      "id": "T02.C01.Pattern.Refactor.1",
+      "level": 1,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C01.Pattern.Refactor.1.Title",
+      "descriptionKey": "Challenge.T02.C01.Pattern.Refactor.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C01.Pattern.Refactor.1.Title": "Nhìn ra Quy luật",
+          "Challenge.T02.C01.Pattern.Refactor.1.Description": "Đoạn mã này hoạt động đúng nhưng trông rất dài. Hãy quan sát kỹ, bạn có thấy một nhóm các khối lệnh nào đó được lặp lại không? Việc nhận ra các quy luật là bước đầu tiên để viết code tốt hơn."
+        },
+        "en": {
+          "Challenge.T02.C01.Pattern.Refactor.1.Title": "Spotting the Pattern",
+          "Challenge.T02.C01.Pattern.Refactor.1.Description": "This code works, but it looks very long. Look closely, can you see a group of blocks that gets repeated? Recognizing patterns is the first step to writing better code."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "side_legs_length": 3,
+          "base_leg_length": 2,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C02.Pattern.Refactor.2",
+      "level": 2,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C02.Pattern.Refactor.2.Title",
+      "descriptionKey": "Challenge.T02.C02.Pattern.Refactor.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C02.Pattern.Refactor.2.Title": "Quy luật Ziczac",
+          "Challenge.T02.C02.Pattern.Refactor.2.Description": "Trên con đường ziczac này, nhân vật lặp lại một chuỗi hành động \"đi tới và rẽ\". Hãy tìm ra chuỗi hành động đó đã được lặp lại bao nhiêu lần trong đoạn mã dài này."
+        },
+        "en": {
+          "Challenge.T02.C02.Pattern.Refactor.2.Title": "The Zigzag Pattern",
+          "Challenge.T02.C02.Pattern.Refactor.2.Description": "On this zigzag path, the character repeats a sequence of \"move and turn\". Figure out how many times that sequence is repeated in this long piece of code."
+        }
+      },
+      "generation_config": {
+        "map_type": "z_shape",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 1,
+          "leg2_length": 1,
+          "leg3_length": 1,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C03.Pattern.Refactor.3",
+      "level": 3,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C03.Pattern.Refactor.3.Title",
+      "descriptionKey": "Challenge.T02.C03.Pattern.Refactor.3.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C03.Pattern.Refactor.3.Title": "Vượt Chướng ngại vật",
+          "Challenge.T02.C03.Pattern.Refactor.3.Description": "Để vượt qua mỗi vật cản, nhân vật cần một chuỗi lệnh giống hệt nhau. Hãy tìm ra chuỗi lệnh \"nhảy qua một vật cản\" đang được lặp lại trong chương trình."
+        },
+        "en": {
+          "Challenge.T02.C03.Pattern.Refactor.3.Title": "Overcoming Obstacles",
+          "Challenge.T02.C03.Pattern.Refactor.3.Description": "To get past each obstacle, the character needs an identical sequence of commands. Find the \"jump over one obstacle\" sequence that is being repeated in the program."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "path_length": 6,
+          "obstacle_count": 3,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C04.Pattern.Refactor.4",
+      "level": 4,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C04.Pattern.Refactor.4.Title",
+      "descriptionKey": "Challenge.T02.C04.Pattern.Refactor.4.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C04.Pattern.Refactor.4.Title": "Thám tử Mã lệnh",
+          "Challenge.T02.C04.Pattern.Refactor.4.Description": "Đoạn mã này vẽ một hình chữ H bằng cách vẽ một cột dọc, di chuyển qua, rồi lại vẽ một cột dọc y hệt. Hãy xác định chính xác đoạn mã \"vẽ một cột dọc\" đã được sử dụng hai lần."
+        },
+        "en": {
+          "Challenge.T02.C04.Pattern.Refactor.4.Title": "Code Detective",
+          "Challenge.T02.C04.Pattern.Refactor.4.Description": "This code draws an H-shape by drawing a vertical column, moving across, then drawing an identical vertical column. Pinpoint the exact \"draw one column\" piece of code that was used twice."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "column_length": 4,
+          "column_spacing": 2,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C05.Pattern.Refactor.5",
+      "level": 5,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C05.Pattern.Refactor.5.Title",
+      "descriptionKey": "Challenge.T02.C05.Pattern.Refactor.5.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C05.Pattern.Refactor.5.Title": "Hai Hòn đảo Sinh đôi",
+          "Challenge.T02.C05.Pattern.Refactor.5.Description": "Để giải quyết bài toán này, bạn phải thực hiện cùng một chuỗi hành động trên hai hòn đảo giống hệt nhau. Tìm đoạn mã \"giải quyết một hòn đảo\" đang bị lặp lại."
+        },
+        "en": {
+          "Challenge.T02.C05.Pattern.Refactor.5.Title": "The Twin Islands",
+          "Challenge.T02.C05.Pattern.Refactor.5.Description": "To solve this puzzle, you have to perform the same sequence of actions on two identical islands. Find the repeating \"solve one island\" piece of code."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 2,
+          "island_pattern": "l_shape",
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C06.Pattern.Debug.1",
+      "level": 6,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C06.Pattern.Debug.1.Title",
+      "descriptionKey": "Challenge.T02.C06.Pattern.Debug.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C06.Pattern.Debug.1.Title": "Thanh tra Lỗi",
+          "Challenge.T02.C06.Pattern.Debug.1.Description": "Đoạn mã dài này có một lỗi sai! Một trong các khối moveForward đã bị đặt sai, khiến nhân vật đi không đúng đường. Hãy tìm và sửa khối lệnh đó."
+        },
+        "en": {
+          "Challenge.T02.C06.Pattern.Debug.1.Title": "Bug Inspector",
+          "Challenge.T02.C06.Pattern.Debug.1.Description": "This long piece of code has a mistake! One of the moveForward blocks is incorrect, causing the character to go the wrong way. Find and fix that block."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "side_legs_length": 4,
+          "base_leg_length": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "options": {
+              "block_type_to_remove": "moveForward"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C07.Pattern.Debug.2",
+      "level": 7,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C07.Pattern.Debug.2.Title",
+      "descriptionKey": "Challenge.T02.C07.Pattern.Debug.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C07.Pattern.Debug.2.Title": "Hiệu chỉnh Logic",
+          "Challenge.T02.C07.Pattern.Debug.2.Description": "Chương trình gần đúng rồi, nhưng ở một khúc cua, nhân vật lại rẽ sai hướng. Hãy rà soát đoạn mã và sửa khối lệnh turn bị sai đó."
+        },
+        "en": {
+          "Challenge.T02.C07.Pattern.Debug.2.Title": "Logic Corrector",
+          "Challenge.T02.C07.Pattern.Debug.2.Description": "The program is almost correct, but at one of the corners, the character turns the wrong way. Scan the code and fix the incorrect turn block."
+        }
+      },
+      "generation_config": {
+        "map_type": "z_shape",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 2,
+          "leg2_length": 2,
+          "leg3_length": 2,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_block",
+          "bug_config": {
+            "options": {
+              "from": "turnRight",
+              "to": "turnLeft"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C08.Pattern.Debug.3",
+      "level": 8,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C08.Pattern.Debug.3.Title",
+      "descriptionKey": "Challenge.T02.C08.Pattern.Debug.3.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C08.Pattern.Debug.3.Title": "Người sửa Lỗi Nhảy",
+          "Challenge.T02.C08.Pattern.Debug.3.Description": "Trong chuỗi các hành động nhảy qua vật cản, có một bước bị sai khiến nhân vật bị kẹt. Hãy tìm và sửa lỗi trong một trong các bước nhảy đó."
+        },
+        "en": {
+          "Challenge.T02.C08.Pattern.Debug.3.Title": "The Jump Fixer",
+          "Challenge.T02.C08.Pattern.Debug.3.Description": "In the long sequence of jumping over obstacles, one step is wrong, causing the character to get stuck. Find and fix the bug in one of the jump sequences."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "path_length": 7,
+          "obstacle_count": 4,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block",
+          "bug_config": {
+            "options": {
+              "block_type_to_remove": "jump"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C09.Pattern.Debug.4",
+      "level": 9,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C09.Pattern.Debug.4.Title",
+      "descriptionKey": "Challenge.T02.C09.Pattern.Debug.4.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C09.Pattern.Debug.4.Title": "Sắp xếp Thứ tự",
+          "Challenge.T02.C09.Pattern.Debug.4.Description": "Logic của chương trình này bị sai vì thứ tự thực hiện các hành động không đúng. Nhân vật đang cố đi qua cây cầu nối trước khi vẽ xong cột thứ hai. Hãy sắp xếp lại các khối lệnh."
+        },
+        "en": {
+          "Challenge.T02.C09.Pattern.Debug.4.Title": "Sequence Sorter",
+          "Challenge.T02.C09.Pattern.Debug.4.Description": "The logic of this program is flawed because the actions are in the wrong order. The character is trying to cross the bridge before drawing the second column. Reorder the blocks."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_debug_sequence",
+        "num_variants": 1,
+        "params": {
+          "column_length": 4,
+          "column_spacing": 3,
+          "challenge_type": "DEBUG_FIX_SEQUENCE",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "sequence_error"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C10.SimpleFunc.Apply.1",
+      "level": 10,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C10.SimpleFunc.Apply.1.Title",
+      "descriptionKey": "Challenge.T02.C10.SimpleFunc.Apply.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C10.SimpleFunc.Apply.1.Title": "Hàm Đầu tiên",
+          "Challenge.T02.C10.SimpleFunc.Apply.1.Description": "Thay vì dùng hai khối turnLeft, chúng ta có thể tạo một hàm turnAround. Hãy định nghĩa hàm turnAround bằng cách đặt hai khối turnLeft vào bên trong nó. Sau đó, gọi hàm này để giải quyết bài toán chữ U."
+        },
+        "en": {
+          "Challenge.T02.C10.SimpleFunc.Apply.1.Title": "Your First Function",
+          "Challenge.T02.C10.SimpleFunc.Apply.1.Description": "Instead of using two turnLeft blocks, we can create a function called turnAround. Define the turnAround function by placing two turnLeft blocks inside it. Then, call this function to solve the U-shape puzzle."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "side_legs_length": 3,
+          "base_leg_length": 2
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C11.SimpleFunc.Apply.2",
+      "level": 11,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C11.SimpleFunc.Apply.2.Title",
+      "descriptionKey": "Challenge.T02.C11.SimpleFunc.Apply.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C11.SimpleFunc.Apply.2.Title": "Tái sử dụng Hàm",
+          "Challenge.T02.C11.SimpleFunc.Apply.2.Description": "Giờ bạn đã có hàm turnAround, hãy sử dụng nó để giúp nhân vật đi hết con đường hình chữ S. Bạn sẽ cần gọi hàm này ở cả hai khúc cua."
+        },
+        "en": {
+          "Challenge.T02.C11.SimpleFunc.Apply.2.Title": "Reusing a Function",
+          "Challenge.T02.C11.SimpleFunc.Apply.2.Description": "Now that you have the turnAround function, use it to help the character navigate the S-shaped path. You'll need to call it at both turns."
+        }
+      },
+      "generation_config": {
+        "map_type": "s_shape",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 3,
+          "leg2_length": 2,
+          "leg3_length": 3
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C12.SimpleFunc.Apply.3",
+      "level": 12,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C12.SimpleFunc.Apply.3.Title",
+      "descriptionKey": "Challenge.T02.C12.SimpleFunc.Apply.3.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C12.SimpleFunc.Apply.3.Title": "Đi vào rồi Quay ra",
+          "Challenge.T02.C12.SimpleFunc.Apply.3.Description": "Để khám phá nhánh phụ này, nhân vật cần đi vào, sau đó quay đầu và đi ra. Hàm turnAround là công cụ hoàn hảo cho việc này."
+        },
+        "en": {
+          "Challenge.T02.C12.SimpleFunc.Apply.3.Title": "In and Out",
+          "Challenge.T02.C12.SimpleFunc.Apply.3.Description": "To explore this side path, the character needs to go in, then turn around and come back out. The turnAround function is the perfect tool for the job."
+        }
+      },
+      "generation_config": {
+        "map_type": "interspersed_path",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "main_path_length": 5,
+          "num_branches": 1,
+          "branch_length": 2
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C13.SimpleFunc.Refactor.1",
+      "level": 13,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C13.SimpleFunc.Refactor.1.Title",
+      "descriptionKey": "Challenge.T02.C13.SimpleFunc.Refactor.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C13.SimpleFunc.Refactor.1.Title": "Dọn dẹp Mã lệnh",
+          "Challenge.T02.C13.SimpleFunc.Refactor.1.Description": "Đoạn mã này sử dụng hai khối turnLeft để quay đầu. Hãy tối ưu nó bằng cách thay thế hai khối lệnh đó bằng một lệnh gọi hàm turnAround."
+        },
+        "en": {
+          "Challenge.T02.C13.SimpleFunc.Refactor.1.Title": "Code Cleanup",
+          "Challenge.T02.C13.SimpleFunc.Refactor.1.Description": "This code uses two turnLeft blocks to turn around. Refactor it by replacing those two blocks with a single call to the turnAround function."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "side_legs_length": 4,
+          "base_leg_length": 3,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C14.SimpleFunc.Refactor.2",
+      "level": 14,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C14.SimpleFunc.Refactor.2.Title",
+      "descriptionKey": "Challenge.T02.C14.SimpleFunc.Refactor.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C14.SimpleFunc.Refactor.2.Title": "Sức mạnh của Tối ưu hóa",
+          "Challenge.T02.C14.SimpleFunc.Refactor.2.Description": "Tìm tất cả các đoạn mã \"quay đầu\" trong chương trình này và thay thế chúng bằng hàm turnAround để làm cho chương trình ngắn hơn và dễ đọc hơn."
+        },
+        "en": {
+          "Challenge.T02.C14.SimpleFunc.Refactor.2.Title": "The Power of Refactoring",
+          "Challenge.T02.C14.SimpleFunc.Refactor.2.Description": "Find all the \"turn around\" code segments in this program and replace them with the turnAround function to make the program shorter and easier to read."
+        }
+      },
+      "generation_config": {
+        "map_type": "s_shape",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 4,
+          "leg2_length": 3,
+          "leg3_length": 4,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C15.SimpleFunc.Debug.1",
+      "level": 15,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C15.SimpleFunc.Debug.1.Title",
+      "descriptionKey": "Challenge.T02.C15.SimpleFunc.Debug.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C15.SimpleFunc.Debug.1.Title": "Gỡ lỗi cho Hàm",
+          "Challenge.T02.C15.SimpleFunc.Debug.1.Description": "Hàm turnAround đã được định nghĩa sẵn, nhưng có một lỗi bên trong nó! Nó đang sử dụng turnRight thay vì turnLeft. Hãy sửa lại định nghĩa của hàm cho đúng."
+        },
+        "en": {
+          "Challenge.T02.C15.SimpleFunc.Debug.1.Title": "Debugging a Function",
+          "Challenge.T02.C15.SimpleFunc.Debug.1.Description": "The turnAround function is pre-defined, but there's a bug inside it! It's using turnRight instead of turnLeft. Fix the function's definition to make it correct."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "side_legs_length": 3,
+          "base_leg_length": 2,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "turnAround",
+              "from": "turnLeft",
+              "to": "turnRight"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C16.SimpleFunc.Debug.2",
+      "level": 16,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C16.SimpleFunc.Debug.2.Title",
+      "descriptionKey": "Challenge.T02.C16.SimpleFunc.Debug.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C16.SimpleFunc.Debug.2.Title": "Sửa lỗi: Lời gọi bị lãng quên",
+          "Challenge.T02.C16.SimpleFunc.Debug.2.Description": "Hàm turnAround đã được định nghĩa đúng, nhưng chương trình chính lại quên không gọi nó ở khúc cua. Hãy tìm vị trí đúng và thêm khối gọi hàm turnAround."
+        },
+        "en": {
+          "Challenge.T02.C16.SimpleFunc.Debug.2.Title": "Fix the Bug: The Forgotten Call",
+          "Challenge.T02.C16.SimpleFunc.Debug.2.Description": "The turnAround function is defined correctly, but the main program forgets to call it at the turn. Find the right spot and add the turnAround function call."
+        }
+      },
+      "generation_config": {
+        "map_type": "s_shape",
+        "logic_type": "function_debug_missing_call",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 3,
+          "leg2_length": 2,
+          "leg3_length": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_function_call"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C17.SimpleFunc.Debug.3",
+      "level": 17,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C17.SimpleFunc.Debug.3.Title",
+      "descriptionKey": "Challenge.T02.C17.SimpleFunc.Debug.3.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C17.SimpleFunc.Debug.3.Title": "Sửa lỗi: Gọi sai thời điểm",
+          "Challenge.T02.C17.SimpleFunc.Debug.3.Description": "Chương trình có gọi hàm turnAround, nhưng lại gọi sai vị trí, khiến nhân vật quay đầu quá sớm. Hãy di chuyển khối gọi hàm đến đúng chỗ."
+        },
+        "en": {
+          "Challenge.T02.C17.SimpleFunc.Debug.3.Title": "Fix the Bug: Calling at the Wrong Time",
+          "Challenge.T02.C17.SimpleFunc.Debug.3.Description": "The program does call the turnAround function, but it calls it in the wrong place, causing the character to turn too early. Move the function call block to the correct spot."
+        }
+      },
+      "generation_config": {
+        "map_type": "interspersed_path",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "main_path_length": 6,
+          "num_branches": 1,
+          "branch_length": 2,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_function_call_order"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C18.SimpleFunc.Debug.4",
+      "level": 18,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C18.SimpleFunc.Debug.4.Title",
+      "descriptionKey": "Challenge.T02.C18.SimpleFunc.Debug.4.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C18.SimpleFunc.Debug.4.Title": "Sửa lỗi: Logic lộn xộn",
+          "Challenge.T02.C18.SimpleFunc.Debug.4.Description": "Các khối lệnh bên trong hàm turnAround đang bị sai thứ tự. Hãy mở định nghĩa hàm và sắp xếp lại các khối bên trong nó cho đúng."
+        },
+        "en": {
+          "Challenge.T02.C18.SimpleFunc.Debug.4.Title": "Fix the Bug: Jumbled Logic",
+          "Challenge.T02.C18.SimpleFunc.Debug.4.Description": "The blocks inside the turnAround function are in the wrong order. Open the function definition and rearrange the blocks inside it correctly."
+        }
+      },
+      "generation_config": {
+        "map_type": "u_shape",
+        "logic_type": "function_debug_sequence",
+        "num_variants": 1,
+        "params": {
+          "side_legs_length": 3,
+          "base_leg_length": 2,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "turnAround",
+              "from": "turnLeft",
+              "to": "turnRight"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C19.ComplexFunc.Apply.1",
+      "level": 19,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C19.ComplexFunc.Apply.1.Title",
+      "descriptionKey": "Challenge.T02.C19.ComplexFunc.Apply.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C19.ComplexFunc.Apply.1.Title": "Xây dựng Hàm: Vượt chướng ngại vật",
+          "Challenge.T02.C19.ComplexFunc.Apply.1.Description": "Hãy tạo một hàm mới tên là jumpOverObstacle. Bên trong hàm, đặt các lệnh cần thiết để nhảy lên và nhảy xuống khỏi một vật cản. Sau đó, gọi hàm này 3 lần để vượt qua 3 vật cản."
+        },
+        "en": {
+          "Challenge.T02.C19.ComplexFunc.Apply.1.Title": "Building a Function: Jump Over",
+          "Challenge.T02.C19.ComplexFunc.Apply.1.Description": "Create a new function named jumpOverObstacle. Inside it, place the commands needed to jump up and then down from an obstacle. Then, call this function 3 times to clear the 3 obstacles."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "path_length": 7,
+          "obstacle_count": 3
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C20.ComplexFunc.Apply.2",
+      "level": 20,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C20.ComplexFunc.Apply.2.Title",
+      "descriptionKey": "Challenge.T02.C20.ComplexFunc.Apply.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C20.ComplexFunc.Apply.2.Title": "Xây dựng Hàm: Vẽ một Cột",
+          "Challenge.T02.C20.ComplexFunc.Apply.2.Description": "Hãy tạo một hàm drawColumn để vẽ một cột dọc của hình chữ H. Sau khi định nghĩa xong, hãy gọi nó hai lần, kết hợp với các lệnh di chuyển ở giữa, để hoàn thành hình chữ H."
+        },
+        "en": {
+          "Challenge.T02.C20.ComplexFunc.Apply.2.Title": "Building a Function: Draw a Column",
+          "Challenge.T02.C20.ComplexFunc.Apply.2.Description": "Create a drawColumn function to draw one vertical column of the H-shape. After defining it, call it twice, with move commands in between, to complete the H-shape."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "column_length": 4,
+          "column_spacing": 3
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C21.ComplexFunc.Apply.3",
+      "level": 21,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C21.ComplexFunc.Apply.3.Title",
+      "descriptionKey": "Challenge.T02.C21.ComplexFunc.Apply.3.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C21.ComplexFunc.Apply.3.Title": "Xây dựng Hàm: Giải một Đoạn Ziczac",
+          "Challenge.T02.C21.ComplexFunc.Apply.3.Description": "Tạo một hàm solveOneSegment chứa các lệnh để đi hết một đoạn của đường ziczac (ví dụ: đi thẳng, rẽ phải). Sau đó, gọi hàm này nhiều lần để giải quyết toàn bộ con đường."
+        },
+        "en": {
+          "Challenge.T02.C21.ComplexFunc.Apply.3.Title": "Building a Function: Solve a Segment",
+          "Challenge.T02.C21.ComplexFunc.Apply.3.Description": "Create a solveOneSegment function that contains the commands to navigate one segment of the zigzag path (e.g., move forward, turn right). Then, call this function multiple times to solve the whole path."
+        }
+      },
+      "generation_config": {
+        "map_type": "z_shape",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 2,
+          "leg2_length": 2,
+          "leg3_length": 2
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C22.ComplexFunc.Refactor.1",
+      "level": 22,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C22.ComplexFunc.Refactor.1.Title",
+      "descriptionKey": "Challenge.T02.C22.ComplexFunc.Refactor.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C22.ComplexFunc.Refactor.1.Title": "Tối ưu hóa việc Nhảy",
+          "Challenge.T02.C22.ComplexFunc.Refactor.1.Description": "Đoạn mã này vượt qua 4 vật cản bằng cách lặp lại các khối lệnh jump. Hãy tạo hàm jumpOverObstacle và thay thế các đoạn mã lặp lại bằng lệnh gọi hàm."
+        },
+        "en": {
+          "Challenge.T02.C22.ComplexFunc.Refactor.1.Title": "Refactoring the Jumps",
+          "Challenge.T02.C22.ComplexFunc.Refactor.1.Description": "This code clears 4 obstacles by repeating jump blocks. Create a jumpOverObstacle function and replace the repetitive code segments with function calls."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "path_length": 8,
+          "obstacle_count": 4,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C23.ComplexFunc.Refactor.2",
+      "level": 23,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C23.ComplexFunc.Refactor.2.Title",
+      "descriptionKey": "Challenge.T02.C23.ComplexFunc.Refactor.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C23.ComplexFunc.Refactor.2.Title": "Tối ưu hóa Hình chữ H",
+          "Challenge.T02.C23.ComplexFunc.Refactor.2.Description": "Gom các khối lệnh vẽ một cột vào hàm drawColumn. Sử dụng hàm này để làm cho chương trình vẽ hình chữ H trở nên ngắn gọn và dễ hiểu hơn rất nhiều."
+        },
+        "en": {
+          "Challenge.T02.C23.ComplexFunc.Refactor.2.Title": "Refactoring the H-Shape",
+          "Challenge.T02.C23.ComplexFunc.Refactor.2.Description": "Group the blocks that draw a column into a drawColumn function. Use this function to make the H-shape drawing program much shorter and more understandable."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "column_length": 5,
+          "column_spacing": 4,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C24.ComplexFunc.Refactor.3",
+      "level": 24,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C24.ComplexFunc.Refactor.3.Title",
+      "descriptionKey": "Challenge.T02.C24.ComplexFunc.Refactor.3.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C24.ComplexFunc.Refactor.3.Title": "Tối ưu hóa Quần đảo",
+          "Challenge.T02.C24.ComplexFunc.Refactor.3.Description": "Tạo hàm solveIsland từ đoạn code lặp lại để giải quyết các hòn đảo. Chương trình của bạn sẽ trở nên cực kỳ gọn gàng khi bạn chỉ cần gọi hàm này cho mỗi hòn đảo."
+        },
+        "en": {
+          "Challenge.T02.C24.ComplexFunc.Refactor.3.Title": "Refactoring the Islands",
+          "Challenge.T02.C24.ComplexFunc.Refactor.3.Description": "Create a solveIsland function from the repetitive code that solves the islands. Your program will become extremely clean when you just call this function for each island."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 3,
+          "island_pattern": "u_shape",
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C25.ComplexFunc.Debug.1",
+      "level": 25,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C25.ComplexFunc.Debug.1.Title",
+      "descriptionKey": "Challenge.T02.C25.ComplexFunc.Debug.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C25.ComplexFunc.Debug.1.Title": "Sửa lỗi trong Hàm Nhảy",
+          "Challenge.T02.C25.ComplexFunc.Debug.1.Description": "Hàm jumpOverObstacle bị định nghĩa sai. Nó có một lệnh moveForward thay vì một lệnh jump, khiến nhân vật đâm vào tường. Hãy sửa lại logic bên trong hàm."
+        },
+        "en": {
+          "Challenge.T02.C25.ComplexFunc.Debug.1.Title": "Bug in the Jump Function",
+          "Challenge.T02.C25.ComplexFunc.Debug.1.Description": "The jumpOverObstacle function is defined incorrectly. It has a moveForward command instead of a jump, causing the character to hit the wall. Fix the logic inside the function."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "path_length": 5,
+          "obstacle_count": 1,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "jumpOverObstacle",
+              "from": "jump",
+              "to": "moveForward"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C26.ComplexFunc.Debug.2",
+      "level": 26,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C26.ComplexFunc.Debug.2.Title",
+      "descriptionKey": "Challenge.T02.C26.ComplexFunc.Debug.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C26.ComplexFunc.Debug.2.Title": "Sửa lỗi Hàm vẽ Cột",
+          "Challenge.T02.C26.ComplexFunc.Debug.2.Description": "Hàm drawColumn bị thiếu một khối moveForward, khiến cột vẽ ra bị ngắn hơn so với yêu cầu. Hãy tìm và bổ sung khối lệnh còn thiếu vào bên trong hàm."
+        },
+        "en": {
+          "Challenge.T02.C26.ComplexFunc.Debug.2.Title": "Bug in the Column Function",
+          "Challenge.T02.C26.ComplexFunc.Debug.2.Description": "The drawColumn function is missing a moveForward block, causing the drawn column to be shorter than required. Find and add the missing block inside the function."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "column_length": 4,
+          "column_spacing": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "drawColumn",
+              "block_type_to_remove": "moveForward"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C27.ComplexFunc.Debug.3",
+      "level": 27,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C27.ComplexFunc.Debug.3.Title",
+      "descriptionKey": "Challenge.T02.C27.ComplexFunc.Debug.3.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C27.ComplexFunc.Debug.3.Title": "Sửa lỗi Hàm Ziczac",
+          "Challenge.T02.C27.ComplexFunc.Debug.3.Description": "Hàm solveOneSegment đang gọi sai khối rẽ (dùng turnLeft thay vì turnRight), khiến nhân vật đi lạc hướng. Sửa lại khối lệnh sai bên trong hàm."
+        },
+        "en": {
+          "Challenge.T02.C27.ComplexFunc.Debug.3.Title": "Bug in the Zigzag Function",
+          "Challenge.T02.C27.ComplexFunc.Debug.3.Description": "The solveOneSegment function is calling the wrong turn block (turnLeft instead of turnRight), leading the character astray. Correct the wrong block inside the function."
+        }
+      },
+      "generation_config": {
+        "map_type": "z_shape",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "leg1_length": 2,
+          "leg2_length": 2,
+          "leg3_length": 2,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "solveOneSegment",
+              "from": "turnRight",
+              "to": "turnLeft"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C28.ComplexFunc.Debug.4",
+      "level": 28,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C28.ComplexFunc.Debug.4.Title",
+      "descriptionKey": "Challenge.T02.C28.ComplexFunc.Debug.4.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C28.ComplexFunc.Debug.4.Title": "Sửa lỗi Thứ tự Hàm",
+          "Challenge.T02.C28.ComplexFunc.Debug.4.Description": "Hàm drawColumn đã đúng, nhưng chương trình chính lại gọi các hàm và lệnh di chuyển sai thứ tự, tạo ra một hình thù kỳ lạ thay vì chữ H. Hãy sắp xếp lại các khối lệnh trong chương trình chính."
+        },
+        "en": {
+          "Challenge.T02.C28.ComplexFunc.Debug.4.Title": "Fixing the Function Order",
+          "Challenge.T02.C28.ComplexFunc.Debug.4.Description": "The drawColumn function is correct, but the main program calls functions and move commands in the wrong order, creating a weird shape instead of an H. Reorder the blocks in the main program."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "column_length": 4,
+          "column_spacing": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_function_call_order"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C29.ComplexFunc.Debug.5",
+      "level": 29,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C29.ComplexFunc.Debug.5.Title",
+      "descriptionKey": "Challenge.T02.C29.ComplexFunc.Debug.5.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C29.ComplexFunc.Debug.5.Title": "Sửa lỗi Giải cứu Đảo",
+          "Challenge.T02.C29.ComplexFunc.Debug.5.Description": "Hàm solveIsland được viết để giải một hòn đảo hình chữ L, nhưng logic bên trong nó lại bị sai (rẽ nhầm hướng), khiến nhân vật bị rơi. Hãy gỡ lỗi cho hàm này."
+        },
+        "en": {
+          "Challenge.T02.C29.ComplexFunc.Debug.5.Title": "Island Rescue Mission",
+          "Challenge.T02.C29.ComplexFunc.Debug.5.Description": "The solveIsland function was written for an L-shaped island, but its internal logic is flawed (it turns the wrong way), causing the character to fall. Debug this function."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 2,
+          "island_pattern": "l_shape",
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "solveIsland",
+              "from": "turnLeft",
+              "to": "turnRight"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C30.ComplexFunc.Debug.6",
+      "level": 30,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C30.ComplexFunc.Debug.6.Title",
+      "descriptionKey": "Challenge.T02.C30.ComplexFunc.Debug.6.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C30.ComplexFunc.Debug.6.Title": "Sửa lỗi Thứ tự trong Hàm",
+          "Challenge.T02.C30.ComplexFunc.Debug.6.Description": "Các khối lệnh bên trong hàm jumpOverObstacle (gồm 2 lệnh jump) đang bị sai thứ tự, làm nhân vật không thể vượt qua vật cản. Sắp xếp lại chúng."
+        },
+        "en": {
+          "Challenge.T02.C30.ComplexFunc.Debug.6.Title": "Reordering Inside a Function",
+          "Challenge.T02.C30.ComplexFunc.Debug.6.Description": "The blocks inside the jumpOverObstacle function (which should contain two jump commands) are in the wrong order, making it impossible to clear the obstacle. Reorder them."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "function_debug_sequence",
+        "num_variants": 1,
+        "params": {
+          "path_length": 5,
+          "obstacle_count": 1,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "jumpOverObstacle",
+              "from": "jump",
+              "to": "moveForward"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C31.ComplexFunc.Debug.7",
+      "level": 31,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C31.ComplexFunc.Debug.7.Title",
+      "descriptionKey": "Challenge.T02.C31.ComplexFunc.Debug.7.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C31.ComplexFunc.Debug.7.Title": "Gỡ lỗi: Hàm đa năng",
+          "Challenge.T02.C31.ComplexFunc.Debug.7.Description": "Hàm solveIsland được thiết kế để giải quyết nhiều hòn đảo, nhưng logic bên trong nó lại bị sai, khiến nhân vật đi sai đường trên chính hòn đảo. Hãy tìm và sửa lỗi trong định nghĩa của hàm."
+        },
+        "en": {
+          "Challenge.T02.C31.ComplexFunc.Debug.7.Title": "Debugging a Versatile Function",
+          "Challenge.T02.C31.ComplexFunc.Debug.7.Description": "The solveIsland function is designed to solve multiple islands, but its internal logic is flawed, causing the character to take a wrong turn on the island itself. Find and fix the bug in the function's definition."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 2,
+          "island_pattern": "u_shape",
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "solveIsland",
+              "from": "turnRight",
+              "to": "turnLeft"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C32.ComplexFunc.Debug.8",
+      "level": 32,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C32.ComplexFunc.Debug.8.Title",
+      "descriptionKey": "Challenge.T02.C32.ComplexFunc.Debug.8.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C32.ComplexFunc.Debug.8.Title": "Gỡ lỗi: Thứ tự bên trong",
+          "Challenge.T02.C32.ComplexFunc.Debug.8.Description": "Các khối lệnh bên trong hàm jumpOverObstacle bị sai thứ tự. Hãy kiểm tra lại logic nhảy lên và nhảy xuống để đảm bảo nhân vật có thể vượt qua vật cản."
+        },
+        "en": {
+          "Challenge.T02.C32.ComplexFunc.Debug.8.Title": "Debugging: Internal Order",
+          "Challenge.T02.C32.ComplexFunc.Debug.8.Description": "The blocks inside the jumpOverObstacle function are in the wrong order. Review the logic for jumping up and then down to ensure the character can clear the obstacle."
+        }
+      },
+      "generation_config": {
+        "map_type": "straight_line",
+        "logic_type": "function_debug_sequence",
+        "num_variants": 1,
+        "params": {
+          "path_length": 5,
+          "obstacle_count": 1,
+          "challenge_type": "DEBUG_FIX_SEQUENCE",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "jumpOverObstacle",
+              "from": "jump",
+              "to": "moveForward"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C33.ComplexFunc.Debug.9",
+      "level": 33,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C33.ComplexFunc.Debug.9.Title",
+      "descriptionKey": "Challenge.T02.C33.ComplexFunc.Debug.9.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C33.ComplexFunc.Debug.9.Title": "Gỡ lỗi: Dòng chảy chương trình",
+          "Challenge.T02.C33.ComplexFunc.Debug.9.Description": "Chương trình chính đang gọi các hàm và di chuyển theo một trình tự sai, khiến hình chữ H bị vẽ sai. Hãy sắp xếp lại các khối lệnh trong luồng chính (không sửa hàm)."
+        },
+        "en": {
+          "Challenge.T02.C33.ComplexFunc.Debug.9.Title": "Debugging: Program Flow",
+          "Challenge.T02.C33.ComplexFunc.Debug.9.Description": "The main program is calling functions and moving in the wrong sequence, causing the H-shape to be drawn incorrectly. Rearrange the blocks in the main flow (without editing the functions)."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "column_length": 4,
+          "column_spacing": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_function_call_order"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C34.Final.Create.1",
+      "level": 34,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C34.Final.Create.1.Title",
+      "descriptionKey": "Challenge.T02.C34.Final.Create.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C34.Final.Create.1.Title": "Kiến trúc sư Hàm",
+          "Challenge.T02.C34.Final.Create.1.Description": "Hãy tạo một hàm solveIsland để giải quyết một hòn đảo hình chữ L. Sau đó, gọi hàm này 4 lần, kết hợp với các lệnh di chuyển và rẽ, để thu thập tất cả pha lê trên 4 hòn đảo."
+        },
+        "en": {
+          "Challenge.T02.C34.Final.Create.1.Title": "Function Architect",
+          "Challenge.T02.C34.Final.Create.1.Description": "Create a solveIsland function that solves one L-shaped island. Then, call this function 4 times, combining it with move and turn commands, to collect all crystals on the 4 islands."
+        }
+      },
+      "generation_config": {
+        "map_type": "plus_shape_islands",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 4,
+          "island_pattern": "l_shape",
+          "arm_length": 4,
+          "items_to_place": [
+            "crystal",
+            "crystal",
+            "crystal",
+            "crystal"
+          ]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": 4
+        }
+      }
+    },
+    {
+      "id": "T02.C35.Final.Create.2",
+      "level": 35,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C35.Final.Create.2.Title",
+      "descriptionKey": "Challenge.T02.C35.Final.Create.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C35.Final.Create.2.Title": "Vẽ Chữ E",
+          "Challenge.T02.C35.Final.Create.2.Description": "Để vẽ chữ E, bạn cần một hàm drawBranch để vẽ các nhánh ngang và một hàm turnAround để quay đầu. Hãy kết hợp chúng một cách thông minh để hoàn thành tác phẩm."
+        },
+        "en": {
+          "Challenge.T02.C35.Final.Create.2.Title": "Drawing an E",
+          "Challenge.T02.C35.Final.Create.2.Description": "To draw the letter E, you'll need a drawBranch function for the horizontal strokes and a turnAround function. Combine them intelligently to complete the masterpiece."
+        }
+      },
+      "generation_config": {
+        "map_type": "ef_shape",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "stem_length": 6,
+          "num_branches": 3,
+          "branch_length": 2
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C36.Final.Create.3",
+      "level": 36,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C36.Final.Create.3.Title",
+      "descriptionKey": "Challenge.T02.C36.Final.Create.3.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C36.Final.Create.3.Title": "Người Nông dân Chăm chỉ",
+          "Challenge.T02.C36.Final.Create.3.Description": "Cánh đồng này cần được dọn dẹp! Hãy tạo một hàm plowOneRow để xử lý một hàng (đi thẳng, quay đầu). Sau đó, gọi hàm này nhiều lần để dọn dẹp toàn bộ cánh đồng."
+        },
+        "en": {
+          "Challenge.T02.C36.Final.Create.3.Title": "The Diligent Farmer",
+          "Challenge.T02.C36.Final.Create.3.Description": "This field needs clearing! Create a plowOneRow function to handle one row (move across, turn around). Then, call this function multiple times to clear the entire field."
+        }
+      },
+      "generation_config": {
+        "map_type": "plowing_field",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "rows": 4,
+          "cols": 2,
+          "items_to_place": [
+            "crystal"
+          ]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "T02.C37.Final.Create.4",
+      "level": 37,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C37.Final.Create.4.Title",
+      "descriptionKey": "Challenge.T02.C37.Final.Create.4.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C37.Final.Create.4.Title": "Chinh phục 3D",
+          "Challenge.T02.C37.Final.Create.4.Description": "Tạo một hàm jumpToNextLevel để xử lý việc di chuyển và nhảy từ một cụm đảo thấp lên một cụm đảo cao hơn. Sử dụng hàm này để leo lên đỉnh cao nhất."
+        },
+        "en": {
+          "Challenge.T02.C37.Final.Create.4.Title": "3D Conquest",
+          "Challenge.T02.C37.Final.Create.4.Description": "Create a jumpToNextLevel function to handle moving and jumping from a lower island cluster to a higher one. Use this function to climb to the highest point."
+        }
+      },
+      "generation_config": {
+        "map_type": "stepped_island_clusters",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_clusters": 4,
+          "islands_per_cluster": 1,
+          "height_step": 2
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C38.Final.Create.5",
+      "level": 38,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C38.Final.Create.5.Title",
+      "descriptionKey": "Challenge.T02.C38.Final.Create.5.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C38.Final.Create.5.Title": "Chuyên gia Xoắn ốc",
+          "Challenge.T02.C38.Final.Create.5.Description": "Hãy tạo một hàm để xử lý việc leo một đoạn của tháp xoắn ốc (ví dụ: đi thẳng và nhảy lên). Sau đó, gọi hàm này nhiều lần để leo lên đỉnh tháp."
+        },
+        "en": {
+          "Challenge.T02.C38.Final.Create.5.Title": "Spiral Expert",
+          "Challenge.T02.C38.Final.Create.5.Description": "Create a function to handle climbing one segment of the spiral tower (e.g., move forward and jump up). Then, call this function repeatedly to ascend to the top."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_3d",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_turns": 4,
+          "reverse": "false"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C39.Final.Debug.1",
+      "level": 39,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C39.Final.Debug.1.Title",
+      "descriptionKey": "Challenge.T02.C39.Final.Debug.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C39.Final.Debug.1.Title": "Gỡ lỗi: Lạc giữa các Đảo",
+          "Challenge.T02.C39.Final.Debug.1.Description": "Hàm solveIsland của bạn đã đúng, nhưng logic di chuyển giữa các hòn đảo lại sai, khiến nhân vật rẽ nhầm hướng. Hãy sửa lại các khối lệnh trong chương trình chính."
+        },
+        "en": {
+          "Challenge.T02.C39.Final.Debug.1.Title": "Debugging: Lost Between Islands",
+          "Challenge.T02.C39.Final.Debug.1.Description": "Your solveIsland function is correct, but the logic for moving between the islands is wrong, causing the character to turn the wrong way. Fix the blocks in the main program."
+        }
+      },
+      "generation_config": {
+        "map_type": "plus_shape_islands",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 4,
+          "island_pattern": "l_shape",
+          "arm_length": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_function_call_order"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C40.Final.Debug.2",
+      "level": 40,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C40.Final.Debug.2.Title",
+      "descriptionKey": "Challenge.T02.C40.Final.Debug.2.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C40.Final.Debug.2.Title": "Gỡ lỗi: Thiếu một Vòng quay",
+          "Challenge.T02.C40.Final.Debug.2.Description": "Sau khi vẽ một nhánh của chữ E, nhân vật cần quay đầu để vẽ nhánh tiếp theo, nhưng chương trình đã quên gọi hàm turnAround. Hãy bổ sung lời gọi hàm còn thiếu."
+        },
+        "en": {
+          "Challenge.T02.C40.Final.Debug.2.Title": "Debugging: A Missing Turnaround",
+          "Challenge.T02.C40.Final.Debug.2.Description": "After drawing a branch of the E, the character needs to turn around for the next one, but the program forgot to call the turnAround function. Add the missing function call."
+        }
+      },
+      "generation_config": {
+        "map_type": "ef_shape",
+        "logic_type": "function_debug_missing_call",
+        "num_variants": 1,
+        "params": {
+          "stem_length": 6,
+          "num_branches": 3,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_function_call"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C41.Final.Debug.3",
+      "level": 41,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C41.Final.Debug.3.Title",
+      "descriptionKey": "Challenge.T02.C41.Final.Debug.3.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C41.Final.Debug.3.Title": "Gỡ lỗi: Hàng cuối cùng",
+          "Challenge.T02.C41.Final.Debug.3.Description": "Hàm plowOneRow hoạt động tốt cho các hàng đầu, nhưng nó quên thu thập pha lê ở cuối hàng. Hãy sửa logic bên trong hàm để đảm bảo không bỏ sót vật phẩm nào."
+        },
+        "en": {
+          "Challenge.T02.C41.Final.Debug.3.Title": "Debugging: The Last Row",
+          "Challenge.T02.C41.Final.Debug.3.Description": "The plowOneRow function works for the first few rows, but it forgets to collect the crystal at the end of a row. Fix the logic inside the function to ensure no item is left behind."
+        }
+      },
+      "generation_config": {
+        "map_type": "plowing_field",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "rows": 4,
+          "cols": 2,
+          "items_to_place": [
+            "crystal"
+          ],
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "missing_block_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "plowOneRow",
+              "block_type_to_remove": "collectItem"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "T02.C42.Final.Debug.4",
+      "level": 42,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C42.Final.Debug.4.Title",
+      "descriptionKey": "Challenge.T02.C42.Final.Debug.4.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C42.Final.Debug.4.Title": "Gỡ lỗi: Bước đi Sai lầm",
+          "Challenge.T02.C42.Final.Debug.4.Description": "Hàm jumpToNextLevel đang cố dùng moveForward để đi qua khoảng trống giữa các hòn đảo. Đây là một lỗi nghiêm trọng! Hãy thay thế nó bằng lệnh jump chính xác."
+        },
+        "en": {
+          "Challenge.T02.C42.Final.Debug.4.Title": "Debugging: A Fatal Misstep",
+          "Challenge.T02.C42.Final.Debug.4.Description": "The jumpToNextLevel function is trying to use moveForward to cross the gap between islands. This is a critical error! Replace it with the correct jump command."
+        }
+      },
+      "generation_config": {
+        "map_type": "stepped_island_clusters",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "num_clusters": 3,
+          "height_step": 2,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "jumpToNextLevel",
+              "from": "jump",
+              "to": "moveForward"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C43.Final.Debug.5",
+      "level": 43,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C43.Final.Debug.5.Title",
+      "descriptionKey": "Challenge.T02.C43.Final.Debug.5.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C43.Final.Debug.5.Title": "Gỡ lỗi: Xoắn ốc Ngược",
+          "Challenge.T02.C43.Final.Debug.5.Description": "Hàm leo tháp xoắn ốc đang rẽ sai hướng, khiến nhân vật đi ra ngoài thay vì đi vào trong. Hãy tìm và sửa lại lệnh turn bên trong hàm."
+        },
+        "en": {
+          "Challenge.T02.C43.Final.Debug.5.Title": "Debugging: The Reverse Spiral",
+          "Challenge.T02.C43.Final.Debug.5.Description": "The spiral-climbing function is turning the wrong way, causing the character to spiral outwards instead of inwards. Find and correct the turn command inside the function."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_3d",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "num_turns": 5,
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "incorrect_logic_in_function",
+          "bug_config": {
+            "target": "function_body",
+            "options": {
+              "function_name": "climbSpiral",
+              "from": "turnLeft",
+              "to": "turnRight"
+            }
+          }
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C44.Final.Create.6",
+      "level": 44,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C44.Final.Create.6.Title",
+      "descriptionKey": "Challenge.T02.C44.Final.Create.6.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C44.Final.Create.6.Title": "Bậc thầy Phân nhánh",
+          "Challenge.T02.C44.Final.Create.6.Description": "Con đường này có nhiều nhánh phụ giống hệt nhau. Hãy tạo một hàm solveBranch để xử lý một nhánh (đi vào, thu thập pha lê, đi ra), sau đó gọi nó cho tất cả các nhánh."
+        },
+        "en": {
+          "Challenge.T02.C44.Final.Create.6.Title": "Branch Master",
+          "Challenge.T02.C44.Final.Create.6.Description": "This path has multiple identical side branches. Create a solveBranch function to handle one branch (go in, collect a crystal, come out), then call it for all branches."
+        }
+      },
+      "generation_config": {
+        "map_type": "interspersed_path",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "main_path_length": 8,
+          "num_branches": 3,
+          "branch_length": 2,
+          "items_to_place": [
+            "crystal"
+          ]
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {
+          "crystal": "all"
+        }
+      }
+    },
+    {
+      "id": "T02.C45.Final.Create.7",
+      "level": 45,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C45.Final.Create.7.Title",
+      "descriptionKey": "Challenge.T02.C45.Final.Create.7.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C45.Final.Create.7.Title": "Chinh phục Quần đảo",
+          "Challenge.T02.C45.Final.Create.7.Description": "Thử thách cuối cùng về tư duy 2D! Hãy viết một hàm solvePlusIsland và sử dụng nó để giải quyết 4 hòn đảo hình dấu cộng phức tạp."
+        },
+        "en": {
+          "Challenge.T02.C45.Final.Create.7.Title": "Island Conqueror",
+          "Challenge.T02.C45.Final.Create.7.Description": "The final 2D thinking challenge! Write a solvePlusIsland function and use it to solve 4 complex plus-shaped islands."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 4,
+          "island_pattern": "plus_shape"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C46.Final.Refactor.1",
+      "level": 46,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C46.Final.Refactor.1.Title",
+      "descriptionKey": "Challenge.T02.C46.Final.Refactor.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C46.Final.Refactor.1.Title": "Tối ưu hóa Tuyệt đối",
+          "Challenge.T02.C46.Final.Refactor.1.Description": "Đây là một đoạn mã rất dài để giải quyết cánh đồng. Hãy thể hiện kỹ năng của bạn bằng cách tái cấu trúc nó, sử dụng các hàm như plowOneRow và moveToNextRow để tạo ra một giải pháp tối ưu."
+        },
+        "en": {
+          "Challenge.T02.C46.Final.Refactor.1.Title": "The Ultimate Cleaner",
+          "Challenge.T02.C46.Final.Refactor.1.Description": "This is a very long piece of code for solving the field. Show off your skills by refactoring it, using functions like plowOneRow and moveToNextRow to create an optimal solution."
+        }
+      },
+      "generation_config": {
+        "map_type": "plowing_field",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "rows": 4,
+          "cols": 3,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C47.Final.Debug.6",
+      "level": 47,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C47.Final.Debug.6.Title",
+      "descriptionKey": "Challenge.T02.C47.Final.Debug.6.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C47.Final.Debug.6.Title": "Gỡ lỗi không gian 3D",
+          "Challenge.T02.C47.Final.Debug.6.Description": "Một thử thách gỡ lỗi cuối cùng trong không gian 3D! Chương trình này có lỗi trong cả hàm solveIsland và logic di chuyển giữa các đảo. Hãy tìm và sửa tất cả."
+        },
+        "en": {
+          "Challenge.T02.C47.Final.Debug.6.Title": "Grand 3D Debugger",
+          "Challenge.T02.C47.Final.Debug.6.Description": "A final debugging challenge in 3D space! This program has errors in both the solveIsland function and the logic for moving between islands. Find and fix them all."
+        }
+      },
+      "generation_config": {
+        "map_type": "hub_with_stepped_islands",
+        "logic_type": "function_debug_logic",
+        "num_variants": 1,
+        "params": {
+          "hub_size": 3,
+          "island_size": 2,
+          "gap_size": 2,
+          "height_options": [
+            1,
+            0
+          ],
+          "challenge_type": "DEBUG_FIX_LOGIC",
+          "start_blocks_type": "buggy_solution",
+          "bug_type": "multiple_errors"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    },
+    {
+      "id": "T02.C48.Final.Champion.1",
+      "level": 48,
+      "grade": "G34",
+      "titleKey": "Challenge.T02.C48.Final.Champion.1.Title",
+      "descriptionKey": "Challenge.T02.C48.Final.Champion.1.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T02.C48.Final.Champion.1.Title": "Nhà Vô địch Hàm",
+          "Challenge.T02.C48.Final.Champion.1.Description": "Thử thách cuối cùng của Topic 2! Tự mình thiết kế một giải pháp hoàn chỉnh từ đầu đến cuối để vẽ một chữ E lớn, phức tạp. Hãy sử dụng các hàm một cách hiệu quả để chứng tỏ bạn đã làm chủ khái niệm này."
+        },
+        "en": {
+          "Challenge.T02.C48.Final.Champion.1.Title": "Function Champion",
+          "Challenge.T02.C48.Final.Champion.1.Description": "The final challenge of Topic 2! Design a complete solution from scratch to draw a large, complex letter E. Use functions effectively to prove you've mastered the concept."
+        }
+      },
+      "generation_config": {
+        "map_type": "ef_shape",
+        "logic_type": "function_command_obstacle",
+        "num_variants": 1,
+        "params": {
+          "stem_length": 7,
+          "num_branches": 3,
+          "branch_length": 3
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {}
+      }
+    }
+  ]
+}

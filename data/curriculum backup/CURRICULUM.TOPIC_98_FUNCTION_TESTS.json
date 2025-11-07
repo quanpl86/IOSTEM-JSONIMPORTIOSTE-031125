@@ -132,13 +132,13 @@
         }
       },
       "generation_config": {
-        "map_type": "h_shape",
+        "map_type": "u_shape",
         "logic_type": "function_debug_sequence",
         "num_variants": 1,
         "params": {
-          "column_length": 3,
-          "column_spacing": 3,
-          "items_to_place": ["crystal", "switch"],
+          "side_legs_length": 3,
+          "base_leg_length": 2,
+          "items_to_place": ["crystal"],
           "start_blocks_type": "buggy_solution",
           "bug_type": "incorrect_function_call_order"
         }
@@ -149,11 +149,142 @@
       "solution_config": {
         "type": "reach_target",
         "itemGoals": {
-          "crystal": "all",
-          "switch": "all"
+          "crystal": "all"
         },
         "force_function": true
+      }
+    },
+    {
+      "id": "T98.G00.C05.Function.Refactor.Plowing",
+      "level": 5,
+      "grade": "G00",
+      "titleKey": "Test.Function.Refactor.Plowing.Title",
+      "descriptionKey": "Test.Function.Refactor.Plowing.Description",
+      "translations": {
+        "vi": {
+          "Test.Function.Refactor.Plowing.Title": "Tối ưu hóa: Cày Ruộng",
+          "Test.Function.Refactor.Plowing.Description": "Hành động đi hết một hàng và quay đầu được lặp lại nhiều lần. Hãy tạo hàm 'plowOneRow' để tối ưu hóa chương trình."
+        }
+      },
+      "generation_config": {
+        "map_type": "plowing_field",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "rows": 4,
+          "cols": 3,
+          "start_blocks_type": "unrefactored_solution",
+          "challenge_type": "REFACTOR"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {},
+        "force_function": true,
+        "function_names": ["plowOneRow"]
+      }
+    },
+    {
+      "id": "T98.G00.C06.Function.Refactor.Zigzag",
+      "level": 6,
+      "grade": "G00",
+      "titleKey": "Test.Function.Refactor.Zigzag.Title",
+      "descriptionKey": "Test.Function.Refactor.Zigzag.Description",
+      "translations": {
+        "vi": {
+          "Test.Function.Refactor.Zigzag.Title": "Tối ưu hóa: Đường Ziczac",
+          "Test.Function.Refactor.Zigzag.Description": "Đoạn code để đi một khúc cua ziczac (tiến, rẽ, tiến, rẽ) được lặp lại. Hãy tạo một hàm để gói gọn logic này."
+        }
+      },
+      "generation_config": {
+        "map_type": "zigzag",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "num_segments": 4,
+          "segment_length": 2,
+          "start_blocks_type": "unrefactored_solution",
+          "challenge_type": "REFACTOR"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {},
+        "force_function": true
+      }
+    },
+    {
+      "id": "T98.G00.C07.Function.Refactor.HShape",
+      "level": 7,
+      "grade": "G00",
+      "titleKey": "Test.Function.Refactor.HShape.Title",
+      "descriptionKey": "Test.Function.Refactor.HShape.Description",
+      "translations": {
+        "vi": {
+          "Test.Function.Refactor.HShape.Title": "Tối ưu hóa: Vẽ Chữ H",
+          "Test.Function.Refactor.HShape.Description": "Logic để vẽ một cột dọc của chữ H được lặp lại hai lần. Hãy tạo hàm 'drawColumn' và tái sử dụng nó."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "column_length": 4,
+          "column_spacing": 3,
+          "start_blocks_type": "unrefactored_solution",
+          "challenge_type": "REFACTOR"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {},
+        "force_function": true,
+        "function_names": ["drawColumn"]
+      }
+    },
+    {
+      "id": "T98.G00.C08.Function.Refactor.Spiral3D",
+      "level": 8,
+      "grade": "G00",
+      "titleKey": "Test.Function.Refactor.Spiral3D.Title",
+      "descriptionKey": "Test.Function.Refactor.Spiral3D.Description",
+      "translations": {
+        "vi": {
+          "Test.Function.Refactor.Spiral3D.Title": "Tối ưu hóa: Leo Tháp Xoắn Ốc",
+          "Test.Function.Refactor.Spiral3D.Description": "Để leo lên mỗi tầng của tháp, bạn cần một chuỗi lệnh 'tiến-nhảy-rẽ'. Hãy tạo hàm 'climbOneLevel' để tối ưu hóa việc leo tháp."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_3d",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "num_turns": 4,
+          "start_blocks_type": "unrefactored_solution",
+          "challenge_type": "REFACTOR"
+        }
+      },
+      "blockly_config": {
+        "toolbox_preset": "functions_basic"
+      },
+      "solution_config": {
+        "type": "reach_target",
+        "itemGoals": {},
+        "force_function": true,
+        "function_names": ["climbOneLevel"]
       }
     }
   ]
 }
+
+    

@@ -1,0 +1,176 @@
+{
+  "id": "T01.G34.C10.Jump.Create.2-var1",
+  "gameType": "maze",
+  "topic": "topic-title-topic_01_sequencing",
+  "level": 10,
+  "titleKey": "Challenge.T01.C10.Jump.Create.2.Title",
+  "questTitleKey": "Challenge.T01.C10.Jump.Create.2.Description",
+  "descriptionKey": "Challenge.T01.C10.Jump.Create.2.Description",
+  "translations": {
+    "vi": {
+      "Challenge.T01.C10.Jump.Create.2.Title": "Nhảy qua vực thẳm",
+      "Challenge.T01.C10.Jump.Create.2.Description": "Con đường đã bị gãy. Hãy sử dụng kết hợp các lệnh di chuyển và nhảy để đi từ hòn đảo này sang hòn đảo khác và đến đích an toàn.",
+      "topic-title-topic_01_sequencing": "LỆNH VÀ TUẦN TỰ"
+    },
+    "en": {
+      "Challenge.T01.C10.Jump.Create.2.Title": "Across the Gap",
+      "Challenge.T01.C10.Jump.Create.2.Description": "The path is broken. Use a combination of move and jump commands to get from one platform to the next and reach the goal safely.",
+      "topic-title-topic_01_sequencing": "LỆNH VÀ TUẦN TỰ"
+    }
+  },
+  "supportedEditors": [
+    "blockly",
+    "monaco"
+  ],
+  "blocklyConfig": {
+    "toolbox": {
+      "kind": "categoryToolbox",
+      "contents": [
+        {
+          "kind": "category",
+          "name": "%{BKY_GAMES_CATEVENTS}",
+          "categorystyle": "events_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "maze_start"
+            }
+          ]
+        },
+        {
+          "kind": "category",
+          "name": "%{BKY_GAMES_CATMOVEMENT}",
+          "categorystyle": "movement_category",
+          "contents": [
+            {
+              "kind": "block",
+              "type": "maze_moveForward"
+            },
+            {
+              "kind": "block",
+              "type": "maze_turn"
+            },
+            {
+              "kind": "block",
+              "type": "maze_jump"
+            }
+          ]
+        }
+      ]
+    },
+    "maxBlocks": 8,
+    "startBlocks": "<xml><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"></statement></block></xml>"
+  },
+  "gameConfig": {
+    "type": "maze",
+    "renderer": "3d",
+    "blocks": [
+      {
+        "modelKey": "stone.stone02",
+        "position": {
+          "x": 5,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone02",
+        "position": {
+          "x": 6,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone02",
+        "position": {
+          "x": 6,
+          "y": 1,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "stone.stone02",
+        "position": {
+          "x": 7,
+          "y": 0,
+          "z": 7
+        }
+      },
+      {
+        "modelKey": "wall.brick04",
+        "position": {
+          "x": 6,
+          "y": 1,
+          "z": 7
+        }
+      }
+    ],
+    "players": [
+      {
+        "id": "player1",
+        "start": {
+          "x": 5,
+          "y": 1,
+          "z": 7,
+          "direction": 1
+        }
+      }
+    ],
+    "collectibles": [],
+    "interactibles": [],
+    "finish": {
+      "x": 7,
+      "y": 1,
+      "z": 7
+    },
+    "obstacles": [
+      {
+        "id": "o1",
+        "type": "obstacle",
+        "modelKey": "wall.brick04",
+        "position": {
+          "x": 6,
+          "y": 1,
+          "z": 7
+        }
+      }
+    ]
+  },
+  "solution": {
+    "type": "reach_target",
+    "itemGoals": {},
+    "optimalBlocks": 3,
+    "optimalLines": 2,
+    "rawActions": [
+      "jump",
+      "jump"
+    ],
+    "structuredSolution": {
+      "main": [
+        {
+          "type": "maze_jump"
+        },
+        {
+          "type": "maze_jump"
+        }
+      ],
+      "procedures": {}
+    },
+    "structuredSolution_fixbug_version": {
+      "main": [
+        {
+          "type": "maze_jump"
+        },
+        {
+          "type": "maze_jump"
+        }
+      ],
+      "procedures": {}
+    }
+  },
+  "sounds": {
+    "win": "/assets/maze/win.mp3",
+    "fail": "/assets/maze/fail_pegman.mp3"
+  }
+}

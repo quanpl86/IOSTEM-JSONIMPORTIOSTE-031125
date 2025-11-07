@@ -128,8 +128,14 @@ class MapData:
         # [FIX] Lấy modelKey cho obstacle từ asset_theme
         obstacle_model = asset_theme.get('obstacle', 'wall.brick01')
 
-        # [FIX] Tạo một set chứa tọa độ và modelKey của các chướng ngại vật để tra cứu nhanh
-        obstacle_map = {tuple(obs['pos']): obs.get('modelKey', obstacle_model) for obs in self.obstacles}
+        # [SỬA LỖI HIỂN THỊ] Phân loại obstacles thành "hố" và "vật cản vật lý"
+        # Hố (is_hole=True) là những vị trí không có nền đất.
+        # Vật cản vật lý là các khối tường, bậc thang...
+        holes = {tuple(obs['pos']) for obs in self.obstacles if obs.get('is_hole')}
+        physical_obstacles = [obs for obs in self.obstacles if not obs.get('is_hole')]
+
+        # [FIX] Tạo một set chứa tọa độ và modelKey của các vật cản VẬT LÝ để tra cứu nhanh
+        obstacle_map = {tuple(obs['pos']): obs.get('modelKey', obstacle_model) for obs in physical_obstacles}
         
         # --- Bước 1: Tạo mặt đất (ground) ---
         # [SỬA LỖI] Logic tạo nền đất được viết lại hoàn toàn.
@@ -150,12 +156,12 @@ class MapData:
         # [SỬA LỖI] Tạo một set chứa tọa độ của các chướng ngại vật để loại trừ nền đất bên dưới.
         # Chỉ loại trừ khi map là 3D (có bậc thang) để tránh khối chồng chéo.
         obstacle_positions_to_exclude_ground = set()
-        if self.map_type in ['stepped_island_clusters', 'hub_with_stepped_islands']:
-            obstacle_positions_to_exclude_ground = {tuple(obs['pos']) for obs in self.obstacles}
+        if self.map_type in ['stepped_island_clusters', 'hub_with_stepped_islands', 'staircase']:
+            obstacle_positions_to_exclude_ground = {tuple(obs['pos']) for obs in physical_obstacles}
 
         # [REFACTORED] Logic xử lý ground cho chướng ngại vật đã rõ ràng hơn.
         # - Tường (wall/obstacle) cần có ground bên dưới.
-        for obs in self.obstacles:
+        for obs in physical_obstacles:
             obs_pos = tuple(obs['pos'])
             ground_coords.add(obs_pos)
 
@@ -165,9 +171,8 @@ class MapData:
             
             # [SỬA LỖI] Tạo một set chứa tọa độ 2D (x, z) của tất cả các bức tường để tra cứu nhanh.
             # Tường trong maze được tạo ở y=1, nhưng BFS chạy ở y=0, nên ta cần bỏ qua tọa độ y khi so sánh.
-            wall_coords_2d = {(obs['pos'][0], 0, obs['pos'][2]) 
-                              for obs in self.obstacles if obs.get('type') == 'wall'}
-            wall_coords_3d = {tuple(obs['pos']) for obs in self.obstacles if obs.get('type') == 'wall'}
+            wall_coords_2d = {(obs['pos'][0], 0, obs['pos'][2])
+                              for obs in physical_obstacles if obs.get('type') == 'wall'}
             
             # Sử dụng thuật toán BFS để tìm tất cả các ô ground có thể đi được.
             # Hàng đợi (queue) cho BFS, bắt đầu từ vị trí của người chơi.
@@ -197,10 +202,11 @@ class MapData:
             final_ground_coords = visited_grounds.union(wall_coords_2d)
         else:
             # Đối với các map khác, ground_coords đã được xác định ở trên.
-            final_ground_coords = ground_coords
+            # [SỬA LỖI HIỂN THỊ] Loại bỏ các "hố" khỏi danh sách nền đất.
+            final_ground_coords = ground_coords - holes
             # [SỬA LỖI LẦN 3] Chỉ loại bỏ nền đất bên dưới bậc thang đối với các map 3D,
             # để tránh tạo khối chồng chéo.
-            final_ground_coords = ground_coords - obstacle_positions_to_exclude_ground
+            final_ground_coords = final_ground_coords - obstacle_positions_to_exclude_ground
 
         
         # [CẢI TIẾN] Xử lý các khối có modelKey tùy chỉnh từ placement_coords
@@ -220,7 +226,7 @@ class MapData:
                 game_blocks.append({"modelKey": ground_model, "position": coord_to_obj(pos)})
 
         # Bước 2.2: Tạo tất cả các khối CHƯỚNG NGẠI VẬT (obstacles)
-        for obs in self.obstacles:
+        for obs in physical_obstacles:
             game_blocks.append({"modelKey": obs.get('modelKey', obstacle_model), "position": coord_to_obj(obs['pos'])})
 
         # --- Bước 2: Đặt các đối tượng lên trên mặt đất ---
@@ -250,6 +256,27 @@ class MapData:
         # Logic này đã được chuyển hoàn toàn sang `generate_all_maps.py` để tránh tạo khối trùng lặp
         # cho các bậc thang.
 
+        # --- [CẢI TIẾN] Xác định hướng bắt đầu của người chơi ---
+        # Ưu tiên 1: Lấy hướng trực tiếp từ params nếu có.
+        # Ưu tiên 2: Tự động tính toán hướng để nhân vật nhìn về phía target_pos.
+        # Ưu tiên 3: Nếu không thể tính toán (start == target), mặc định là hướng 1 (+X).
+        start_direction = self.params.get('start_direction')
+
+        if start_direction is None:
+            # Tự động tính toán hướng
+            dx = self.target_pos[0] - self.start_pos[0]
+            dz = self.target_pos[2] - self.start_pos[2]
+
+            if abs(dx) > abs(dz):
+                # Hướng chính là trục X
+                start_direction = 1 if dx > 0 else 3 # Đúng: 1: Đông (+X), 3: Tây (-X)
+            elif abs(dz) > abs(dx):
+                # Hướng chính là trục Z
+                start_direction = 2 if dz > 0 else 0 # [SỬA LỖI] 2: Nam (+Z), 0: Bắc (-Z)
+            else: # dx == dz, hoặc cả hai đều bằng 0
+                # Nếu start và target trùng nhau, hoặc trên đường chéo, ưu tiên hướng +X
+                start_direction = 1
+
         # --- Bước 3: Hoàn thiện cấu trúc JSON ---
         return {
             "gameConfig": {
@@ -260,7 +287,7 @@ class MapData:
                     "id": "player1",
                     "start": {
                         **coord_to_obj(self.start_pos, y_offset=1),
-                        "direction": 1 # Mặc định hướng về +X
+                        "direction": start_direction
                     }
                 }],
                 "collectibles": collectibles,

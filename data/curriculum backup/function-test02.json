@@ -1,0 +1,316 @@
+{
+  "topic_code": "TOPIC_99_REFACTOR_ALL_MAPS",
+  "topic_name": "Kiểm thử Refactor trên mọi dạng Map",
+  "suggested_maps": [
+    {
+      "id": "T99.G00.C01.Function.Refactor.Staircase",
+      "level": 1,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C01.Title",
+      "descriptionKey": "Challenge.T99.C01.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C01.Title": "Tối ưu: Leo Cầu Thang",
+          "Challenge.T99.C01.Description": "Hành động 'tiến và nhảy' được lặp lại nhiều lần. Hãy tạo một hàm để tối ưu hóa việc leo cầu thang."
+        }
+      },
+      "generation_config": {
+        "map_type": "staircase",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "num_steps": 5,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {}, "force_function": true, "function_names": ["climbOneStep"] }
+    },
+    {
+      "id": "T99.G00.C02.Function.Refactor.Square",
+      "level": 2,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C02.Title",
+      "descriptionKey": "Challenge.T99.C02.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C02.Title": "Tối ưu: Vẽ Hình Vuông",
+          "Challenge.T99.C02.Description": "Hành động 'đi một cạnh và rẽ' được lặp lại 4 lần. Hãy tạo hàm 'drawSide' để vẽ hình vuông."
+        }
+      },
+      "generation_config": {
+        "map_type": "square_shape",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "side_length": 4,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {}, "force_function": true, "function_names": ["drawSide"] }
+    },
+    {
+      "id": "T99.G00.C03.Function.Refactor.Zigzag",
+      "level": 3,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C03.Title",
+      "descriptionKey": "Challenge.T99.C03.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C03.Title": "Tối ưu: Đường Ziczac",
+          "Challenge.T99.C03.Description": "Một đoạn hành động để đi một khúc cua ziczac được lặp lại. Hãy tạo một hàm để gói gọn logic này."
+        }
+      },
+      "generation_config": {
+        "map_type": "zigzag",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "num_segments": 4,
+          "segment_length": 2,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {}, "force_function": true, "function_names": ["navigateSegment"] }
+    },
+    {
+      "id": "T99.G00.C04.Function.Refactor.PlowingField",
+      "level": 4,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C04.Title",
+      "descriptionKey": "Challenge.T99.C04.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C04.Title": "Tối ưu: Cày Ruộng",
+          "Challenge.T99.C04.Description": "Hành động đi hết một hàng và quay đầu được lặp lại. Hãy tạo hàm 'plowOneRow' để tối ưu hóa."
+        }
+      },
+      "generation_config": {
+        "map_type": "plowing_field",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "rows": 4,
+          "cols": 3,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {}, "force_function": true, "function_names": ["plowOneRow"] }
+    },
+    {
+      "id": "T99.G00.C05.Function.Refactor.SymmetricalIslands",
+      "level": 5,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C05.Title",
+      "descriptionKey": "Challenge.T99.C05.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C05.Title": "Tối ưu: Các Đảo Đối Xứng",
+          "Challenge.T9̃9.C05.Description": "Hai hòn đảo này có cấu trúc giống hệt nhau. Hãy tạo một hàm để xử lý một hòn đảo và gọi nó hai lần."
+        }
+      },
+      "generation_config": {
+        "map_type": "symmetrical_islands",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "num_islands": 2,
+          "island_pattern": "l_shape",
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {}, "force_function": true, "function_names": ["solveIsland"] }
+    },
+    {
+      "id": "T99.G00.C06.Function.Refactor.HShape",
+      "level": 6,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C06.Title",
+      "descriptionKey": "Challenge.T99.C06.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C06.Title": "Tối ưu: Vẽ Chữ H",
+          "Challenge.T99.C06.Description": "Logic để vẽ một cột dọc của chữ H được lặp lại. Hãy tạo hàm 'drawColumn' và tái sử dụng nó."
+        }
+      },
+      "generation_config": {
+        "map_type": "h_shape",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "column_length": 4,
+          "column_spacing": 3,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {}, "force_function": true, "function_names": ["drawColumn"] }
+    },
+    {
+      "id": "T99.G00.C07.Function.Refactor.InterspersedPath",
+      "level": 7,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C07.Title",
+      "descriptionKey": "Challenge.T99.C07.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C07.Title": "Tối ưu: Các Nhánh Phụ",
+          "Challenge.T99.C07.Description": "Các nhánh rẽ ra từ đường chính đều giống nhau. Hãy tạo hàm 'exploreBranch' để khám phá chúng."
+        }
+      },
+      "generation_config": {
+        "map_type": "interspersed_path",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "main_path_length": 10,
+          "num_branches": 3,
+          "branch_length": 2,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {"crystal": "all"}, "force_function": true, "function_names": ["exploreBranch"] }
+    },
+    {
+      "id": "T99.G00.C08.Function.Refactor.Spiral3D",
+      "level": 8,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C08.Title",
+      "descriptionKey": "Challenge.T99.C08.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C08.Title": "Tối ưu: Leo Tháp Xoắn Ốc",
+          "Challenge.T99.C08.Description": "Để leo lên mỗi tầng của tháp, bạn cần một chuỗi lệnh lặp lại. Hãy tạo hàm 'climbOneLevel' để tối ưu hóa."
+        }
+      },
+      "generation_config": {
+        "map_type": "spiral_3d",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "num_turns": 8,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {}, "force_function": true, "function_names": ["climbOneLevel"] }
+    },
+    {
+      "id": "T99.G00.C09.Function.Refactor.HubWithSteppedIslands",
+      "level": 9,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C09.Title",
+      "descriptionKey": "Challenge.T99.C09.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C09.Title": "Tối ưu: Đảo Vệ Tinh",
+          "Challenge.T99.C09.Description": "Hành động đi từ trung tâm ra một đảo và quay về được lặp lại. Hãy tạo hàm 'visitIsland' để tối ưu."
+        }
+      },
+      "generation_config": {
+        "map_type": "hub_with_stepped_islands",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "hub_size": 3,
+          "island_size": 3,
+          "gap_size": 2,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {"crystal": "all"}, "force_function": true, "function_names": ["visitIsland"] }
+    },
+    {
+      "id": "T99.G00.C10.Function.Refactor.SwiftPlaygroundMaze",
+      "level": 10,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C10.Title",
+      "descriptionKey": "Challenge.T99.C10.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C10.Title": "Tối ưu: Mê Cung Nhiều Tầng",
+          "Challenge.T99.C10.Description": "Hành động leo hai bậc thang để sang sàn tiếp theo được lặp lại. Hãy tạo hàm 'crossToNextPlatform'."
+        }
+      },
+      "generation_config": {
+        "map_type": "swift_playground_maze",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {}, "force_function": true, "function_names": ["crossToNextPlatform"] }
+    },
+    {
+      "id": "T99.G00.C11.Function.Refactor.ComplexMaze",
+      "level": 11,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C11.Title",
+      "descriptionKey": "Challenge.T99.C11.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C11.Title": "Tối ưu: Mê Cung Phức Tạp",
+          "Challenge.T99.C11.Description": "Trong một mê cung lớn, đôi khi có những đoạn đường lặp lại. Hãy thử tìm một mẫu hành động và tạo hàm để tối ưu hóa đường đi."
+        }
+      },
+      "generation_config": {
+        "map_type": "complex_maze_2d",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "maze_width": 8,
+          "maze_depth": 8,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {"crystal": "all"}, "force_function": true, "function_names": ["navigatePattern"] }
+    },
+    {
+      "id": "T99.G00.C12.Function.Refactor.GridWithHoles",
+      "level": 12,
+      "grade": "G00",
+      "titleKey": "Challenge.T99.C12.Title",
+      "descriptionKey": "Challenge.T99.C12.Description",
+      "translations": {
+        "vi": {
+          "Challenge.T99.C12.Title": "Tối ưu: Lưới Lỗ Thủng",
+          "Challenge.T99.C12.Description": "Việc di chuyển và né các hố có thể tạo ra các mẫu hành động lặp lại. Hãy tìm một mẫu và tạo hàm để làm gọn chương trình."
+        }
+      },
+      "generation_config": {
+        "map_type": "grid_with_holes",
+        "logic_type": "function_refactor",
+        "num_variants": 1,
+        "params": {
+          "width": 12,
+          "height": 12,
+          "hole_percentage": 0.5,
+          "challenge_type": "REFACTOR",
+          "start_blocks_type": "unrefactored_solution"
+        }
+      },
+      "blockly_config": { "toolbox_preset": "functions_basic" },
+      "solution_config": { "type": "reach_target", "itemGoals": {}, "force_function": true, "function_names": ["avoidAndMove"] }
+    }
+  ]
+}

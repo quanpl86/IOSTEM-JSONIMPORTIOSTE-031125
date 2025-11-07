@@ -1,16 +1,21 @@
 {
-  "id": "T98.G00.G00.C02.Function.Debug.Logic-var1",
+  "id": "T01.G34.C34.Switch.Debug.1-var1",
   "gameType": "maze",
-  "topic": "topic-title-topic_98_function_tests",
-  "level": 2,
-  "titleKey": "Test.Function.Debug.Logic.Title",
-  "questTitleKey": "Test.Function.Debug.Logic.Description",
-  "descriptionKey": "Test.Function.Debug.Logic.Description",
+  "topic": "topic-title-topic_01_sequencing",
+  "level": 34,
+  "titleKey": "Challenge.T01.C34.Switch.Debug.1.Title",
+  "questTitleKey": "Challenge.T01.C34.Switch.Debug.1.Description",
+  "descriptionKey": "Challenge.T01.C34.Switch.Debug.1.Description",
   "translations": {
     "vi": {
-      "Test.Function.Debug.Logic.Title": "Sửa lỗi: Logic sai trong Hàm",
-      "Test.Function.Debug.Logic.Description": "Hàm 'collectOnIsland' được cho là sẽ giúp nhân vật rẽ phải, nhưng nó lại rẽ trái. Hãy tìm lỗi bên trong khối định nghĩa hàm và sửa nó.",
-      "topic-title-topic_98_function_tests": "Kiểm thử Toàn diện về Hàm"
+      "Challenge.T01.C34.Switch.Debug.1.Title": "Sửa lỗi: Bật công tắc từ xa",
+      "Challenge.T01.C34.Switch.Debug.1.Description": "Chương trình đang cố gắng bật công tắc trước khi nhân vật di chuyển đến vị trí của nó. Hãy sắp xếp lại các khối lệnh cho đúng thứ tự.",
+      "topic-title-topic_01_sequencing": "LỆNH VÀ TUẦN TỰ"
+    },
+    "en": {
+      "Challenge.T01.C34.Switch.Debug.1.Title": "Fix the Bug: Remote Flipping",
+      "Challenge.T01.C34.Switch.Debug.1.Description": "The program is trying to flip the switch before the character moves to its location. Rearrange the blocks into the correct order.",
+      "topic-title-topic_01_sequencing": "LỆNH VÀ TUẦN TỰ"
     }
   },
   "supportedEditors": [
@@ -43,11 +48,11 @@
             },
             {
               "kind": "block",
-              "type": "maze_jump"
+              "type": "maze_turn"
             },
             {
               "kind": "block",
-              "type": "maze_turn"
+              "type": "maze_jump"
             }
           ]
         },
@@ -65,41 +70,16 @@
               "type": "maze_toggle_switch"
             }
           ]
-        },
-        {
-          "kind": "sep"
-        },
-        {
-          "kind": "category",
-          "name": "%{BKY_GAMES_CATPROCEDURES}",
-          "custom": "PROCEDURE",
-          "categorystyle": "procedure_category"
         }
       ]
     },
-    "maxBlocks": 14,
-    "startBlocks": "<xml><block type=\"procedures_defnoreturn\" deletable=\"false\"><field name=\"NAME\">collectOnIsland</field><statement name=\"STACK\"><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></statement></block><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"><block type=\"procedures_callnoreturn\"><mutation name=\"collectOnIsland\" /><next><block type=\"maze_turn\"><field name=\"DIR\">turnLeft</field><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></next></block></statement></block></xml>"
+    "maxBlocks": 12,
+    "startBlocks": "<xml><block type=\"maze_start\" deletable=\"false\" movable=\"false\"><statement name=\"DO\"><block type=\"maze_toggle_switch\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\"><next><block type=\"maze_moveForward\" /></next></block></next></block></next></block></next></block></next></block></statement></block></xml>"
   },
   "gameConfig": {
     "type": "maze",
     "renderer": "3d",
     "blocks": [
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 1,
-          "y": 0,
-          "z": 1
-        }
-      },
-      {
-        "modelKey": "ground.normal",
-        "position": {
-          "x": 1,
-          "y": 0,
-          "z": 2
-        }
-      },
       {
         "modelKey": "ground.normal",
         "position": {
@@ -123,6 +103,30 @@
           "y": 0,
           "z": 3
         }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 4,
+          "y": 0,
+          "z": 3
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 5,
+          "y": 0,
+          "z": 3
+        }
+      },
+      {
+        "modelKey": "ground.normal",
+        "position": {
+          "x": 6,
+          "y": 0,
+          "z": 3
+        }
       }
     ],
     "players": [
@@ -131,15 +135,26 @@
         "start": {
           "x": 1,
           "y": 1,
-          "z": 1,
+          "z": 3,
           "direction": 1
         }
       }
     ],
     "collectibles": [],
-    "interactibles": [],
+    "interactibles": [
+      {
+        "id": "s1",
+        "type": "switch",
+        "position": {
+          "x": 2,
+          "y": 1,
+          "z": 3
+        },
+        "initialState": "off"
+      }
+    ],
     "finish": {
-      "x": 3,
+      "x": 6,
       "y": 1,
       "z": 3
     }
@@ -147,27 +162,31 @@
   "solution": {
     "type": "reach_target",
     "itemGoals": {
-      "crystal": 0
+      "switch": 1
     },
-    "optimalBlocks": 9,
-    "optimalLines": 8,
+    "optimalBlocks": 7,
+    "optimalLines": 6,
     "rawActions": [
-      "turnRight",
+      "moveForward",
+      "toggleSwitch",
       "moveForward",
       "moveForward",
-      "turnLeft",
       "moveForward",
       "moveForward"
     ],
     "structuredSolution": {
       "main": [
         {
-          "type": "CALL",
-          "name": "collectOnIsland"
+          "type": "maze_moveForward"
         },
         {
-          "type": "maze_turn",
-          "direction": "turnLeft"
+          "type": "maze_toggleSwitch"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
         },
         {
           "type": "maze_moveForward"
@@ -176,30 +195,21 @@
           "type": "maze_moveForward"
         }
       ],
-      "procedures": {
-        "collectOnIsland": [
-          {
-            "type": "maze_turn",
-            "direction": "turnRight"
-          },
-          {
-            "type": "maze_moveForward"
-          },
-          {
-            "type": "maze_moveForward"
-          }
-        ]
-      }
+      "procedures": {}
     },
     "structuredSolution_fixbug_version": {
       "main": [
         {
-          "type": "CALL",
-          "name": "collectOnIsland"
+          "type": "maze_toggleSwitch"
         },
         {
-          "type": "maze_turn",
-          "direction": "turnLeft"
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
+        },
+        {
+          "type": "maze_moveForward"
         },
         {
           "type": "maze_moveForward"
@@ -208,20 +218,7 @@
           "type": "maze_moveForward"
         }
       ],
-      "procedures": {
-        "collectOnIsland": [
-          {
-            "type": "maze_turn",
-            "direction": "turnLeft"
-          },
-          {
-            "type": "maze_moveForward"
-          },
-          {
-            "type": "maze_moveForward"
-          }
-        ]
-      }
+      "procedures": {}
     }
   },
   "sounds": {

@@ -1,3 +1,4 @@
+# src/map_generator/topologies/grid_with_holes.py
 import random
 from .base_topology import BaseTopology
 from src.map_generator.models.path_info import PathInfo, Coord
@@ -62,7 +63,7 @@ class GridWithHolesTopology(BaseTopology):
         # === ĐÂY LÀ DÒNG CODE QUAN TRỌNG NHẤT CẦN KIỂM TRA ===
         # === Hãy chắc chắn rằng "type" là "obstacle" ===
         # ====================================================================
-        obstacles = [{"type": "obstacle", "pos": pos} for pos in potential_holes]
+        obstacles = [{"type": "obstacle", "pos": pos, "is_hole": True} for pos in potential_holes]
 
         return PathInfo(
             start_pos=start_pos,

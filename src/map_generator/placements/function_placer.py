@@ -26,18 +26,18 @@ class FunctionPlacer(BasePlacer):
     ISLAND_PATTERNS = {
         'basic': [
             {'type': 'crystal', 'offset': (2, 0)},
-            {'type': 'crystal',     'offset': (5, 0)}
+            {'type': 'crystal',  'offset': (5, 0)}
         ],
         'medium': [
             {'type': 'crystal', 'offset': (1, 0)},
             {'type': 'switch',  'offset': (3, 0)},
-            {'type': 'crystal',     'offset': (5, 0)}
+            {'type': 'crystal', 'offset': (5, 0)}
         ],
         'advanced': [
-            {'type': 'crystal',     'offset': (1, 0)},
+            {'type': 'crystal',  'offset': (1, 0)},
             {'type': 'crystal', 'offset': (2, 0)},
             {'type': 'switch',  'offset': (4, 0)},
-            {'type': 'crystal',     'offset': (6, 0)}
+            {'type': 'crystal',  'offset': (6, 0)}
         ]
     }
 

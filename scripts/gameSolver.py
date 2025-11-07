@@ -163,11 +163,13 @@ def _solve_multi_goal_tsp(world: GameWorld) -> Optional[List[Action]]:
     # Tạo một cache để lưu trữ đường đi giữa hai điểm bất kỳ, tránh tính toán lại
     path_cache: Dict[Tuple[str, str], Optional[List[Action]]] = {}
 
-    def get_path_between(pos1: Position, pos2: Position, collected_so_far: Set[str]) -> Optional[List[Action]]:
+    def get_path_between(pos1: Position, pos2: Position, current_game_state: GameState) -> Optional[List[Action]]:
         """Hàm helper để tìm đường đi giữa 2 điểm và cache lại kết quả."""
-        # [SỬA LỖI] Key của cache phải bao gồm cả trạng thái vật phẩm đã thu thập
-        collected_key = ",".join(sorted(list(collected_so_far)))
-        key1 = f"{pos1['x']}-{pos1['y']}-{pos1['z']}|{collected_key}"
+        # [SỬA LỖI QUAN TRỌNG] Key của cache phải bao gồm cả trạng thái vật phẩm VÀ trạng thái công tắc.
+        # Điều này đảm bảo rằng chúng ta không sử dụng lại một đường đi cũ vốn được tính khi công tắc ở trạng thái khác.
+        collected_key = ",".join(sorted(list(current_game_state.collected_items)))
+        switches_key = ",".join(sorted([f"{k}:{v}" for k, v in current_game_state.switch_states.items()]))
+        key1 = f"{pos1['x']}-{pos1['y']}-{pos1['z']}|i:{collected_key}|s:{switches_key}"
         key2 = f"{pos2['x']}-{pos2['y']}-{pos2['z']}"
         
         # Kiểm tra cache trước
@@ -182,8 +184,8 @@ def _solve_multi_goal_tsp(world: GameWorld) -> Optional[List[Action]]:
         temp_world.solution_config = {"type": "reach_target", "itemGoals": {}}
         
         # [SỬA LỖI] Tạo một GameState tạm với các vật phẩm đã thu thập để A* không tìm cách thu thập lại
-        temp_start_state = GameState(temp_world.start_info, temp_world)
-        temp_start_state.collected_items = collected_so_far.copy()
+        # Sử dụng trạng thái hiện tại được truyền vào để đảm bảo tính đúng đắn của trạng thái công tắc.
+        temp_start_state = current_game_state.clone()
 
         # Gọi hàm A* gốc để giải bài toán con
         sub_path = solve_level(temp_world, is_sub_problem=True, initial_state_override=temp_start_state)
@@ -204,17 +206,18 @@ def _solve_multi_goal_tsp(world: GameWorld) -> Optional[List[Action]]:
         
         # Thuật toán Người hàng xóm gần nhất (Nearest Neighbor Heuristic)
         unvisited_goals = set(tuple(p.items()) for p in goal_positions)
-        current_pos = start_pos
+        current_pos = copy.deepcopy(start_pos)
         ordered_path = [start_pos]
-        temp_collected: Set[str] = set()
+        # [SỬA LỖI] Khởi tạo GameState ban đầu để theo dõi trạng thái
+        current_state = GameState(world.start_info, world)
 
         while unvisited_goals:
             nearest_goal = None
             shortest_path_len = float('inf')
 
-            for goal_tuple in unvisited_goals:
+            for goal_tuple in unvisited_goals: # type: ignore
                 goal_pos = dict(goal_tuple)
-                path = get_path_between(current_pos, goal_pos, temp_collected)
+                path = get_path_between(current_pos, goal_pos, current_state)
                 if path is not None and len(path) < shortest_path_len:
                     shortest_path_len = len(path)
                     nearest_goal = goal_tuple
@@ -223,81 +226,107 @@ def _solve_multi_goal_tsp(world: GameWorld) -> Optional[List[Action]]:
                 ordered_path.append(dict(nearest_goal))
                 unvisited_goals.remove(nearest_goal)
                 current_pos = dict(nearest_goal)
-                # Cập nhật vật phẩm đã thu thập
+                # [SỬA LỖI] Cập nhật trạng thái (vật phẩm và công tắc) sau khi đi đến mục tiêu
                 dest_pos_key = f"{current_pos['x']}-{current_pos['y']}-{current_pos['z']}"
                 if dest_pos_key in world.collectibles_by_pos:
                     item_id = world.collectibles_by_pos[dest_pos_key]['id']
-                    temp_collected.add(item_id)
+                    current_state.collected_items.add(item_id)
+                elif dest_pos_key in world.switches:
+                    switch_obj = world.switches[dest_pos_key]
+                    switch_id = switch_obj['id']
+                    current_state.switch_states[switch_id] = 'on' if current_state.switch_states[switch_id] == 'off' else 'off'
+
             else:
                 # Không tìm thấy đường đến bất kỳ mục tiêu nào còn lại
                 print("    LOG: (Solver) Heuristic không tìm được đường đi đến các mục tiêu còn lại.")
                 return None # Không thể giải
         
-        ordered_path.append(world.finish_pos)
         best_order = ordered_path
 
     else:
         print(f"    LOG: (Solver) Số mục tiêu ({len(goal_positions)}) trong ngưỡng. Thử tất cả các hoán vị...")
         min_total_cost = float('inf')
         for order in permutations(goal_positions):
-            current_order = [start_pos] + list(order) + [world.finish_pos]
-            # [SỬA LỖI] Không thêm world.finish_pos vào mỗi hoán vị.
-            # Thay vào đó, tìm đường đi ngắn nhất qua các mục tiêu, sau đó mới tìm đường từ mục tiêu cuối cùng đến finish.
+            # [SỬA LỖI QUAN TRỌNG] Logic Brute-force TSP
+            # 1. Chỉ tính toán đường đi giữa các điểm mục tiêu (start -> g1 -> g2 -> ...).
             current_order = [start_pos] + list(order)
             total_cost = 0
             possible = True
-            temp_collected: Set[str] = set()
+            # [SỬA LỖI] Khởi tạo GameState cho mỗi hoán vị để theo dõi trạng thái
+            temp_state = GameState(world.start_info, world)
+
             for i in range(len(current_order) - 1):
-                path = get_path_between(current_order[i], current_order[i+1], temp_collected)
-                if path is None: possible = False; break
+                path = get_path_between(current_order[i], current_order[i+1], temp_state)
                 if path is None:
                     possible = False
                     break
                 total_cost += len(path)
+                # [SỬA LỖI] Cập nhật trạng thái (vật phẩm và công tắc) sau mỗi bước
                 dest_pos_key = f"{current_order[i+1]['x']}-{current_order[i+1]['y']}-{current_order[i+1]['z']}"
                 if dest_pos_key in world.collectibles_by_pos:
-                    temp_collected.add(world.collectibles_by_pos[dest_pos_key]['id'])
-            if possible and total_cost < min_total_cost:
-                min_total_cost, best_order = total_cost, current_order
+                    item_id = world.collectibles_by_pos[dest_pos_key]['id']
+                    temp_state.collected_items.add(item_id)
+                elif dest_pos_key in world.switches:
+                    switch_obj = world.switches[dest_pos_key]
+                    switch_id = switch_obj['id']
+                    temp_state.switch_states[switch_id] = 'on' if temp_state.switch_states[switch_id] == 'off' else 'off'
+
+            # 2. Sau khi có tổng chi phí đi qua các mục tiêu, TÍNH THÊM chi phí từ mục tiêu cuối cùng đến ĐÍCH.
+            if possible:
+                last_goal_pos = current_order[-1]
+                path_to_finish = get_path_between(last_goal_pos, world.finish_pos, temp_state)
+                if path_to_finish is not None:
+                    final_cost = total_cost + len(path_to_finish)
+                    if final_cost < min_total_cost:
+                        min_total_cost, best_order = final_cost, current_order
+                else:
+                    # Nếu không có đường từ mục tiêu cuối đến đích, hoán vị này không hợp lệ.
+                    pass
 
     # 3. [SỬA LỖI] Nếu tìm thấy thứ tự tối ưu, ghép các đường đi lại và thêm hành động tương ứng
     if best_order:
         print(f"    LOG: (Solver) Đã tìm thấy một thứ tự hợp lệ để đi qua các mục tiêu.")
-        # [SỬA LỖI] Thêm điểm kết thúc vào cuối lộ trình TỐT NHẤT, thay vì thêm vào mọi hoán vị.
+        # [SỬA LỖI QUAN TRỌNG] Thêm điểm kết thúc vào cuối lộ trình TỐT NHẤT, sau khi đã xác định xong.
+        # Điều này áp dụng cho cả Nearest Neighbor và Brute-force.
         best_order.append(world.finish_pos)
         full_path: List[Action] = []
-        # [SỬA LỖI] Theo dõi các vật phẩm đã thu thập cho đường đi tốt nhất
-        final_collected: Set[str] = set()
+        # [SỬA LỖI] Theo dõi trạng thái đầy đủ (vật phẩm + công tắc) cho đường đi tốt nhất
+        final_state = GameState(world.start_info, world)
         
         # [MỚI] Tạo các set vị trí để dễ dàng kiểm tra loại mục tiêu
         collectible_positions = {tuple(p.values()) for p in [c['position'] for c in world.collectibles_by_id.values()]}
         switch_positions = {tuple(p.values()) for p in [s['position'] for s in world.switches.values()]}
 
         for i in range(len(best_order) - 1):
-            sub_path = get_path_between(best_order[i], best_order[i+1], final_collected)
-            # Cập nhật trạng thái thu thập cho bước tiếp theo
+            sub_path = get_path_between(best_order[i], best_order[i+1], final_state)
+            # [SỬA LỖI] Cập nhật trạng thái đầy đủ cho bước tiếp theo
             dest_pos_key = f"{best_order[i+1]['x']}-{best_order[i+1]['y']}-{best_order[i+1]['z']}"
             if dest_pos_key in world.collectibles_by_pos:
                 item_id = world.collectibles_by_pos[dest_pos_key]['id']
-                final_collected.add(item_id)
+                final_state.collected_items.add(item_id)
+            elif dest_pos_key in world.switches:
+                switch_obj = world.switches[dest_pos_key]
+                switch_id = switch_obj['id']
+                final_state.switch_states[switch_id] = 'on' if final_state.switch_states[switch_id] == 'off' else 'off'
+
             if sub_path:
                 full_path.extend(sub_path)
                 
-                # [SỬA LỖI] Thêm hành động tương ứng (collect hoặc toggleSwitch)
+                # [SỬA LỖI QUAN TRỌNG] Thêm hành động tương ứng (collect hoặc toggleSwitch) sau khi đi đến mục tiêu.
+                # Không thêm hành động cho điểm cuối cùng (finish) nếu nó không phải là một mục tiêu.
                 dest_pos_tuple = tuple(best_order[i+1].values())
-                if dest_pos_tuple in collectible_positions:
-                    full_path.append('collect')
-                elif dest_pos_tuple in switch_positions:
-                    full_path.append('toggleSwitch')
+                is_last_step_before_finish = (i == len(best_order) - 2)
+                
+                if not is_last_step_before_finish:
+                    if dest_pos_tuple in collectible_positions:
+                        full_path.append('collect')
+                    elif dest_pos_tuple in switch_positions:
+                        full_path.append('toggleSwitch')
         
-        # Loại bỏ hành động cuối cùng nếu nó nằm ngay trước khi kết thúc và điểm kết thúc không phải là mục tiêu
-        if full_path and full_path[-1] in ['collect', 'toggleSwitch']:
-             finish_pos_tuple = tuple(world.finish_pos.values())
-             is_finish_a_goal = (finish_pos_tuple in collectible_positions) or \
-                                (finish_pos_tuple in switch_positions)
-             
-             if not is_finish_a_goal:
-                 full_path.pop()
+        # [SỬA LỖI] Xử lý trường hợp điểm kết thúc cũng là một mục tiêu
+        finish_pos_tuple = tuple(world.finish_pos.values())
+        if finish_pos_tuple in collectible_positions: full_path.append('collect')
+        elif finish_pos_tuple in switch_positions: full_path.append('toggleSwitch')
 
         return full_path
 
@@ -403,12 +432,21 @@ def solve_level(world: GameWorld, is_sub_problem=False, initial_state_override: 
     # Nếu đây là bài toán phức tạp (nhiều mục tiêu), sử dụng meta-solver
     required_goals = world.solution_config.get("itemGoals", {})
     # [SỬA LỖI] Chỉ kích hoạt meta-solver cho các bài toán có nhiều hơn 1 mục tiêu CẦN THU THẬP.
-    # Các mục tiêu như 'switch' không nên được tính vào đây vì chúng không ảnh hưởng đến thứ tự đường đi tối ưu theo kiểu TSP.
-    collectible_goals = {k: v for k, v in required_goals.items() if k != 'switch'}
-    # [SỬA LỖI] Chỉ tính tổng các giá trị là số nguyên để tránh lỗi TypeError khi giá trị là "all".
-    # Điều này đảm bảo solver vẫn hoạt động đúng khi itemGoals chưa được tính toán (vd: {"crystal": "all"}).
-    is_multi_goal_problem = sum(v for v in collectible_goals.values() if isinstance(v, int)) > 1
-
+    # Các mục tiêu như 'switch' cũng được coi là mục tiêu cần đến.
+    
+    # [REWRITTEN] Logic xác định bài toán nhiều mục tiêu (TSP)
+    # Đếm tổng số mục tiêu cần đạt được (vật phẩm + công tắc)
+    total_required_items = 0
+    for goal_type, required_count in required_goals.items():
+        if isinstance(required_count, int):
+            total_required_items += required_count
+        elif isinstance(required_count, str) and required_count.lower() == 'all':
+            # Nếu là 'all', đếm tổng số vật phẩm/công tắc loại đó trên bản đồ
+            if goal_type == 'switch':
+                total_required_items += len(world.switches)
+            else:
+                total_required_items += sum(1 for c in world.collectibles_by_id.values() if c.get('type') == goal_type)
+    is_multi_goal_problem = total_required_items > 1
     is_algorithm_design_with_items = world.solution_config.get('logic_type') == 'algorithm_design' and any(collectible_goals)
     is_maze_with_items = is_multi_goal_problem or is_algorithm_design_with_items
     if not is_sub_problem and is_maze_with_items:
@@ -466,11 +504,15 @@ def solve_level(world: GameWorld, is_sub_problem=False, initial_state_override: 
                 if action == 'moveForward':
                     # [SỬA LỖI] Logic moveForward mới, xử lý cả đi ngang, đi lên và đi xuống.
                     next_x, y, next_z = next_state.x + dx, next_state.y, next_state.z + dz
+                    # [FIX] Vị trí của nền đất phải ở y-1 so với vị trí của người chơi (y)
+                    ground_below_key = f"{next_x}-{y-1}-{next_z}"
 
                     # TH1: Đi ngang (cùng độ cao y)
                     ground_ahead_key = f"{next_x}-{y-1}-{next_z}"
                     space_ahead_key = f"{next_x}-{y}-{next_z}"
-                    if world.world_map.get(ground_ahead_key) in GameWorld.WALKABLE_GROUNDS and world.world_map.get(space_ahead_key) is None:
+                    # [FIX] Kiểm tra xem có nền đất ở dưới không. Nếu không có (là hố) thì không đi được.
+                    if world.world_map.get(ground_below_key) in GameWorld.WALKABLE_GROUNDS and \
+                       world.world_map.get(space_ahead_key) is None:
                         next_state.x, next_state.z = next_x, next_z
                         is_valid_move = True # type: ignore
                     
@@ -483,11 +525,12 @@ def solve_level(world: GameWorld, is_sub_problem=False, initial_state_override: 
                     
                     # Vị trí của khối vật cản nằm ngay trước mặt người chơi
                     obstacle_key = f"{next_state.x + dx}-{next_state.y}-{next_state.z + dz}"
+                    ground_below_obstacle_key = f"{next_state.x + dx}-{next_state.y - 1}-{next_state.z + dz}"
                     obstacle_model = world.world_map.get(obstacle_key)
 
                     # Điều kiện để nhảy lên:
-                    # 1. Có một vật cản ở ngay trước mặt.
-                    # 2. Model của vật cản đó nằm trong danh sách JUMPABLE_OBSTACLES.
+                    # 1. Có một vật cản ở ngay trước mặt HOẶC có nền đất bên dưới (trường hợp nhảy lên bậc thang rỗng)
+                    # 2. Model của vật cản đó (nếu có) nằm trong danh sách JUMPABLE_OBSTACLES.
                     # 3. Không gian phía trên vật cản đó phải trống.
                     is_obstacle_jumpable = obstacle_model in GameWorld.JUMPABLE_OBSTACLES
                     is_space_above_clear = world.world_map.get(f"{jump_up_dest_x}-{jump_up_dest_y}-{jump_up_dest_z}") is None
@@ -499,18 +542,25 @@ def solve_level(world: GameWorld, is_sub_problem=False, initial_state_override: 
                     # --- Trường hợp 2: Nhảy XUỐNG (Jump Down) một bậc ---
                     # Logic này vẫn hữu ích cho các map có địa hình bậc thang.
                     if not is_valid_move:
+                        # [FIX] Vị trí đáp phải có nền đất bên dưới nó
                         jump_down_dest_x, jump_down_dest_y, jump_down_dest_z = next_state.x + dx, next_state.y - 1, next_state.z + dz
+                        ground_at_landing_key = f"{jump_down_dest_x}-{jump_down_dest_y - 1}-{jump_down_dest_z}"
                         # Điều kiện: có nền đất ở vị trí đáp và không gian đáp trống
-                        if world.world_map.get(f"{jump_down_dest_x}-{jump_down_dest_y-1}-{jump_down_dest_z}") in GameWorld.WALKABLE_GROUNDS and world.world_map.get(f"{jump_down_dest_x}-{jump_down_dest_y}-{jump_down_dest_z}") is None:
+                        if world.world_map.get(ground_at_landing_key) in GameWorld.WALKABLE_GROUNDS and \
+                           world.world_map.get(f"{jump_down_dest_x}-{jump_down_dest_y}-{jump_down_dest_z}") is None:
                             next_state.x, next_state.y, next_state.z = jump_down_dest_x, jump_down_dest_y, jump_down_dest_z
                             is_valid_move = True
 
             elif action == 'turnLeft':
                 next_state.direction = (state.direction + 3) % 4
-                is_valid_move = True
+                # [FIX] Chỉ coi là một bước đi hợp lệ nếu hướng mới khác hướng cũ.
+                # Điều này ngăn solver thêm các cặp (turnLeft, turnRight) vô nghĩa.
+                # Mặc dù A* có chi phí sẽ xử lý, việc chặn ở đây sẽ rõ ràng hơn.
+                is_valid_move = (next_state.direction != state.direction)
             elif action == 'turnRight':
                 next_state.direction = (state.direction + 1) % 4
-                is_valid_move = True
+                # [FIX] Tương tự như turnLeft, ngăn các hành động quay vô nghĩa.
+                is_valid_move = (next_state.direction != state.direction)
             elif action == 'collect':
                 if current_pos_key in world.collectibles_by_pos and world.collectibles_by_pos[current_pos_key]['id'] not in state.collected_items:
                     next_state.collected_items.add(world.collectibles_by_pos[current_pos_key]['id'])
@@ -545,12 +595,29 @@ def find_most_frequent_sequence(actions: List[str], min_len=3, max_len=10, force
     actions_tuple = tuple(actions)
     for length in range(min_len, max_len + 1):
         for i in range(len(actions_tuple) - length + 1):
-            sequence_counts[actions_tuple[i:i+length]] += 1
+            # [SỬA LỖI] Logic mới để nhóm các chuỗi tương tự.
+            # Biến đổi chuỗi con thành một dạng chuẩn hóa, ví dụ: thay thế 'turnLeft'/'turnRight' bằng một placeholder 'TURN'.
+            # Điều này giúp tìm thấy các mẫu lặp lại ngay cả khi chúng không giống hệt nhau.
+            original_sequence = actions_tuple[i:i+length]
+            normalized_sequence_list = []
+            for action in original_sequence:
+                if action in ['turnLeft', 'turnRight']:
+                    normalized_sequence_list.append('TURN_ACTION')
+                else:
+                    normalized_sequence_list.append(action)
+            normalized_sequence = tuple(normalized_sequence_list)
+
+            # Đếm dựa trên chuỗi đã chuẩn hóa, nhưng lưu lại chuỗi gốc đầu tiên tìm thấy.
+            if normalized_sequence not in sequence_counts:
+                sequence_counts[normalized_sequence] = {'freq': 0, 'original': original_sequence}
+            sequence_counts[normalized_sequence]['freq'] += 1
 
     # [CẢI TIẾN] Ưu tiên tìm các chuỗi có 'jump' khi force_function=True
     def find_best_sequence(sequences: List[Tuple[Tuple[str, ...], int]]) -> Optional[Tuple[List[str], int]]:
         most_common, max_freq, best_savings = None, 1, 0
-        for seq, freq in sequences:
+        for seq_info in sequences:
+            # [SỬA LỖI] Trích xuất đúng chuỗi gốc và tần suất từ cấu trúc mới.
+            seq, freq = seq_info['original'], seq_info['freq']
             if freq > 1:
                 # Nếu không ép buộc tạo hàm, chỉ tạo khi nó thực sự tiết kiệm khối lệnh.
                 # Nếu ép buộc, chỉ cần nó xuất hiện nhiều hơn 1 lần là đủ.
@@ -559,7 +626,7 @@ def find_most_frequent_sequence(actions: List[str], min_len=3, max_len=10, force
                     best_savings, most_common, max_freq = savings, seq, freq
         return (list(most_common), max_freq) if most_common else None
 
-    all_sequences = list(sequence_counts.items())
+    all_sequences = list(sequence_counts.values())
     
     if force_function:
         # Ưu tiên các chuỗi có 'jump'
